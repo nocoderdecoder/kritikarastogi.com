@@ -33,6 +33,8 @@ The scheduled GitHub Action runs at 8:15 a.m. Pacific during daylight saving tim
 
 Add either `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in GitHub repository **Settings → Secrets and variables → Actions**. Model names can be overridden with the `ANTHROPIC_MODEL` or `OPENAI_MODEL` repository variable.
 
+The recommended OpenAI configuration is `OPENAI_MODEL=gpt-5.4-mini`, which offers a strong quality-to-cost balance for short sourced articles.
+
 An interactive Codex subscription cannot power unattended GitHub Actions by itself; a metered API key is required for fully automatic publishing. The workflow uses one call per day, making it inexpensive with a small model.
 
 Test research without calling a model:

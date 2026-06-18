@@ -104,7 +104,7 @@ async function callModel(prompt) {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
       body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || 'gpt-5-mini',
+        model: process.env.OPENAI_MODEL || 'gpt-5.4-mini',
         input: prompt,
         max_output_tokens: isSunday ? 2600 : 1800
       })
