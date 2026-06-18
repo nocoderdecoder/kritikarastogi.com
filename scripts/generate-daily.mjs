@@ -46,6 +46,14 @@ function normalizeUrl(value = '') {
   }
 }
 
+function truncateAtWord(value, maxLength) {
+  const text = String(value).replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  const shortened = text.slice(0, maxLength - 1);
+  const boundary = shortened.lastIndexOf(' ');
+  return `${shortened.slice(0, boundary > maxLength * 0.65 ? boundary : maxLength - 1).replace(/[,:;\-\s]+$/, '')}…`;
+}
+
 async function readFeed([source, url]) {
   try {
     const response = await fetch(url, { headers: { 'user-agent': 'kritikarastogi.com editorial research/1.0' } });
@@ -86,7 +94,7 @@ QUALITY BAR
 - End with a clear implication, not a generic summary.
 - Do not copy more than 10 consecutive words from a source.
 
-Return strict JSON only with this shape:
+Return strict JSON only with this shape. Keep title at 75 characters or fewer and description at 160 characters or fewer:
 {"title":"...","description":"...","topic":"AI & PMM|Positioning|Customer Insight|GTM|Enablement","kind":"${isSunday ? 'Essay' : 'Field Note'}","body":"Markdown without an H1","sources":[{"label":"...","url":"https://..."}]}
 
 SOURCE PACKET
@@ -159,7 +167,6 @@ function parseDraft(raw) {
   if (!allowedTopics.includes(draft.topic)) throw new Error(`Invalid topic: ${draft.topic}`);
   if (words < (isSunday ? 700 : 350)) throw new Error(`Draft is too short: ${words} words.`);
   if (words > (isSunday ? 1400 : 850)) throw new Error(`Draft is too long: ${words} words.`);
-  if (draft.title.length > 85 || draft.description.length > 180) throw new Error('Title or description is too long.');
   if (/in today'?s|fast-paced landscape|game-changer|\bdelve\b|\bunlock\b|revolutioni[sz]e/i.test(draft.body)) throw new Error('Draft failed the language quality gate.');
   if (hasStaccatoParagraph || /\bThis is where\b|\bThen everything changed\b|\bThe goal is not\b/i.test(draft.body)) throw new Error('Draft failed the prose rhythm quality gate.');
   const validSources = asArray(draft.sources)
@@ -170,7 +177,13 @@ function parseDraft(raw) {
   if (!validSources.length) throw new Error('Draft has no valid packet sources.');
   if (bodyUrls.some((url) => !packetByUrl.has(normalizeUrl(url)))) throw new Error('Draft body cited a URL outside the source packet.');
 
-  return { ...draft, sources: validSources, words };
+  return {
+    ...draft,
+    title: truncateAtWord(draft.title, 75),
+    description: truncateAtWord(draft.description, 160),
+    sources: validSources,
+    words
+  };
 }
 
 function slugify(value) {
@@ -214,7 +227,13 @@ const prompt = editorialPrompt(globalThis.packet);
 if (DRY_RUN) {
   console.log(`Dry run: ${globalThis.packet.length} source items ready.\n\n${prompt.slice(0, 2600)}\n...`);
 } else {
-  const draft = parseDraft(await callModel(prompt));
+  let draft;
+  try {
+    draft = parseDraft(await callModel(prompt));
+  } catch (error) {
+    console.warn(`First draft rejected: ${error.message}. Retrying once.`);
+    draft = parseDraft(await callModel(`${prompt}\n\nA previous draft failed this validation check: ${error.message}. Produce a new draft that corrects it.`));
+  }
   const date = new Date().toISOString().slice(0, 10);
   const file = path.join(OUTPUT_DIR, `${date}-${slugify(draft.title)}.md`);
   await fs.writeFile(file, toMarkdown(draft), { flag: 'wx' });
