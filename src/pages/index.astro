@@ -6,9 +6,10 @@ import ArticleRow from '../components/ArticleRow.astro';
 import { caseStudies } from '../data/caseStudies';
 import { getCollection } from 'astro:content';
 
-const articles = (await getCollection('writing', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
-  .slice(0, 3);
+const allArticles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const heroArticles = allArticles.slice(0, 3);
+const articles = allArticles.slice(0, 3);
 ---
 
 <BaseLayout>
@@ -16,21 +17,38 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
     <div class="hero__copy">
       <p class="kicker">PRODUCT MARKETER · AI, SAAS & PLATFORMS · BAY AREA</p>
       <h1>I turn complex products<br />into <em>clear choices.</em></h1>
-      <div class="hero__lower">
-        <p>I'm Kritika. I've launched AI recruiting workflows, grown a loyalty product used by more than one million customers, and taken four advertising products from zero to market.</p>
+      <div class="hero__below">
+        <div>
+          <p class="hero__intro">I'm Kritika. I've launched AI recruiting workflows, grown a loyalty product used by more than one million customers, and taken four advertising products from zero to market.</p>
+          <div class="hero__vocabulary" aria-hidden="true">
+            <span>Positioning</span>
+            <span>Messaging</span>
+            <span>Go-to-market</span>
+            <span>Buyer insight</span>
+            <span>Segmentation</span>
+            <span>Launch strategy</span>
+            <span>Adoption</span>
+            <span>Sales enablement</span>
+          </div>
+        </div>
+        <aside class="hero__reading" aria-label="Latest writing">
+          <div class="hero__reading-head">
+            <span class="kicker">LATEST THINKING</span>
+            <a href="/writing">View all <ArrowUpRight size={14} /></a>
+          </div>
+          <ol>
+            {heroArticles.map((article, index) => (
+              <li>
+                <a href={`/writing/${article.id}`}>
+                  <span>0{index + 1} · {article.data.topic}</span>
+                  <strong>{article.data.title}</strong>
+                  <ArrowUpRight size={16} />
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
       </div>
-    </div>
-    <div class="hero__vocabulary" aria-hidden="true">
-      <span>Positioning</span>
-      <span>Messaging</span>
-      <span>Go-to-market</span>
-      <span>Buyer insight</span>
-      <span>Segmentation</span>
-      <span>Launch strategy</span>
-      <span>Adoption</span>
-      <span>Sales enablement</span>
-      <span>Competitive intelligence</span>
-      <span>Lifecycle</span>
     </div>
     <div class="hero__stamp" aria-label="Seven plus years, global product marketing">
       <span>7+ YEARS</span>
@@ -122,15 +140,25 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 
 <style>
   .hero { min-height: min(820px, calc(100svh - 180px)); padding: 34px var(--gutter) 42px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-  .hero__copy { position: relative; z-index: 2; margin-top: clamp(36px, 7vh, 72px); }
+  .hero__copy { position: relative; z-index: 2; margin-top: clamp(28px, 5vh, 54px); }
   .hero h1 { margin: 22px 0 42px; max-width: 1120px; font: 400 92px/0.98 var(--serif); }
   .hero h1 em { display: inline-block; color: var(--coral); font-weight: 400; transform: translateY(0.06em); }
-  .hero__lower { width: min(640px, calc(100% - 210px)); }
-  .hero__lower p { margin: 0; font-size: 19px; line-height: 1.5; }
-  .hero__vocabulary { position: absolute; z-index: 1; right: 220px; bottom: 48px; width: min(43vw, 680px); display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: baseline; gap: 11px 24px; color: rgba(23, 23, 22, 0.46); }
-  .hero__vocabulary span { font-size: 14px; line-height: 1.2; }
-  .hero__vocabulary span:nth-child(3n + 1) { font: 400 23px/1.1 var(--serif); }
+  .hero__below { width: calc(100% - 220px); display: grid; grid-template-columns: minmax(390px, 1fr) minmax(370px, 470px); gap: clamp(48px, 7vw, 100px); align-items: end; }
+  .hero__intro { max-width: 620px; margin: 0; font-size: 18px; line-height: 1.5; }
+  .hero__vocabulary { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; color: rgba(23, 23, 22, 0.44); }
+  .hero__vocabulary span { font-size: 12px; line-height: 1.2; }
+  .hero__vocabulary span:nth-child(3n + 1) { font: 400 18px/1.1 var(--serif); }
   .hero__vocabulary span:nth-child(4n) { color: rgba(240, 82, 54, 0.52); }
+  .hero__reading { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.72); }
+  .hero__reading-head { min-height: 38px; padding: 10px 13px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+  .hero__reading-head a { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 650; }
+  .hero__reading ol { margin: 0; padding: 0; list-style: none; }
+  .hero__reading li + li { border-top: 1px solid var(--line); }
+  .hero__reading li a { min-height: 56px; padding: 9px 13px; display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; align-items: center; }
+  .hero__reading li a:hover strong { color: var(--coral); }
+  .hero__reading li span { grid-column: 1; color: var(--muted); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero__reading li strong { grid-column: 1; font: 400 17px/1.12 var(--serif); transition: color 150ms ease; }
+  .hero__reading li svg { grid-column: 2; grid-row: 1 / 3; }
   .hero__stamp { position: absolute; right: var(--gutter); bottom: 36px; width: 154px; height: 154px; border-radius: 50%; background: var(--green); display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(7deg); }
   .hero__stamp strong { font: 400 43px/1 var(--serif); }
   .hero__stamp span { font-size: 9px; letter-spacing: 0.12em; }
@@ -165,8 +193,8 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
   @media (max-width: 900px) {
     .hero h1 { font-size: 70px; }
     .hero__stamp { width: 118px; height: 118px; }
-    .hero__lower { width: min(760px, calc(100% - 145px)); }
-    .hero__vocabulary { right: 165px; width: min(46vw, 440px); }
+    .hero__below { width: calc(100% - 145px); grid-template-columns: 1fr; gap: 28px; }
+    .hero__vocabulary { margin-top: 20px; }
     .proof__grid, .method__inner { grid-template-columns: 1fr; gap: 56px; }
     .method__intro { position: static; }
   }
@@ -174,13 +202,14 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
     .hero { min-height: calc(100svh - 144px); padding-top: 26px; }
     .hero__copy { margin-top: 24px; }
     .hero h1 { font-size: 53px; margin-top: 16px; }
-    .hero__lower { width: 100%; }
-    .hero__lower p { max-width: 100%; font-size: 16px; padding-right: 0; }
-    .hero__vocabulary { position: static; width: 100%; margin-top: 32px; justify-content: flex-start; gap: 9px 18px; }
+    .hero__below { width: 100%; gap: 24px; }
+    .hero__intro { max-width: 100%; font-size: 16px; }
+    .hero__vocabulary { margin-top: 20px; gap: 7px 16px; }
     .hero__vocabulary span { font-size: 12px; }
     .hero__vocabulary span:nth-child(3n + 1) { font-size: 17px; }
-    .hero__stamp { position: static; width: 96px; height: 96px; margin: 28px 0 0 auto; }
-    .hero__stamp strong { font-size: 30px; }
+    .hero__vocabulary span:nth-child(n + 6) { display: none; }
+    .hero__reading li:nth-child(3) { display: none; }
+    .hero__stamp { display: none; }
     .proof, .work-section, .writing { padding: 70px 0; }
     .proof__lead { font-size: 36px; }
     .case-grid { grid-template-columns: 1fr; }
