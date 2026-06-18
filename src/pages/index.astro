@@ -8,7 +8,6 @@ import { getCollection } from 'astro:content';
 
 const allArticles = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-const heroArticles = allArticles.slice(0, 3);
 const articles = allArticles.slice(0, 3);
 ---
 
@@ -31,22 +30,27 @@ const articles = allArticles.slice(0, 3);
             <span>Sales enablement</span>
           </div>
         </div>
-        <aside class="hero__reading" aria-label="Latest writing">
+        <aside class="hero__reading" aria-label="Latest writing" data-article-ticker>
           <div class="hero__reading-head">
-            <span class="kicker">LATEST THINKING</span>
+            <span><i></i><span class="kicker">LATEST THINKING</span></span>
+            <span class="hero__reading-count" aria-live="polite"><b data-ticker-count>01</b> / {String(allArticles.length).padStart(2, '0')}</span>
             <a href="/writing">View all <ArrowUpRight size={14} /></a>
           </div>
-          <ol>
-            {heroArticles.map((article, index) => (
-              <li>
-                <a href={`/writing/${article.id}`}>
-                  <span>0{index + 1} · {article.data.topic}</span>
-                  <strong>{article.data.title}</strong>
-                  <ArrowUpRight size={16} />
-                </a>
-              </li>
+          <div class="hero__reading-window">
+            {allArticles.map((article, index) => (
+              <a
+                class:list={['hero__reading-item', { 'is-active': index === 0 }]}
+                href={`/writing/${article.id}`}
+                data-ticker-item
+                aria-hidden={index === 0 ? 'false' : 'true'}
+                tabindex={index === 0 ? 0 : -1}
+              >
+                <span>{article.data.topic} · {article.data.kind}</span>
+                <strong>{article.data.title}</strong>
+                <span class="hero__reading-action">Read article <ArrowUpRight size={15} /></span>
+              </a>
             ))}
-          </ol>
+          </div>
         </aside>
       </div>
     </div>
@@ -138,6 +142,53 @@ const articles = allArticles.slice(0, 3);
   </section>
 </BaseLayout>
 
+<script>
+  const ticker = document.querySelector<HTMLElement>('[data-article-ticker]');
+  const tickerItems = Array.from(ticker?.querySelectorAll<HTMLAnchorElement>('[data-ticker-item]') ?? []);
+  const tickerCount = ticker?.querySelector<HTMLElement>('[data-ticker-count]');
+  let tickerIndex = 0;
+  let tickerTimer: number | undefined;
+
+  const showNextArticle = () => {
+    if (tickerItems.length < 2) return;
+    const current = tickerItems[tickerIndex];
+    tickerIndex = (tickerIndex + 1) % tickerItems.length;
+    const next = tickerItems[tickerIndex];
+
+    current.classList.remove('is-active');
+    current.classList.add('is-exiting');
+    current.setAttribute('aria-hidden', 'true');
+    current.tabIndex = -1;
+
+    next.classList.remove('is-exiting');
+    next.classList.add('is-active');
+    next.setAttribute('aria-hidden', 'false');
+    next.tabIndex = 0;
+    if (tickerCount) tickerCount.textContent = String(tickerIndex + 1).padStart(2, '0');
+
+    window.setTimeout(() => current.classList.remove('is-exiting'), 550);
+  };
+
+  const stopTicker = () => {
+    if (tickerTimer) window.clearInterval(tickerTimer);
+    tickerTimer = undefined;
+  };
+
+  const startTicker = () => {
+    stopTicker();
+    tickerTimer = window.setInterval(showNextArticle, 3000);
+  };
+
+  ticker?.addEventListener('mouseenter', stopTicker);
+  ticker?.addEventListener('mouseleave', startTicker);
+  ticker?.addEventListener('focusin', stopTicker);
+  ticker?.addEventListener('focusout', (event) => {
+    if (!ticker.contains(event.relatedTarget as Node | null)) startTicker();
+  });
+  document.addEventListener('visibilitychange', () => document.hidden ? stopTicker() : startTicker());
+  startTicker();
+</script>
+
 <style>
   .hero { min-height: min(820px, calc(100svh - 180px)); padding: 34px var(--gutter) 42px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
   .hero__copy { position: relative; z-index: 2; margin-top: clamp(28px, 5vh, 54px); }
@@ -149,16 +200,21 @@ const articles = allArticles.slice(0, 3);
   .hero__vocabulary span { font-size: 12px; line-height: 1.2; }
   .hero__vocabulary span:nth-child(3n + 1) { font: 400 18px/1.1 var(--serif); }
   .hero__vocabulary span:nth-child(4n) { color: rgba(240, 82, 54, 0.52); }
-  .hero__reading { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.72); }
-  .hero__reading-head { min-height: 38px; padding: 10px 13px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+  .hero__reading { min-width: 0; }
+  .hero__reading-head { min-height: 34px; padding: 0 2px 10px; display: grid; grid-template-columns: 1fr auto auto; gap: 18px; align-items: center; }
+  .hero__reading-head > span:first-child { display: inline-flex; align-items: center; gap: 9px; }
+  .hero__reading-head i { width: 7px; height: 7px; display: block; background: var(--coral); border-radius: 50%; }
   .hero__reading-head a { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 650; }
-  .hero__reading ol { margin: 0; padding: 0; list-style: none; }
-  .hero__reading li + li { border-top: 1px solid var(--line); }
-  .hero__reading li a { min-height: 56px; padding: 9px 13px; display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; align-items: center; }
-  .hero__reading li a:hover strong { color: var(--coral); }
-  .hero__reading li span { grid-column: 1; color: var(--muted); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .hero__reading li strong { grid-column: 1; font: 400 17px/1.12 var(--serif); transition: color 150ms ease; }
-  .hero__reading li svg { grid-column: 2; grid-row: 1 / 3; }
+  .hero__reading-count { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+  .hero__reading-count b { color: var(--ink); font-weight: 700; }
+  .hero__reading-window { height: 145px; position: relative; overflow: hidden; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+  .hero__reading-item { position: absolute; inset: 0; padding: 16px 2px 13px; display: grid; grid-template-rows: auto 1fr auto; gap: 6px; opacity: 0; transform: translateX(105%); pointer-events: none; transition: transform 520ms cubic-bezier(.22,.61,.36,1), opacity 320ms ease; }
+  .hero__reading-item.is-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+  .hero__reading-item.is-exiting { opacity: 0; transform: translateX(-105%); }
+  .hero__reading-item > span:first-child { color: var(--coral); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hero__reading-item strong { max-width: 430px; font: 400 28px/1.02 var(--serif); }
+  .hero__reading-action { display: inline-flex; align-items: center; justify-self: end; gap: 6px; color: var(--muted); font-size: 10px; font-weight: 650; }
+  .hero__reading-item:hover strong { color: var(--coral); }
   .hero__stamp { position: absolute; right: var(--gutter); bottom: 36px; width: 154px; height: 154px; border-radius: 50%; background: var(--green); display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(7deg); }
   .hero__stamp strong { font: 400 43px/1 var(--serif); }
   .hero__stamp span { font-size: 9px; letter-spacing: 0.12em; }
@@ -208,7 +264,9 @@ const articles = allArticles.slice(0, 3);
     .hero__vocabulary span { font-size: 12px; }
     .hero__vocabulary span:nth-child(3n + 1) { font-size: 17px; }
     .hero__vocabulary span:nth-child(n + 6) { display: none; }
-    .hero__reading li:nth-child(3) { display: none; }
+    .hero__reading-head { grid-template-columns: 1fr auto auto; gap: 12px; }
+    .hero__reading-window { height: 142px; }
+    .hero__reading-item strong { font-size: 25px; }
     .hero__stamp { display: none; }
     .proof, .work-section, .writing { padding: 70px 0; }
     .proof__lead { font-size: 36px; }
