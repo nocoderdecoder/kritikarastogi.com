@@ -111,7 +111,14 @@ async function callModel(prompt) {
     });
     if (!response.ok) throw new Error(`OpenAI API ${response.status}: ${await response.text()}`);
     const data = await response.json();
-    return data.output_text;
+    const outputText = asArray(data.output)
+      .flatMap((item) => asArray(item.content))
+      .filter((content) => content.type === 'output_text')
+      .map((content) => content.text)
+      .join('\n')
+      .trim();
+    if (!outputText) throw new Error(`OpenAI response contained no output text (status: ${data.status ?? 'unknown'}).`);
+    return outputText;
   }
 
   throw new Error('Set ANTHROPIC_API_KEY or OPENAI_API_KEY. Codex subscriptions do not expose an unattended publishing API.');
