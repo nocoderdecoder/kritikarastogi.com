@@ -16,6 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="about-actions">
           <a class="primary-action" href="/Kritika-Rastogi-Resume.pdf"><Download size={16} /> Download resume</a>
           <a class="arrow-link" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={16} /></a>
+          <a class="arrow-link" href="mailto:kritikarastogi240@gmail.com">Email <ArrowUpRight size={16} /></a>
         </div>
       </div>
     </div>
@@ -90,6 +91,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
     .about-hero h1 { font-size: 50px; }
     .about-hero__copy > p:first-child { margin-top: 0; }
+    .about-actions { align-items: flex-start; flex-wrap: wrap; gap: 20px 24px; }
     .principles__grid > div { border-bottom: 1px solid rgba(23,23,22,.25); padding-bottom: 36px; }
     .principles__grid h2 { margin-top: 40px; }
   }

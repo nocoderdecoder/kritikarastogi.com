@@ -12,6 +12,9 @@ const { study, index } = Astro.props;
     <p class="kicker">{study.eyebrow}</p>
     <ArrowUpRight class="case-card__arrow" size={22} stroke-width={1.5} />
   </div>
+  <div class="case-card__logo">
+    <img src={study.logo} alt={`${study.company} logo`} loading="lazy" />
+  </div>
   <div class="case-card__body">
     <div>
       <p class="case-card__company">{study.company}</p>
@@ -37,7 +40,9 @@ const { study, index } = Astro.props;
   .case-card__top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
   .case-card__index { font-family: var(--serif); font-size: 14px; }
   .case-card__arrow { justify-self: end; }
-  .case-card__body { margin: auto 0 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: end; }
+  .case-card__logo { width: 112px; height: 92px; margin: 38px 0 26px; padding: 10px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.9); }
+  .case-card__logo img { width: 100%; height: 100%; object-fit: contain; }
+  .case-card__body { margin: 0 0 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: end; }
   .case-card__company { margin: 0 0 9px; font-size: 13px; font-weight: 700; }
   h3 { margin: 0; max-width: 470px; font: 400 42px/1 var(--serif); }
   .case-card__metric { min-width: 92px; text-align: right; }
@@ -48,6 +53,7 @@ const { study, index } = Astro.props;
     .case-card__top { grid-template-columns: 1fr 1fr; }
     .case-card__top .kicker { display: none; }
     .case-card__body { grid-template-columns: 1fr; }
+    .case-card__logo { width: 92px; height: 76px; margin: 30px 0 22px; }
     .case-card__metric { text-align: left; }
     h3 { font-size: 35px; }
   }

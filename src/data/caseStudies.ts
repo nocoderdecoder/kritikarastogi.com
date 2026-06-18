@@ -1,6 +1,7 @@
 export type CaseStudy = {
   slug: string;
   company: string;
+  logo: string;
   title: string;
   shortTitle: string;
   eyebrow: string;
@@ -30,6 +31,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'sproutsai-ai-workflows',
     company: 'SproutsAI',
+    logo: '/logos/sproutsai.png',
     title: 'Repositioning recruiting tools around completed AI workflows',
     shortTitle: 'From recruiting features to completed workflows',
     eyebrow: 'AI PRODUCT LAUNCH',
@@ -69,6 +71,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'burger-king-loyalty',
     company: 'Burger King Indonesia',
+    logo: '/logos/burger-king.svg',
     title: 'Designing loyalty around behavior, not blanket discounts',
     shortTitle: 'A loyalty system built for 11 distinct audiences',
     eyebrow: 'LIFECYCLE & ADOPTION',
@@ -108,6 +111,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'gojek-ads-platform',
     company: 'Gojek',
+    logo: '/logos/gojek.svg',
     title: 'Building an ads story that worked from SMB counter to enterprise boardroom',
     shortTitle: 'One platform story for two very different buyers',
     eyebrow: 'PLATFORM GTM',
@@ -147,6 +151,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'multi-agent-trends',
     company: '99P Labs',
+    logo: '/logos/99p-labs.png',
     title: 'Prototyping a multi-agent system for trend intelligence',
     shortTitle: 'From information overload to evidence-backed signals',
     eyebrow: 'AI PROTOTYPE',
