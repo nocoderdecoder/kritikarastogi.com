@@ -10,6 +10,10 @@ export type CaseStudy = {
   secondaryMetrics: { value: string; label: string }[];
   tags: string[];
   color: string;
+  role: string;
+  period: string;
+  ownership: string;
+  measurementNote: string;
   challenge: string;
   insight: string;
   approach: { number: string; title: string; body: string }[];
@@ -26,8 +30,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'sproutsai-ai-workflows',
     company: 'SproutsAI',
-    title: 'Turning recruiting software into AI workflows buyers could believe in',
-    shortTitle: 'From legacy tools to agentic workflows',
+    title: 'Repositioning recruiting tools around completed AI workflows',
+    shortTitle: 'From recruiting features to completed workflows',
     eyebrow: 'AI PRODUCT LAUNCH',
     summary: 'Built the market foundation for two zero-to-one AI products, grounding positioning and roadmap decisions in 42+ customer conversations.',
     metric: '12%',
@@ -39,8 +43,12 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ['AI', 'B2B SaaS', 'Positioning', 'Customer research'],
     color: 'coral',
-    challenge: 'The product was becoming more capable, but the market story still sounded like a list of recruiting features. Buyers needed to understand why an AI workflow was meaningfully different from another tool added to their stack.',
-    insight: 'The strongest value was not “more AI.” It was fewer handoffs between discovering talent, evaluating fit, and acting on evidence. That shifted the story from automation theater to a credible operating advantage.',
+    role: 'AI Product Marketing Manager, part-time',
+    period: 'Jun–Aug 2025',
+    ownership: 'Owned customer research, positioning, launch narrative, and sales enablement; partnered with product, sales, and leadership.',
+    measurementNote: 'The 12% ARR movement was a company result during the launch period. The launches contributed to it; this is not presented as sole attribution.',
+    challenge: 'The product had gained new AI capabilities, but the website and sales story still read like a list of recruiting features. Buyers could not see how the pieces changed the work between opening a role and producing a shortlist.',
+    insight: 'Across 42+ conversations, the recurring problem was the number of handoffs between sourcing, screening, and evaluation. That gave us a more useful organizing idea than simply leading with AI.',
     approach: [
       { number: '01', title: 'Find the buying truth', body: 'Mapped decision-makers, influencers, existing workarounds, and trust barriers through 42+ interviews and live competitive intelligence.' },
       { number: '02', title: 'Reframe the category', body: 'Defined the products around completed recruiting workflows and measurable time-to-value, not isolated AI features.' },
@@ -51,12 +59,12 @@ export const caseStudies: CaseStudy[] = [
       title: 'From feature language to buyer language',
       items: [
         { heading: 'Before', body: 'AI-powered sourcing, ATS, and analytics in one platform.' },
-        { heading: 'After', body: 'Move from open role to evidence-backed shortlist without the sourcing and screening handoffs that slow teams down.' },
-        { heading: 'Proof', body: 'A workflow narrative backed by customer language, competitive gaps, and a 26% reduction in time-to-value.' }
+        { heading: 'Reframed promise', body: 'Build an evidence-backed shortlist in one workflow, with sourcing and screening connected around the same role criteria.' },
+        { heading: 'Support', body: 'Customer interviews, competitive gaps, and a measured 26% reduction in time-to-value supported the workflow story.' }
       ]
     },
     outcome: 'The launches contributed to a 12% increase in ARR while the research program also guided roadmap priorities and the transformation of two legacy products into AI-led workflows.',
-    reflection: 'AI positioning becomes credible when it explains a changed way of working. The model is never the message; the user’s new advantage is.'
+    reflection: 'The most useful positioning decision was to show the recruiting workflow buyers could complete, then use the AI capabilities as evidence.'
   },
   {
     slug: 'burger-king-loyalty',
@@ -74,6 +82,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ['B2C', 'Lifecycle', 'Segmentation', 'Experimentation'],
     color: 'green',
+    role: 'Digital Product Marketing Manager',
+    period: 'Jul 2022–Jun 2024',
+    ownership: 'Led loyalty and gamification GTM with product, CRM, design, engineering, and data teams; owned segmentation, messaging, and lifecycle experimentation.',
+    measurementNote: 'Purchase frequency, retention, adoption, and app revenue were measured across the loyalty and lifecycle program, not a single campaign.',
     challenge: 'A broad loyalty proposition treated very different customers as if they were motivated by the same reward. That made communications easy to send but less relevant to receive.',
     insight: 'Frequency, recency, basket behavior, and reward sensitivity revealed 11 useful customer groups. Each segment had a different reason to return, so the product story had to adapt without fragmenting the brand.',
     approach: [
@@ -91,7 +103,7 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     outcome: 'The combined loyalty, gamification, and lifecycle program doubled purchase frequency, improved retention by 14%, increased adoption by 33%, and contributed to 24% YoY app revenue growth.',
-    reflection: 'Personalization is not inserting a name. It is choosing the next promise based on what a customer has already shown you.'
+    reflection: 'Our lifecycle work improved when each segment had one observable next behavior, rather than a different promotional message for its own sake.'
   },
   {
     slug: 'gojek-ads-platform',
@@ -109,6 +121,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ['B2B', 'Platform', 'GTM', 'Sales enablement'],
     color: 'blue',
+    role: 'B2B Product Marketing Manager',
+    period: 'Apr 2020–Jul 2022',
+    ownership: 'Owned portfolio GTM, product narratives, and enablement; worked with product, sales, performance marketing, and merchant teams.',
+    measurementNote: '$11M is incremental revenue from the ads and promotions portfolio. Adoption refers to the first 30 days after launch.',
     challenge: 'SMBs wanted simple growth they could see. Enterprise advertisers needed reach, control, and evidence. A single product catalog had to make sense to both without becoming generic.',
     insight: 'The common job was not “buy ads.” It was to turn moments of customer intent inside a super app into measurable merchant growth. Proof and packaging could then flex by buyer maturity.',
     approach: [
@@ -126,7 +142,7 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     outcome: 'The portfolio generated $11M in incremental revenue. Launches reached 35% adoption in 30 days, while enablement helped drive 21% advertiser spend growth and 34% ARR growth.',
-    reflection: 'A platform narrative should unify the value without flattening the buyer. The spine stays consistent; the proof earns relevance.'
+    reflection: 'We kept one platform promise, then changed the proof: ease and immediate demand for SMBs; reach, control, and incrementality for enterprise teams.'
   },
   {
     slug: 'multi-agent-trends',
@@ -144,6 +160,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ['Agentic AI', 'Market intelligence', 'Prototype', 'Systems thinking'],
     color: 'ink',
+    role: 'Graduate innovation project, 99P Labs',
+    period: '2025',
+    ownership: 'Co-developed the research workflow, agent responsibilities, evidence model, and prototype documentation.',
+    measurementNote: 'This is a working prototype and learning project. It does not claim a commercial outcome.',
     challenge: 'Trend research is often a pile of links followed by a confident summary. The harder problem is distinguishing a durable market signal from a temporary spike in attention.',
     insight: 'Separating discovery, validation, contradiction, and synthesis creates productive tension. The system becomes more useful when each conclusion can be traced back to evidence and challenged.',
     approach: [
@@ -161,6 +181,6 @@ export const caseStudies: CaseStudy[] = [
       ]
     },
     outcome: 'The prototype demonstrated how multi-agent design can make trend identification more structured, inspectable, and useful for product and marketing decisions.',
-    reflection: 'The best AI research systems do not remove disagreement. They design it into the process, then make the final judgment easier to inspect.'
+    reflection: 'Separating discovery from challenge made the output easier to inspect because the system had to show both the supporting evidence and the objection.'
   }
 ];

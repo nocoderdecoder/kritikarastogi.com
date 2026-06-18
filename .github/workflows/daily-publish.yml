@@ -1,15 +1,15 @@
-name: Publish daily PMM field note
+name: Prepare weekly PMM field note
 
 on:
   schedule:
-    - cron: '15 15 * * *'
+    - cron: '15 15 * * 1'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: daily-publishing
+  group: weekly-editorial-drafting
   cancel-in-progress: false
 
 jobs:
@@ -30,10 +30,11 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
       - run: npm run build
-      - name: Commit article
+      - name: Store editorial draft
         run: |
           git config user.name "Kritika Editorial"
           git config user.email "kritikarastogi240@gmail.com"
           git add src/content/writing
-          git diff --cached --quiet || git commit -m "content: publish daily PMM field note"
+          git diff --cached --quiet && exit 0
+          git commit -m "content: prepare PMM field note for review"
           git push

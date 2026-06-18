@@ -21,21 +21,21 @@ Writing lives in `src/content/writing`. Every Markdown file becomes a page and a
 
 Case studies live in `src/data/caseStudies.ts`. Reconstructed artifacts are labeled as such on the page.
 
-## Daily publishing
+## Editorial drafting
 
-The scheduled GitHub Action runs at 8:15 a.m. Pacific during daylight saving time. It:
+The scheduled GitHub Action runs weekly at 8:15 a.m. Pacific during daylight saving time. It:
 
 1. Reads recent items from a small set of technology and product feeds.
 2. Gives one model call a source packet and strict editorial brief.
 3. Rejects short, long, uncited, malformed, or cliché-heavy drafts.
-4. Writes a Markdown article, builds the site, and commits the result.
-5. Triggers the hosting provider's normal Git deployment.
+4. Writes a private Markdown draft using the Pacific publication date and validates the build.
+5. Stores the hidden draft in the private repository for human editing and approval. Drafts stay off the public site until `draft: false` is set.
 
 Add either `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in GitHub repository **Settings → Secrets and variables → Actions**. Model names can be overridden with the `ANTHROPIC_MODEL` or `OPENAI_MODEL` repository variable.
 
 The recommended OpenAI configuration is `OPENAI_MODEL=gpt-5.4-mini`, which offers a strong quality-to-cost balance for short sourced articles.
 
-An interactive Codex subscription cannot power unattended GitHub Actions by itself; a metered API key is required for fully automatic publishing. The workflow uses one call per day, making it inexpensive with a small model.
+An interactive Codex subscription cannot power unattended GitHub Actions by itself; a metered API key is required for automated drafting. The workflow uses one call per week, making it inexpensive with a small model.
 
 Test research without calling a model:
 
@@ -49,6 +49,8 @@ npm run generate:daily:dry
 2. Import it into Vercel with framework preset **Astro**.
 3. Add `kritikarastogi.com` and `www.kritikarastogi.com` in Vercel.
 4. In Squarespace Domains, replace the current DNS records with the records Vercel provides.
-5. Add the model API secret to GitHub to activate daily publishing.
+5. Add the model API secret to GitHub to activate weekly drafting.
 
 Vercel will build every push, including articles committed by the publishing workflow.
+
+Enable Web Analytics in the Vercel project dashboard after the first deployment. The site includes Vercel's privacy-friendly analytics component for page and referrer reporting without cookies.

@@ -5,8 +5,21 @@ import { XMLParser } from 'fast-xml-parser';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const OUTPUT_DIR = path.join(ROOT, 'src/content/writing');
-const isSunday = new Date().getUTCDay() === 0;
+const TIME_ZONE = 'America/Los_Angeles';
+const now = new Date();
+const isSunday = new Intl.DateTimeFormat('en-US', { timeZone: TIME_ZONE, weekday: 'short' }).format(now) === 'Sun';
 const DRY_RUN = process.env.DRY_RUN === '1';
+
+function localDate(date = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: TIME_ZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
 
 const feeds = [
   ['OpenAI News', 'https://openai.com/news/rss.xml'],
@@ -195,7 +208,7 @@ function yamlString(value) {
 }
 
 function toMarkdown(draft) {
-  const date = new Date().toISOString().slice(0, 10);
+  const date = localDate();
   const sourceList = draft.sources.map((source) => `- [${source.label}](${source.url})`).join('\n');
   return `---
 title: ${yamlString(draft.title)}
@@ -206,6 +219,7 @@ kind: ${yamlString(draft.kind)}
 readTime: ${yamlString(`${Math.max(2, Math.ceil(draft.words / 220))} min`)}
 featured: false
 generated: true
+draft: true
 ---
 
 ${draft.body.trim()}
@@ -234,8 +248,8 @@ if (DRY_RUN) {
     console.warn(`First draft rejected: ${error.message}. Retrying once.`);
     draft = parseDraft(await callModel(`${prompt}\n\nA previous draft failed this validation check: ${error.message}. Produce a new draft that corrects it.`));
   }
-  const date = new Date().toISOString().slice(0, 10);
+  const date = localDate();
   const file = path.join(OUTPUT_DIR, `${date}-${slugify(draft.title)}.md`);
   await fs.writeFile(file, toMarkdown(draft), { flag: 'wx' });
-  console.log(`Published ${path.relative(ROOT, file)} (${draft.words} words).`);
+  console.log(`Prepared ${path.relative(ROOT, file)} for review (${draft.words} words).`);
 }

@@ -7,6 +7,7 @@ kind: "Field Note"
 readTime: "3 min"
 featured: false
 generated: true
+draft: true
 ---
 
 ## The new buying question is: who can stop this?

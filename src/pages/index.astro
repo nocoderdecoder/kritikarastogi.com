@@ -15,17 +15,17 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
   <section class="hero band">
     <div class="hero__signal" aria-hidden="true">
       <span class="signal-dot"></span>
-      <span>Customer truth</span>
+      <span>Customer research</span>
       <i></i>
-      <span>Market story</span>
+      <span>Positioning</span>
       <i></i>
-      <span>Product growth</span>
+      <span>Launch & adoption</span>
     </div>
     <div class="hero__copy">
-      <p class="kicker">AI PRODUCT MARKETER · BAY AREA</p>
-      <h1>I find the <em>signal</em><br />that makes products land.</h1>
+      <p class="kicker">PRODUCT MARKETER · AI, SAAS & PLATFORMS · BAY AREA</p>
+      <h1>I turn complex products<br />into <em>clear choices.</em></h1>
       <div class="hero__lower">
-        <p>I'm Kritika, a product marketer who turns customer and competitive insight into positioning, launches, and adoption across AI, SaaS, and digital ecosystems.</p>
+        <p>I'm Kritika. I've launched AI recruiting workflows, grown a loyalty product used by more than one million customers, and taken four advertising products from zero to market.</p>
         <a href="#work" aria-label="Explore selected work"><ArrowDown size={24} stroke-width={1.5} /></a>
       </div>
     </div>
@@ -38,9 +38,9 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 
   <section class="proof band">
     <div class="shell proof__grid">
-      <p class="proof__lead">My work sits where <span>market evidence</span>, a clear product story, and commercial execution meet.</p>
+      <p class="proof__lead">Seven years of product marketing across <span>AI, super apps, loyalty, and B2B platforms.</span></p>
       <div class="proof__metrics">
-        <div><strong>$24M+</strong><span>revenue influenced</span></div>
+        <div><strong>$11M</strong><span>incremental revenue from Gojek launches</span></div>
         <div><strong>1M+</strong><span>users analyzed</span></div>
         <div><strong>6</strong><span>zero-to-one launches</span></div>
         <div><strong>42+</strong><span>customer interviews</span></div>
@@ -53,7 +53,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
       <div class="section-head">
         <div>
           <p class="kicker">SELECTED WORK</p>
-          <h2>Strategy with receipts.</h2>
+          <h2>What changed, and what I did.</h2>
         </div>
         <a class="arrow-link" href="/work">All case studies <ArrowUpRight size={16} /></a>
       </div>
@@ -67,14 +67,14 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
     <div class="shell method__inner">
       <div class="method__intro">
         <p class="kicker">HOW I THINK</p>
-        <h2>The story is downstream of the evidence.</h2>
-        <p>I use AI to widen the field of view and accelerate synthesis. I use judgment to decide what matters, what is true, and what a buyer should do next.</p>
+        <h2>Research first. Then a market choice.</h2>
+        <p>I start with customer conversations, product behavior, sales evidence, and the alternatives buyers already use. AI helps me search and synthesize; the recommendation remains mine to defend.</p>
       </div>
       <ol class="method__steps">
-        <li><span>01</span><div><h3>Listen for tension</h3><p>Research customers, competitors, sales calls, behavior, and the workarounds people rarely put in a brief.</p></div></li>
-        <li><span>02</span><div><h3>Make the choice clear</h3><p>Turn evidence into a focused ICP, category frame, differentiated promise, and proof architecture.</p></div></li>
-        <li><span>03</span><div><h3>Design the whole launch</h3><p>Align product, sales, lifecycle, content, and measurement around one coherent market story.</p></div></li>
-        <li><span>04</span><div><h3>Learn after launch</h3><p>Treat adoption data and market feedback as the next round of product and message discovery.</p></div></li>
+        <li><span>01</span><div><h3>Understand the current behavior</h3><p>Talk to customers, review sales calls, study usage, and document the workaround the product must replace.</p></div></li>
+        <li><span>02</span><div><h3>Choose the audience and promise</h3><p>Define who needs the product most, which alternative it beats, and what evidence supports the claim.</p></div></li>
+        <li><span>03</span><div><h3>Equip the whole launch</h3><p>Give product, sales, lifecycle, and content teams one usable narrative and a shared adoption goal.</p></div></li>
+        <li><span>04</span><div><h3>Measure what customers do</h3><p>Use adoption, retention, sales feedback, and customer language to decide what changes next.</p></div></li>
       </ol>
     </div>
   </section>
@@ -106,9 +106,13 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 
   <section class="manifesto band">
     <div class="shell manifesto__inner">
-      <p class="kicker">A PMM POINT OF VIEW</p>
-      <blockquote>“The job isn't to make a product sound interesting. It is to find the truth that makes the product matter.”</blockquote>
-      <a class="arrow-link" href="/field-guide">Read the field guide <ArrowUpRight size={16} /></a>
+      <p class="kicker">START A CONVERSATION</p>
+      <h2>Building a product customers need to understand quickly?</h2>
+      <p>I’m always interested in thoughtful conversations about product, positioning, and go-to-market work.</p>
+      <div class="manifesto__actions">
+        <a class="arrow-link" href="mailto:kritikarastogi240@gmail.com">Email Kritika <ArrowUpRight size={16} /></a>
+        <a class="arrow-link" href="/field-guide">Explore the field guide <ArrowUpRight size={16} /></a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -153,7 +157,9 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
   .method__steps p { margin: 0; max-width: 570px; color: var(--muted); }
   .manifesto { padding: 120px 0; background: var(--green); }
   .manifesto__inner { max-width: 1120px; }
-  .manifesto blockquote { margin: 26px 0 38px; font: 400 65px/1.03 var(--serif); }
+  .manifesto h2 { margin: 26px 0 22px; max-width: 1000px; font: 400 65px/1.03 var(--serif); }
+  .manifesto__inner > p:nth-child(3) { max-width: 620px; margin: 0; font-size: 18px; }
+  .manifesto__actions { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 38px; }
   @media (max-width: 900px) {
     .hero h1 { font-size: 70px; }
     .hero__stamp { width: 118px; height: 118px; }
@@ -180,6 +186,6 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
     .method { padding: 76px 0; }
     .method__intro h2 { font-size: 44px; }
     .manifesto { padding: 78px 0; }
-    .manifesto blockquote { font-size: 42px; }
+    .manifesto h2 { font-size: 42px; }
   }
 </style>

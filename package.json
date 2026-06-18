@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.5.1",
     "@lucide/astro": "^1.20.0",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^6.4.8",
     "fast-xml-parser": "^5.2.5"
   },
