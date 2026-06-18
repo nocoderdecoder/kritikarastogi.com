@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { caseStudies } from '../../data/caseStudies';
+---
+
+<BaseLayout title="Selected Work — Kritika Rastogi" description="Product marketing case studies across AI, B2B SaaS, platforms, loyalty, and market intelligence.">
+  <header class="page-head band">
+    <div class="shell page-head__inner">
+      <p class="kicker">SELECTED WORK · 2018–NOW</p>
+      <h1>Turning market truth<br />into <em>traction.</em></h1>
+      <p>Four stories about finding the real problem, making the value clear, and building the system that carries a launch into the market.</p>
+    </div>
+  </header>
+  <section class="work-list band">
+    <div class="shell case-grid">
+      {caseStudies.map((study, index) => <CaseStudyCard study={study} index={index} />)}
+    </div>
+  </section>
+  <section class="capabilities band">
+    <div class="shell capabilities__inner">
+      <p class="kicker">CORE PRACTICE</p>
+      <div class="capabilities__list">
+        <span>Positioning & messaging</span>
+        <span>Voice of customer</span>
+        <span>Competitive intelligence</span>
+        <span>Go-to-market strategy</span>
+        <span>Sales enablement</span>
+        <span>Lifecycle & adoption</span>
+        <span>AI-assisted research</span>
+        <span>Launch measurement</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head { padding: 86px 0 92px; }
+  .page-head h1 { margin: 25px 0 30px; font: 400 80px/0.95 var(--serif); }
+  .page-head h1 em { color: var(--coral); font-weight: 400; }
+  .page-head__inner > p:last-child { max-width: 700px; margin: 0; font-size: 18px; color: var(--muted); }
+  .work-list { padding: 80px 0 100px; }
+  .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .capabilities { background: var(--white); padding: 90px 0; }
+  .capabilities__inner { display: grid; grid-template-columns: 220px 1fr; gap: 50px; }
+  .capabilities__list { display: flex; flex-wrap: wrap; gap: 12px; }
+  .capabilities__list span { padding: 13px 18px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; }
+  @media (max-width: 700px) {
+    .page-head { padding: 62px 0 68px; }
+    .page-head h1 { font-size: 54px; }
+    .case-grid { grid-template-columns: 1fr; }
+    .work-list { padding: 56px 0 72px; }
+    .capabilities__inner { grid-template-columns: 1fr; gap: 30px; }
+  }
+</style>

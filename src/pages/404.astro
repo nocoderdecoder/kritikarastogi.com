@@ -1,0 +1,26 @@
+---
+import { ArrowLeft } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found — Kritika Rastogi" description="The page you requested could not be found.">
+  <section class="not-found band">
+    <div>
+      <p class="kicker">404 · SIGNAL LOST</p>
+      <h1>This story<br />isn't here.</h1>
+      <a class="arrow-link" href="/"><ArrowLeft size={16} /> Return home</a>
+    </div>
+    <strong aria-hidden="true">404</strong>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { min-height: 70vh; padding: 90px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 50px; overflow: hidden; }
+  .not-found h1 { margin: 24px 0 42px; font: 400 82px/0.96 var(--serif); }
+  .not-found > strong { color: var(--green); font: 400 310px/.8 var(--serif); }
+  @media (max-width: 760px) {
+    .not-found { min-height: 65vh; padding-top: 70px; align-items: flex-start; }
+    .not-found h1 { font-size: 55px; }
+    .not-found > strong { position: absolute; right: -30px; bottom: 40px; font-size: 150px; z-index: -1; }
+  }
+</style>

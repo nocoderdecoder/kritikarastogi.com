@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleRow from '../../components/ArticleRow.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const topics = ['All', 'AI & PMM', 'Positioning', 'Customer Insight', 'GTM', 'Enablement'];
+---
+
+<BaseLayout title="Writing — Kritika Rastogi" description="Original product marketing analysis on AI, positioning, customer intelligence, go-to-market, and sales enablement.">
+  <header class="writing-head band">
+    <div class="shell">
+      <p class="kicker">WRITING & FIELD NOTES</p>
+      <h1>Thinking in public,<br />with the <em>receipts.</em></h1>
+      <p>Practical analysis of how AI products earn trust, categories shift, customer evidence becomes strategy, and launches create durable behavior.</p>
+    </div>
+  </header>
+  <section class="archive band">
+    <div class="shell">
+      <div class="filters" role="group" aria-label="Filter writing by topic">
+        {topics.map((topic, index) => <button class:list={{ active: index === 0 }} type="button" data-filter={topic}>{topic}</button>)}
+      </div>
+      <div class="article-list">
+        {articles.map((article) => (
+          <div data-topic={article.data.topic}>
+            <ArticleRow
+              href={`/writing/${article.id}`}
+              title={article.data.title}
+              description={article.data.description}
+              topic={article.data.topic}
+              kind={article.data.kind}
+              date={article.data.publishedAt}
+              readTime={article.data.readTime}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const rows = document.querySelectorAll<HTMLElement>('[data-topic]');
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      buttons.forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+      rows.forEach((row) => { row.hidden = filter !== 'All' && row.dataset.topic !== filter; });
+    }));
+  </script>
+</BaseLayout>
+
+<style>
+  .writing-head { padding: 88px 0 92px; }
+  .writing-head h1 { margin: 25px 0 30px; font: 400 79px/0.96 var(--serif); }
+  .writing-head h1 em { color: var(--coral); font-weight: 400; }
+  .writing-head > .shell > p:last-child { max-width: 750px; margin: 0; color: var(--muted); font-size: 18px; }
+  .archive { padding: 55px 0 100px; }
+  .filters { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 34px; }
+  .filters button { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 13px; background: transparent; cursor: pointer; font-size: 12px; }
+  .filters button:hover, .filters button.active { border-color: var(--ink); background: var(--ink); color: white; }
+  [hidden] { display: none; }
+  @media (max-width: 650px) {
+    .writing-head { padding: 62px 0 66px; }
+    .writing-head h1 { font-size: 52px; }
+  }
+</style>

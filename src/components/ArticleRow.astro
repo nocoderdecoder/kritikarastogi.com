@@ -1,0 +1,46 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  topic: string;
+  kind: string;
+  date: Date;
+  readTime: string;
+}
+const { href, title, description, topic, kind, date, readTime } = Astro.props;
+---
+
+<a class="article-row" href={href}>
+  <div class="article-row__meta">
+    <span class="kicker">{topic}</span>
+    <span>{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>
+  </div>
+  <div class="article-row__copy">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+  <div class="article-row__end">
+    <span>{kind} · {readTime}</span>
+    <ArrowUpRight size={20} stroke-width={1.5} />
+  </div>
+</a>
+
+<style>
+  .article-row { display: grid; grid-template-columns: 190px minmax(0, 1fr) 145px; gap: 28px; align-items: start; padding: 30px 0; border-top: 1px solid var(--line); }
+  .article-row:last-child { border-bottom: 1px solid var(--line); }
+  .article-row:hover h3 { color: var(--coral); }
+  .article-row__meta { display: flex; flex-direction: column; gap: 12px; color: var(--muted); font-size: 12px; }
+  .article-row__meta .kicker { color: var(--ink); }
+  .article-row__copy h3 { margin: 0 0 9px; font: 400 30px/1.08 var(--serif); transition: color 150ms ease; }
+  .article-row__copy p { margin: 0; max-width: 650px; color: var(--muted); font-size: 14px; }
+  .article-row__end { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; }
+  @media (max-width: 760px) {
+    .article-row { grid-template-columns: 1fr auto; gap: 18px; }
+    .article-row__meta { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+    .article-row__copy h3 { font-size: 27px; }
+    .article-row__end span { display: none; }
+  }
+</style>

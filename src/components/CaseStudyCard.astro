@@ -1,0 +1,54 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import type { CaseStudy } from '../data/caseStudies';
+
+interface Props { study: CaseStudy; index: number; }
+const { study, index } = Astro.props;
+---
+
+<a class={`case-card case-card--${study.color}`} href={`/work/${study.slug}`}>
+  <div class="case-card__top">
+    <span class="case-card__index">0{index + 1}</span>
+    <p class="kicker">{study.eyebrow}</p>
+    <ArrowUpRight class="case-card__arrow" size={22} stroke-width={1.5} />
+  </div>
+  <div class="case-card__body">
+    <div>
+      <p class="case-card__company">{study.company}</p>
+      <h3>{study.shortTitle}</h3>
+    </div>
+    <div class="case-card__metric">
+      <strong>{study.metric}</strong>
+      <span>{study.metricLabel}</span>
+    </div>
+  </div>
+  <ul class="tag-list">
+    {study.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+</a>
+
+<style>
+  .case-card { min-height: 430px; padding: 24px; display: flex; flex-direction: column; border: 1px solid var(--line); transition: transform 180ms ease, box-shadow 180ms ease; }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(23, 23, 22, 0.08); }
+  .case-card--coral { background: var(--coral); color: #171716; }
+  .case-card--green { background: var(--green); color: #171716; }
+  .case-card--blue { background: var(--blue); color: white; }
+  .case-card--ink { background: var(--ink); color: white; }
+  .case-card__top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .case-card__index { font-family: var(--serif); font-size: 14px; }
+  .case-card__arrow { justify-self: end; }
+  .case-card__body { margin: auto 0 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: end; }
+  .case-card__company { margin: 0 0 9px; font-size: 13px; font-weight: 700; }
+  h3 { margin: 0; max-width: 470px; font: 400 42px/1 var(--serif); }
+  .case-card__metric { min-width: 92px; text-align: right; }
+  .case-card__metric strong { display: block; font: 400 38px/1 var(--serif); }
+  .case-card__metric span { display: block; max-width: 100px; margin-top: 7px; font-size: 11px; line-height: 1.25; }
+  @media (max-width: 560px) {
+    .case-card { min-height: 370px; }
+    .case-card__top { grid-template-columns: 1fr 1fr; }
+    .case-card__top .kicker { display: none; }
+    .case-card__body { grid-template-columns: 1fr; }
+    .case-card__metric { text-align: left; }
+    h3 { font-size: 35px; }
+  }
+</style>

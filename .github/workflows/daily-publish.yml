@@ -1,0 +1,39 @@
+name: Publish daily PMM field note
+
+on:
+  schedule:
+    - cron: '15 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-publishing
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Research and write
+        run: npm run generate:daily
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      - run: npm run build
+      - name: Commit article
+        run: |
+          git config user.name "Kritika Editorial"
+          git config user.email "kritikarastogi240@gmail.com"
+          git add src/content/writing
+          git diff --cached --quiet || git commit -m "content: publish daily PMM field note"
+          git push

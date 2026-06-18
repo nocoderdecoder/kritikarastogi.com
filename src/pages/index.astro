@@ -1,0 +1,184 @@
+---
+import { ArrowDown, ArrowRight, ArrowUpRight } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import ArticleRow from '../components/ArticleRow.astro';
+import { caseStudies } from '../data/caseStudies';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="hero band">
+    <div class="hero__signal" aria-hidden="true">
+      <span class="signal-dot"></span>
+      <span>Customer truth</span>
+      <i></i>
+      <span>Market story</span>
+      <i></i>
+      <span>Product growth</span>
+    </div>
+    <div class="hero__copy">
+      <p class="kicker">AI PRODUCT MARKETER · BAY AREA</p>
+      <h1>I find the <em>signal</em><br />that makes products land.</h1>
+      <div class="hero__lower">
+        <p>I'm Kritika, a product marketer who turns customer and competitive insight into positioning, launches, and adoption across AI, SaaS, and digital ecosystems.</p>
+        <a href="#work" aria-label="Explore selected work"><ArrowDown size={24} stroke-width={1.5} /></a>
+      </div>
+    </div>
+    <div class="hero__stamp" aria-label="Seven plus years, global product marketing">
+      <span>7+ YEARS</span>
+      <strong>PMM</strong>
+      <span>GLOBAL</span>
+    </div>
+  </section>
+
+  <section class="proof band">
+    <div class="shell proof__grid">
+      <p class="proof__lead">My work sits where <span>market evidence</span>, a clear product story, and commercial execution meet.</p>
+      <div class="proof__metrics">
+        <div><strong>$24M+</strong><span>revenue influenced</span></div>
+        <div><strong>1M+</strong><span>users analyzed</span></div>
+        <div><strong>6</strong><span>zero-to-one launches</span></div>
+        <div><strong>42+</strong><span>customer interviews</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-section band" id="work">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <p class="kicker">SELECTED WORK</p>
+          <h2>Strategy with receipts.</h2>
+        </div>
+        <a class="arrow-link" href="/work">All case studies <ArrowUpRight size={16} /></a>
+      </div>
+      <div class="case-grid">
+        {caseStudies.map((study, index) => <CaseStudyCard study={study} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="method band">
+    <div class="shell method__inner">
+      <div class="method__intro">
+        <p class="kicker">HOW I THINK</p>
+        <h2>The story is downstream of the evidence.</h2>
+        <p>I use AI to widen the field of view and accelerate synthesis. I use judgment to decide what matters, what is true, and what a buyer should do next.</p>
+      </div>
+      <ol class="method__steps">
+        <li><span>01</span><div><h3>Listen for tension</h3><p>Research customers, competitors, sales calls, behavior, and the workarounds people rarely put in a brief.</p></div></li>
+        <li><span>02</span><div><h3>Make the choice clear</h3><p>Turn evidence into a focused ICP, category frame, differentiated promise, and proof architecture.</p></div></li>
+        <li><span>03</span><div><h3>Design the whole launch</h3><p>Align product, sales, lifecycle, content, and measurement around one coherent market story.</p></div></li>
+        <li><span>04</span><div><h3>Learn after launch</h3><p>Treat adoption data and market feedback as the next round of product and message discovery.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="writing band">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <p class="kicker">CURRENT THINKING</p>
+          <h2>Notes from the market.</h2>
+        </div>
+        <a class="arrow-link" href="/writing">Explore writing <ArrowRight size={16} /></a>
+      </div>
+      <div>
+        {articles.map((article) => (
+          <ArticleRow
+            href={`/writing/${article.id}`}
+            title={article.data.title}
+            description={article.data.description}
+            topic={article.data.topic}
+            kind={article.data.kind}
+            date={article.data.publishedAt}
+            readTime={article.data.readTime}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto band">
+    <div class="shell manifesto__inner">
+      <p class="kicker">A PMM POINT OF VIEW</p>
+      <blockquote>“The job isn't to make a product sound interesting. It is to find the truth that makes the product matter.”</blockquote>
+      <a class="arrow-link" href="/field-guide">Read the field guide <ArrowUpRight size={16} /></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { min-height: calc(100vh - 76px); max-height: 900px; padding: 34px var(--gutter) 42px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero__signal { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .signal-dot { width: 9px; height: 9px; background: var(--coral); border-radius: 50%; box-shadow: 0 0 0 6px rgba(240, 82, 54, 0.12); }
+  .hero__signal i { width: min(10vw, 130px); height: 1px; background: var(--line); position: relative; }
+  .hero__signal i::after { content: ''; position: absolute; right: 0; top: -2px; width: 5px; height: 5px; background: var(--ink); border-radius: 50%; }
+  .hero__copy { position: relative; z-index: 2; }
+  .hero h1 { margin: 22px 0 36px; max-width: 1120px; font: 400 92px/0.92 var(--serif); }
+  .hero h1 em { color: var(--coral); font-weight: 400; }
+  .hero__lower { width: min(830px, calc(100% - 210px)); display: grid; grid-template-columns: minmax(280px, 640px) 52px; align-items: end; justify-content: space-between; gap: 32px; }
+  .hero__lower p { margin: 0; font-size: 19px; line-height: 1.5; }
+  .hero__lower a { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; }
+  .hero__stamp { position: absolute; right: var(--gutter); bottom: 36px; width: 154px; height: 154px; border-radius: 50%; background: var(--green); display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(7deg); }
+  .hero__stamp strong { font: 400 43px/1 var(--serif); }
+  .hero__stamp span { font-size: 9px; letter-spacing: 0.12em; }
+  .proof { padding: 84px 0; }
+  .proof__grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 80px; align-items: end; }
+  .proof__lead { margin: 0; font: 400 43px/1.08 var(--serif); }
+  .proof__lead span { color: var(--teal); }
+  .proof__metrics { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .proof__metrics div { min-height: 130px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proof__metrics strong { display: block; font: 400 38px/1 var(--serif); }
+  .proof__metrics span { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; }
+  .work-section, .writing { padding: 96px 0; }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 44px; }
+  .section-head h2 { margin: 16px 0 0; font: 400 57px/1 var(--serif); }
+  .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .method { background: var(--white); padding: 110px 0; }
+  .method__inner { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 100px; }
+  .method__intro { position: sticky; top: 120px; align-self: start; }
+  .method__intro h2 { margin: 20px 0 24px; font: 400 55px/1.03 var(--serif); }
+  .method__intro > p:last-child { max-width: 480px; color: var(--muted); }
+  .method__steps { list-style: none; margin: 0; padding: 0; }
+  .method__steps li { display: grid; grid-template-columns: 55px 1fr; gap: 18px; padding: 28px 0; border-top: 1px solid var(--line); }
+  .method__steps li:last-child { border-bottom: 1px solid var(--line); }
+  .method__steps span { color: var(--coral); font: 400 19px/1 var(--serif); }
+  .method__steps h3 { margin: 0 0 8px; font: 400 30px/1.05 var(--serif); }
+  .method__steps p { margin: 0; max-width: 570px; color: var(--muted); }
+  .manifesto { padding: 120px 0; background: var(--green); }
+  .manifesto__inner { max-width: 1120px; }
+  .manifesto blockquote { margin: 26px 0 38px; font: 400 65px/1.03 var(--serif); }
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 70px; }
+    .hero__stamp { width: 118px; height: 118px; }
+    .hero__lower { width: min(760px, calc(100% - 145px)); }
+    .proof__grid, .method__inner { grid-template-columns: 1fr; gap: 56px; }
+    .method__intro { position: static; }
+  }
+  @media (max-width: 700px) {
+    .hero { min-height: calc(100svh - 64px); max-height: none; padding-top: 26px; }
+    .hero__signal span:nth-of-type(2), .hero__signal i:nth-of-type(2), .hero__signal span:nth-of-type(3) { display: none; }
+    .hero h1 { font-size: 53px; margin-top: 16px; }
+    .hero__lower { grid-template-columns: 1fr; padding-right: 0; }
+    .hero__lower { width: 100%; }
+    .hero__lower p { max-width: 100%; font-size: 16px; padding-right: 0; }
+    .hero__lower a { display: none; }
+    .hero__stamp { position: static; width: 96px; height: 96px; margin: 28px 0 0 auto; }
+    .hero__stamp strong { font-size: 30px; }
+    .proof, .work-section, .writing { padding: 70px 0; }
+    .proof__lead { font-size: 36px; }
+    .case-grid { grid-template-columns: 1fr; }
+    .section-head { align-items: flex-start; flex-direction: column; }
+    .section-head h2 { font-size: 45px; }
+    .method { padding: 76px 0; }
+    .method__intro h2 { font-size: 44px; }
+    .manifesto { padding: 78px 0; }
+    .manifesto blockquote { font-size: 42px; }
+  }
+</style>

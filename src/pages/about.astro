@@ -1,0 +1,96 @@
+---
+import { ArrowUpRight, Download } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About — Kritika Rastogi" description="Global product marketer with experience across AI, SaaS, advertising platforms, loyalty, and digital ecosystems.">
+  <header class="about-hero band">
+    <div class="shell about-hero__grid">
+      <div>
+        <p class="kicker">ABOUT KRITIKA</p>
+        <h1>A global operator with a researcher’s curiosity.</h1>
+      </div>
+      <div class="about-hero__copy">
+        <p>I’m a product marketer with 7+ years of experience helping complex products make sense in the market.</p>
+        <p>My path has moved across countries, categories, and customer types: B2B telecom in India, a super app in Indonesia, consumer loyalty at Burger King, and agentic recruiting software in Silicon Valley. The throughline is the work I enjoy most: listening closely, finding the useful pattern, and building the story and systems that move people to act.</p>
+        <div class="about-actions">
+          <a class="primary-action" href="/Kritika-Rastogi-Resume.pdf"><Download size={16} /> Download resume</a>
+          <a class="arrow-link" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={16} /></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="principles band">
+    <div class="shell">
+      <p class="kicker">WHAT I VALUE</p>
+      <div class="principles__grid">
+        <div><span>01</span><h2>Evidence before adjectives.</h2><p>The strongest message usually starts in a customer sentence, a behavioral pattern, or an unresolved competitive gap.</p></div>
+        <div><span>02</span><h2>Clarity is a team sport.</h2><p>Positioning works when product, sales, marketing, and leadership can all use it to make better choices.</p></div>
+        <div><span>03</span><h2>AI should improve judgment.</h2><p>I use AI to explore more broadly and synthesize faster, while keeping sources, assumptions, and human accountability visible.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline band">
+    <div class="shell timeline__grid">
+      <div class="timeline__intro"><p class="kicker">THE PATH</p><h2>Built across markets.</h2></div>
+      <div class="timeline__list">
+        <div><time>2025</time><div><strong>SproutsAI</strong><span>AI Product Marketing Manager · Palo Alto</span></div></div>
+        <div><time>2022–24</time><div><strong>Burger King Indonesia</strong><span>Digital Product Marketing Manager</span></div></div>
+        <div><time>2020–22</time><div><strong>Gojek</strong><span>B2B Product Marketing Manager · Indonesia</span></div></div>
+        <div><time>2018–20</time><div><strong>Vodafone India</strong><span>National Account Manager, GTM</span></div></div>
+        <div><time>2014–15</time><div><strong>Seven Seas</strong><span>Assistant Product Marketing Manager · Thailand</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="education band">
+    <div class="shell">
+      <p class="kicker">EDUCATION</p>
+      <div class="education__grid">
+        <div><strong>Carnegie Mellon University</strong><span>MS, Product Management · 2025</span></div>
+        <div><strong>Symbiosis Institute of Business Management</strong><span>MBA · 2018</span></div>
+        <div><strong>Lancaster University</strong><span>BSc, Business Economics (Honors) · 2014</span></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero { padding: 95px 0 110px; }
+  .about-hero__grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; }
+  .about-hero h1 { margin: 25px 0 0; max-width: 720px; font: 400 73px/0.98 var(--serif); }
+  .about-hero__copy > p:first-child { margin-top: 40px; font: 400 29px/1.25 var(--serif); }
+  .about-hero__copy > p:nth-child(2) { color: var(--muted); }
+  .about-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
+  .primary-action { display: inline-flex; align-items: center; gap: 9px; padding: 13px 16px; background: var(--ink); color: white; font-size: 13px; }
+  .principles { padding: 100px 0; background: var(--green); }
+  .principles__grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 50px; border-top: 1px solid var(--ink); }
+  .principles__grid > div { padding: 24px 28px 10px 0; }
+  .principles__grid span { font-family: var(--serif); }
+  .principles__grid h2 { margin: 80px 0 16px; font: 400 35px/1.03 var(--serif); }
+  .principles__grid p { margin: 0; max-width: 340px; }
+  .timeline { padding: 100px 0; }
+  .timeline__grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 90px; }
+  .timeline__intro h2 { margin: 18px 0; font: 400 50px/1 var(--serif); }
+  .timeline__list > div { display: grid; grid-template-columns: 105px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .timeline__list > div:last-child { border-bottom: 1px solid var(--line); }
+  .timeline time { color: var(--coral); font: 400 17px/1 var(--serif); }
+  .timeline strong, .timeline span { display: block; }
+  .timeline strong { font: 400 25px/1 var(--serif); }
+  .timeline span { margin-top: 7px; color: var(--muted); font-size: 13px; }
+  .education { padding: 85px 0; background: var(--white); }
+  .education__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; margin-top: 40px; }
+  .education strong, .education span { display: block; }
+  .education strong { font: 400 24px/1.1 var(--serif); }
+  .education span { margin-top: 9px; color: var(--muted); font-size: 13px; }
+  @media (max-width: 760px) {
+    .about-hero { padding: 65px 0 75px; }
+    .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
+    .about-hero h1 { font-size: 50px; }
+    .about-hero__copy > p:first-child { margin-top: 0; }
+    .principles__grid > div { border-bottom: 1px solid rgba(23,23,22,.25); padding-bottom: 36px; }
+    .principles__grid h2 { margin-top: 40px; }
+  }
+</style>

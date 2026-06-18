@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="The PMM Field Guide — Kritika Rastogi" description="Practical product marketing frameworks for positioning, customer intelligence, launches, sales enablement, and AI-assisted research.">
+  <header class="guide-hero band">
+    <div class="shell">
+      <p class="kicker">THE PMM FIELD GUIDE · VERSION 01</p>
+      <h1>Frameworks for making<br />complex products <em>click.</em></h1>
+      <div class="guide-hero__lower">
+        <p>A working collection of tools I use to move from scattered market evidence to a story, launch, and learning system.</p>
+        <span>05 modules · 15 prompts</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="guide-nav band" aria-label="Field guide modules">
+    <div class="shell">
+      <a href="#positioning">01 Positioning</a><a href="#customer">02 Customer truth</a><a href="#gtm">03 GTM</a><a href="#enablement">04 Enablement</a><a href="#ai">05 AI systems</a>
+    </div>
+  </nav>
+
+  <div class="guide-sections">
+    <section id="positioning" class="guide-module band">
+      <div class="shell module-grid">
+        <header><span>01</span><p class="kicker">POSITIONING</p><h2>The Choice Frame</h2><p>Positioning is the context that makes your value obvious relative to the alternatives a buyer already understands.</p></header>
+        <div class="framework">
+          <div><small>ALTERNATIVE</small><strong>What do they do today?</strong><p>Include spreadsheets, headcount, delay, and “do nothing,” not only competitors.</p></div>
+          <div><small>TENSION</small><strong>Why does that stop working?</strong><p>Name the change that makes the old way newly expensive, risky, or limiting.</p></div>
+          <div><small>ADVANTAGE</small><strong>What can only you deliver?</strong><p>Choose the capabilities that matter because of the tension, not every feature.</p></div>
+          <div><small>PROOF</small><strong>Why should they believe it?</strong><p>Use evidence matched to the claim: behavior, product fact, customer result, or expert authority.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="customer" class="guide-module band inverse">
+      <div class="shell module-grid">
+        <header><span>02</span><p class="kicker">CUSTOMER TRUTH</p><h2>The Signal Stack</h2><p>A single quote is a clue. Confidence comes from seeing the same tension across what people say, do, buy, and avoid.</p></header>
+        <div class="signal-stack">
+          <div><span>04</span><strong>Behavior</strong><p>Usage, conversion, retention, workarounds</p></div>
+          <div><span>03</span><strong>Commercial</strong><p>Win/loss, sales friction, willingness to pay</p></div>
+          <div><span>02</span><strong>Qualitative</strong><p>Interviews, support, community, call notes</p></div>
+          <div><span>01</span><strong>Market</strong><p>Competitors, category language, macro shifts</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gtm" class="guide-module band">
+      <div class="shell module-grid">
+        <header><span>03</span><p class="kicker">GO-TO-MARKET</p><h2>The Launch Spine</h2><p>A launch is not a date or asset list. It is a coordinated bet about whose behavior will change, why, and how you will know.</p></header>
+        <div class="launch-spine">
+          <div><span>WHO</span><strong>Priority audience</strong><p>Specific enough to deprioritize someone.</p></div><i></i>
+          <div><span>CHANGE</span><strong>Target behavior</strong><p>The action that creates product value.</p></div><i></i>
+          <div><span>WHY</span><strong>Market story</strong><p>Tension, promise, proof, and objection.</p></div><i></i>
+          <div><span>LEARN</span><strong>Signal plan</strong><p>Leading, lagging, and qualitative evidence.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enablement" class="guide-module band orange">
+      <div class="shell module-grid">
+        <header><span>04</span><p class="kicker">SALES ENABLEMENT</p><h2>The Conversation Map</h2><p>Enablement should improve a real conversation, not merely complete a content checklist.</p></header>
+        <div class="conversation-map">
+          <div><small>OPEN</small><h3>Reframe the problem</h3><p>What changed, and why does the old approach now carry a cost?</p></div>
+          <div><small>DISCOVER</small><h3>Expose the impact</h3><p>Which questions help buyers connect the problem to an urgent business consequence?</p></div>
+          <div><small>PROVE</small><h3>Match evidence</h3><p>What proof resolves this persona’s specific risk?</p></div>
+          <div><small>ADVANCE</small><h3>Earn the next step</h3><p>What is the smallest useful commitment the buyer can make?</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai" class="guide-module band">
+      <div class="shell module-grid">
+        <header><span>05</span><p class="kicker">AI-ASSISTED PMM</p><h2>The Judgment Loop</h2><p>Use AI to increase coverage and challenge assumptions, then keep a person accountable for evidence, prioritization, and the final point of view.</p></header>
+        <div class="judgment-loop">
+          <div><strong>Collect</strong><p>Bring source material, customer language, and product context into view.</p></div>
+          <div><strong>Expand</strong><p>Generate patterns, alternatives, counterarguments, and missing questions.</p></div>
+          <div><strong>Verify</strong><p>Trace claims, test contradictions, and separate evidence from inference.</p></div>
+          <div><strong>Decide</strong><p>Choose the implication and make the tradeoff explicit.</p></div>
+          <div><strong>Learn</strong><p>Feed market response back into the next cycle.</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide-hero { padding: 90px 0 70px; }
+  .guide-hero h1 { margin: 26px 0 44px; font: 400 76px/0.96 var(--serif); }
+  .guide-hero h1 em { color: var(--coral); font-weight: 400; }
+  .guide-hero__lower { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .guide-hero__lower p { max-width: 650px; margin: 0; font-size: 18px; }
+  .guide-hero__lower span { color: var(--muted); font-size: 12px; }
+  .guide-nav { position: sticky; top: 76px; z-index: 20; background: rgba(247,247,244,.95); backdrop-filter: blur(10px); }
+  .guide-nav .shell { display: flex; gap: 28px; overflow-x: auto; padding-top: 14px; padding-bottom: 14px; }
+  .guide-nav a { flex: none; font-size: 12px; }
+  .guide-module { padding: 110px 0; scroll-margin-top: 125px; }
+  .module-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 100px; }
+  .module-grid header > span { font: 400 75px/1 var(--serif); color: var(--coral); }
+  .module-grid header .kicker { margin-top: 45px; }
+  .module-grid header h2 { margin: 15px 0 20px; font: 400 52px/1 var(--serif); }
+  .module-grid header > p:last-child { color: var(--muted); }
+  .framework { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+  .framework > div { min-height: 230px; padding: 25px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .framework small, .conversation-map small { color: var(--coral); font-size: 10px; letter-spacing: .12em; }
+  .framework strong { display: block; margin: 70px 0 10px; font: 400 24px/1.05 var(--serif); }
+  .framework p { margin: 0; color: var(--muted); font-size: 13px; }
+  .inverse { background: var(--ink); color: white; }
+  .inverse header > p:last-child { color: #aaa9a3; }
+  .signal-stack > div { display: grid; grid-template-columns: 60px 160px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #4a4a46; }
+  .signal-stack > div:last-child { border-bottom: 1px solid #4a4a46; }
+  .signal-stack span { color: var(--green); font: 400 20px/1 var(--serif); }
+  .signal-stack strong { font: 400 25px/1 var(--serif); }
+  .signal-stack p { margin: 0; color: #aaa9a3; }
+  .launch-spine { display: grid; grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr; align-items: center; }
+  .launch-spine > div { min-height: 245px; padding: 20px; border: 1px solid var(--line); }
+  .launch-spine > i { height: 1px; background: var(--ink); position: relative; }
+  .launch-spine > i::after { content: ''; position: absolute; right: -1px; top: -3px; border-left: 6px solid var(--ink); border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+  .launch-spine span { font-size: 9px; letter-spacing: .12em; }
+  .launch-spine strong { display: block; margin: 75px 0 12px; font: 400 23px/1 var(--serif); }
+  .launch-spine p { margin: 0; color: var(--muted); font-size: 12px; }
+  .orange { background: var(--coral); }
+  .orange .module-grid header > span, .orange .conversation-map small { color: var(--ink); }
+  .orange .module-grid header > p:last-child { color: var(--ink); }
+  .conversation-map { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
+  .conversation-map > div { min-height: 215px; padding: 25px 25px 20px 0; border-bottom: 1px solid rgba(23,23,22,.35); }
+  .conversation-map h3 { margin: 65px 0 10px; font: 400 25px/1 var(--serif); }
+  .conversation-map p { margin: 0; font-size: 13px; }
+  .judgment-loop { display: grid; grid-template-columns: repeat(5, 1fr); }
+  .judgment-loop > div { min-height: 260px; padding: 18px; border: 1px solid var(--line); position: relative; }
+  .judgment-loop > div::after { content: '→'; position: absolute; right: -12px; top: 18px; z-index: 2; width: 24px; background: var(--paper); text-align: center; }
+  .judgment-loop > div:last-child::after { content: '↻'; right: 8px; color: var(--coral); }
+  .judgment-loop strong { display: block; margin-top: 115px; font: 400 23px/1 var(--serif); }
+  .judgment-loop p { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+  @media (max-width: 850px) {
+    .guide-nav { top: 64px; }
+    .module-grid { grid-template-columns: 1fr; gap: 50px; }
+    .launch-spine { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .launch-spine > i { display: none; }
+    .judgment-loop { grid-template-columns: 1fr; }
+    .judgment-loop > div { min-height: 160px; }
+    .judgment-loop strong { margin-top: 45px; }
+    .judgment-loop > div::after { right: 12px; top: auto; bottom: -14px; transform: rotate(90deg); }
+  }
+  @media (max-width: 600px) {
+    .guide-hero h1 { font-size: 50px; }
+    .guide-hero__lower { align-items: flex-start; flex-direction: column; }
+    .guide-module { padding: 75px 0; }
+    .framework, .conversation-map, .launch-spine { grid-template-columns: 1fr; }
+    .signal-stack > div { grid-template-columns: 45px 1fr; }
+    .signal-stack p { grid-column: 2; }
+  }
+</style>
