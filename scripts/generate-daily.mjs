@@ -31,6 +31,21 @@ function clean(value = '') {
     .trim();
 }
 
+function normalizeUrl(value = '') {
+  try {
+    const url = new URL(String(value).replace(/&amp;/g, '&'));
+    url.hash = '';
+    for (const key of [...url.searchParams.keys()]) {
+      if (key.startsWith('utm_') || ['ref', 'source'].includes(key)) url.searchParams.delete(key);
+    }
+    url.hostname = url.hostname.toLowerCase();
+    url.pathname = url.pathname.replace(/\/$/, '') || '/';
+    return url.toString();
+  } catch {
+    return '';
+  }
+}
+
 async function readFeed([source, url]) {
   try {
     const response = await fetch(url, { headers: { 'user-agent': 'kritikarastogi.com editorial research/1.0' } });
@@ -129,7 +144,7 @@ function parseDraft(raw) {
   if (!match) throw new Error('Model did not return JSON.');
   const draft = JSON.parse(match[0]);
   const allowedTopics = ['AI & PMM', 'Positioning', 'Customer Insight', 'GTM', 'Enablement'];
-  const packetUrls = new Set(globalThis.packet.map((item) => item.url));
+  const packetByUrl = new Map(globalThis.packet.map((item) => [normalizeUrl(item.url), item]));
   const words = String(draft.body || '').trim().split(/\s+/).length;
   const hasStaccatoParagraph = String(draft.body || '').split(/\n\s*\n/).some((paragraph) => {
     const sentences = paragraph.replace(/[#>*_`-]/g, '').match(/[^.!?]+[.!?]+/g) || [];
@@ -147,10 +162,15 @@ function parseDraft(raw) {
   if (draft.title.length > 85 || draft.description.length > 180) throw new Error('Title or description is too long.');
   if (/in today'?s|fast-paced landscape|game-changer|\bdelve\b|\bunlock\b|revolutioni[sz]e/i.test(draft.body)) throw new Error('Draft failed the language quality gate.');
   if (hasStaccatoParagraph || /\bThis is where\b|\bThen everything changed\b|\bThe goal is not\b/i.test(draft.body)) throw new Error('Draft failed the prose rhythm quality gate.');
-  if (!asArray(draft.sources).length) throw new Error('Draft has no sources.');
-  if (asArray(draft.sources).some((source) => !packetUrls.has(source.url))) throw new Error('Draft cited a URL outside the source packet.');
+  const validSources = asArray(draft.sources)
+    .map((source) => packetByUrl.get(normalizeUrl(source.url)))
+    .filter(Boolean)
+    .map((source) => ({ label: `${source.source}: ${source.title}`, url: source.url }));
+  const bodyUrls = [...String(draft.body).matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((match) => match[1]);
+  if (!validSources.length) throw new Error('Draft has no valid packet sources.');
+  if (bodyUrls.some((url) => !packetByUrl.has(normalizeUrl(url)))) throw new Error('Draft body cited a URL outside the source packet.');
 
-  return { ...draft, words };
+  return { ...draft, sources: validSources, words };
 }
 
 function slugify(value) {
