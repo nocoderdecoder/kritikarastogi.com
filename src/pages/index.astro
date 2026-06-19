@@ -1,74 +1,48 @@
 ---
-import { ArrowRight, ArrowUpRight } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, NotebookPen, UserRound } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import ArticleRow from '../components/ArticleRow.astro';
 import { caseStudies } from '../data/caseStudies';
 import { getCollection } from 'astro:content';
 
-const allArticles = (await getCollection('writing', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-const articles = allArticles.slice(0, 3);
+const articles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout>
   <section class="hero band">
-    <div class="hero__copy">
-      <p class="kicker">PRODUCT MARKETER · AI, SAAS & PLATFORMS · BAY AREA</p>
-      <h1>I turn complex products<br />into <em>clear choices.</em></h1>
-      <div class="hero__below">
-        <div>
-          <p class="hero__intro">I'm Kritika. I've launched AI recruiting workflows, grown a loyalty product used by more than one million customers, and taken four advertising products from zero to market.</p>
-          <div class="hero__vocabulary" aria-hidden="true">
-            <span>Positioning</span>
-            <span>Messaging</span>
-            <span>Go-to-market</span>
-            <span>Buyer insight</span>
-            <span>Segmentation</span>
-            <span>Launch strategy</span>
-            <span>Adoption</span>
-            <span>Sales enablement</span>
-          </div>
-        </div>
-        <aside class="hero__reading" aria-label="Latest writing" data-article-ticker>
-          <div class="hero__reading-head">
-            <span><i></i><span class="kicker">LATEST THINKING</span></span>
-            <span class="hero__reading-count" aria-live="polite"><b data-ticker-count>01</b> / {String(allArticles.length).padStart(2, '0')}</span>
-            <a href="/writing">View all <ArrowUpRight size={14} /></a>
-          </div>
-          <div class="hero__reading-window">
-            {allArticles.map((article, index) => (
-              <a
-                class:list={['hero__reading-item', { 'is-active': index === 0 }]}
-                href={`/writing/${article.id}`}
-                data-ticker-item
-                aria-hidden={index === 0 ? 'false' : 'true'}
-                tabindex={index === 0 ? 0 : -1}
-              >
-                <span>{article.data.topic} · {article.data.kind}</span>
-                <strong>{article.data.title}</strong>
-                <span class="hero__reading-action">Read article <ArrowUpRight size={15} /></span>
-              </a>
-            ))}
-          </div>
-        </aside>
+    <div class="hero__inner">
+      <p class="kicker">AI & B2B PRODUCT MARKETER · BAY AREA</p>
+      <h1>I help technical products become <em>easier to understand, buy, and adopt.</em></h1>
+      <p class="hero__summary"><span>I’m Kritika, a product marketer with 7+ years across AI, SaaS, advertising platforms, and consumer products.</span> <span>I turn customer evidence into positioning, launches, and adoption programs that product and sales teams can use.</span></p>
+      <div class="hero__actions">
+        <a class="hero__primary" href="/about"><UserRound size={16} /> About me</a>
+        <a class="hero__secondary" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">
+          <svg class="linkedin-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.4 7.2H2V22h3.4V7.2ZM3.7 2A2 2 0 1 0 3.7 6a2 2 0 0 0 0-4ZM22 13.5c0-4.5-2.4-6.6-5.6-6.6-2.6 0-3.7 1.4-4.4 2.4V7.2H8.6V22H12v-7.3c0-1.9.4-3.8 2.8-3.8 2.4 0 2.4 2.2 2.4 3.9V22H22v-8.5Z" /></svg>
+          LinkedIn
+        </a>
+        <a class="hero__secondary" href="/writing"><NotebookPen size={16} /> PMM writing</a>
       </div>
-    </div>
-    <div class="hero__stamp" aria-label="Seven plus years, global product marketing">
-      <span>7+ YEARS</span>
-      <strong>PMM</strong>
-      <span>GLOBAL</span>
-    </div>
-  </section>
-
-  <section class="proof band">
-    <div class="shell proof__grid">
-      <p class="proof__lead">Seven years of product marketing across <span>AI, super apps, loyalty, and B2B platforms.</span></p>
-      <div class="proof__metrics">
-        <div><strong>$11M</strong><span>incremental revenue from Gojek launches</span></div>
-        <div><strong>1M+</strong><span>users analyzed</span></div>
-        <div><strong>6</strong><span>zero-to-one launches</span></div>
-        <div><strong>42+</strong><span>customer interviews</span></div>
+      <div class="credibility" aria-label="Education and selected experience">
+        <p>TRAINED AT / BUILT AT</p>
+        <div class="credibility__item">
+          <img class="credibility__logo credibility__logo--cmu" src="/logos/cmu-lettermark.png" alt="Carnegie Mellon University" />
+          <span>CMU · MS Product Management</span>
+        </div>
+        <div class="credibility__item">
+          <img class="credibility__logo" src="/logos/gojek.svg" alt="Gojek" />
+          <span>B2B Product Marketing Manager</span>
+        </div>
+        <div class="credibility__item">
+          <img class="credibility__logo credibility__logo--square" src="/logos/burger-king.svg" alt="Burger King" />
+          <span>Digital Product Marketing Manager</span>
+        </div>
+        <div class="credibility__item">
+          <img class="credibility__logo" src="/logos/vodafone.svg" alt="Vodafone" />
+          <span>National Account Manager, GTM</span>
+        </div>
       </div>
     </div>
   </section>
@@ -142,91 +116,26 @@ const articles = allArticles.slice(0, 3);
   </section>
 </BaseLayout>
 
-<script>
-  const ticker = document.querySelector<HTMLElement>('[data-article-ticker]');
-  const tickerItems = Array.from(ticker?.querySelectorAll<HTMLAnchorElement>('[data-ticker-item]') ?? []);
-  const tickerCount = ticker?.querySelector<HTMLElement>('[data-ticker-count]');
-  let tickerIndex = 0;
-  let tickerTimer: number | undefined;
-
-  const showNextArticle = () => {
-    if (tickerItems.length < 2) return;
-    const current = tickerItems[tickerIndex];
-    tickerIndex = (tickerIndex + 1) % tickerItems.length;
-    const next = tickerItems[tickerIndex];
-
-    current.classList.remove('is-active');
-    current.classList.add('is-exiting');
-    current.setAttribute('aria-hidden', 'true');
-    current.tabIndex = -1;
-
-    next.classList.remove('is-exiting');
-    next.classList.add('is-active');
-    next.setAttribute('aria-hidden', 'false');
-    next.tabIndex = 0;
-    if (tickerCount) tickerCount.textContent = String(tickerIndex + 1).padStart(2, '0');
-
-    window.setTimeout(() => current.classList.remove('is-exiting'), 550);
-  };
-
-  const stopTicker = () => {
-    if (tickerTimer) window.clearInterval(tickerTimer);
-    tickerTimer = undefined;
-  };
-
-  const startTicker = () => {
-    stopTicker();
-    tickerTimer = window.setInterval(showNextArticle, 3000);
-  };
-
-  ticker?.addEventListener('mouseenter', stopTicker);
-  ticker?.addEventListener('mouseleave', startTicker);
-  ticker?.addEventListener('focusin', stopTicker);
-  ticker?.addEventListener('focusout', (event) => {
-    if (!ticker.contains(event.relatedTarget as Node | null)) startTicker();
-  });
-  document.addEventListener('visibilitychange', () => document.hidden ? stopTicker() : startTicker());
-  startTicker();
-</script>
-
 <style>
-  .hero { min-height: min(820px, calc(100svh - 180px)); padding: 34px var(--gutter) 42px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-  .hero__copy { position: relative; z-index: 2; margin-top: clamp(28px, 5vh, 54px); }
-  .hero h1 { margin: 22px 0 42px; max-width: 1120px; font: 400 92px/0.98 var(--serif); }
-  .hero h1 em { display: inline-block; color: var(--coral); font-weight: 400; transform: translateY(0.06em); }
-  .hero__below { width: calc(100% - 220px); display: grid; grid-template-columns: minmax(390px, 1fr) minmax(370px, 470px); gap: clamp(48px, 7vw, 100px); align-items: end; }
-  .hero__intro { max-width: 620px; margin: 0; font-size: 18px; line-height: 1.5; }
-  .hero__vocabulary { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; color: rgba(23, 23, 22, 0.44); }
-  .hero__vocabulary span { font-size: 12px; line-height: 1.2; }
-  .hero__vocabulary span:nth-child(3n + 1) { font: 400 18px/1.1 var(--serif); }
-  .hero__vocabulary span:nth-child(4n) { color: rgba(240, 82, 54, 0.52); }
-  .hero__reading { min-width: 0; }
-  .hero__reading-head { min-height: 34px; padding: 0 2px 10px; display: grid; grid-template-columns: 1fr auto auto; gap: 18px; align-items: center; }
-  .hero__reading-head > span:first-child { display: inline-flex; align-items: center; gap: 9px; }
-  .hero__reading-head i { width: 7px; height: 7px; display: block; background: var(--coral); border-radius: 50%; }
-  .hero__reading-head a { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 650; }
-  .hero__reading-count { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
-  .hero__reading-count b { color: var(--ink); font-weight: 700; }
-  .hero__reading-window { height: 145px; position: relative; overflow: hidden; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
-  .hero__reading-item { position: absolute; inset: 0; padding: 16px 2px 13px; display: grid; grid-template-rows: auto 1fr auto; gap: 6px; opacity: 0; transform: translateX(105%); pointer-events: none; transition: transform 520ms cubic-bezier(.22,.61,.36,1), opacity 320ms ease; }
-  .hero__reading-item.is-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
-  .hero__reading-item.is-exiting { opacity: 0; transform: translateX(-105%); }
-  .hero__reading-item > span:first-child { color: var(--coral); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .hero__reading-item strong { max-width: 430px; font: 400 28px/1.02 var(--serif); }
-  .hero__reading-action { display: inline-flex; align-items: center; justify-self: end; gap: 6px; color: var(--muted); font-size: 10px; font-weight: 650; }
-  .hero__reading-item:hover strong { color: var(--coral); }
-  .hero__stamp { position: absolute; right: var(--gutter); bottom: 36px; width: 154px; height: 154px; border-radius: 50%; background: var(--green); display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(7deg); }
-  .hero__stamp strong { font: 400 43px/1 var(--serif); }
-  .hero__stamp span { font-size: 9px; letter-spacing: 0.12em; }
-  .proof { padding: 84px 0; }
-  .proof__grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 80px; align-items: end; }
-  .proof__lead { margin: 0; font: 400 43px/1.08 var(--serif); }
-  .proof__lead span { color: var(--teal); }
-  .proof__metrics { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-  .proof__metrics div { min-height: 130px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .proof__metrics strong { display: block; font: 400 38px/1 var(--serif); }
-  .proof__metrics span { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; }
-  .work-section, .writing { padding: 96px 0; }
+  .hero { min-height: min(730px, calc(100svh - 76px)); padding: clamp(54px, 8vh, 88px) var(--gutter) 0; overflow: hidden; display: flex; }
+  .hero__inner { width: min(100%, 1500px); margin: 0 auto; display: flex; flex: 1; flex-direction: column; }
+  .hero h1 { margin: 22px 0 28px; max-width: 1280px; font: 400 82px/0.97 var(--serif); }
+  .hero h1 em { color: var(--coral); font-weight: 400; }
+  .hero__summary { max-width: 850px; margin: 0; font-size: 18px; line-height: 1.55; }
+  .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 30px; }
+  .hero__primary, .hero__secondary { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
+  .linkedin-mark { width: 16px; height: 16px; fill: currentColor; flex: 0 0 auto; }
+  .hero__primary { background: var(--ink); color: white; }
+  .hero__secondary { border: 1px solid var(--ink); }
+  .credibility { margin-top: auto; padding: 24px 0 26px; display: grid; grid-template-columns: 145px repeat(4, minmax(0, 1fr)); align-items: center; gap: 24px; border-bottom: 1px solid var(--ink); }
+  .credibility > p { margin: 0; max-width: 90px; color: var(--muted); font-size: 9px; font-weight: 750; line-height: 1.35; letter-spacing: 0.12em; }
+  .credibility__item { min-width: 0; display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: 14px; }
+  .credibility__logo { width: 72px; height: 34px; object-fit: contain; object-position: left center; filter: grayscale(1); opacity: 0.72; }
+  .credibility__logo--cmu { height: 29px; mix-blend-mode: multiply; }
+  .credibility__logo--square { width: 42px; height: 42px; }
+  .credibility__item span { max-width: 145px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+  .work-section { padding: 72px 0 96px; }
+  .writing { padding: 96px 0; }
   .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 44px; }
   .section-head h2 { margin: 16px 0 0; font: 400 57px/1 var(--serif); }
   .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -246,30 +155,33 @@ const articles = allArticles.slice(0, 3);
   .manifesto h2 { margin: 26px 0 22px; max-width: 1000px; font: 400 65px/1.03 var(--serif); }
   .manifesto__inner > p:nth-child(3) { max-width: 620px; margin: 0; font-size: 18px; }
   .manifesto__actions { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 38px; }
+  @media (min-width: 901px) and (max-width: 1300px) {
+    .hero { padding-top: 48px; }
+    .hero h1 { margin: 18px 0 22px; font-size: 70px; }
+    .hero__summary { font-size: 17px; }
+    .hero__actions { margin-top: 24px; }
+    .credibility { padding: 16px 0; }
+  }
   @media (max-width: 900px) {
-    .hero h1 { font-size: 70px; }
-    .hero__stamp { width: 118px; height: 118px; }
-    .hero__below { width: calc(100% - 145px); grid-template-columns: 1fr; gap: 28px; }
-    .hero__vocabulary { margin-top: 20px; }
-    .proof__grid, .method__inner { grid-template-columns: 1fr; gap: 56px; }
+    .hero h1 { font-size: 66px; }
+    .credibility { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .credibility > p { grid-column: 1 / -1; max-width: none; }
+    .method__inner { grid-template-columns: 1fr; gap: 56px; }
     .method__intro { position: static; }
   }
   @media (max-width: 700px) {
-    .hero { min-height: calc(100svh - 144px); padding-top: 26px; }
-    .hero__copy { margin-top: 24px; }
-    .hero h1 { font-size: 53px; margin-top: 16px; }
-    .hero__below { width: 100%; gap: 24px; }
-    .hero__intro { max-width: 100%; font-size: 16px; }
-    .hero__vocabulary { margin-top: 20px; gap: 7px 16px; }
-    .hero__vocabulary span { font-size: 12px; }
-    .hero__vocabulary span:nth-child(3n + 1) { font-size: 17px; }
-    .hero__vocabulary span:nth-child(n + 6) { display: none; }
-    .hero__reading-head { grid-template-columns: 1fr auto auto; gap: 12px; }
-    .hero__reading-window { height: 142px; }
-    .hero__reading-item strong { font-size: 25px; }
-    .hero__stamp { display: none; }
-    .proof, .work-section, .writing { padding: 70px 0; }
-    .proof__lead { font-size: 36px; }
+    .hero { min-height: 0; padding-top: 34px; }
+    .hero h1 { margin: 15px 0 20px; font-size: 43px; line-height: 1; }
+    .hero__summary { font-size: 16px; }
+    .hero__summary span:last-child { display: none; }
+    .hero__actions { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    .hero__primary, .hero__secondary { min-width: 0; min-height: 42px; padding: 0 7px; gap: 5px; font-size: 11px; white-space: nowrap; }
+    .credibility { margin-top: 30px; padding: 18px 0 20px; gap: 16px 10px; border-top: 1px solid var(--line); }
+    .credibility__item { grid-template-columns: 58px minmax(0, 1fr); gap: 9px; }
+    .credibility__logo { width: 54px; height: 26px; }
+    .credibility__logo--square { width: 34px; height: 34px; }
+    .credibility__item span { font-size: 9px; }
+    .work-section, .writing { padding: 70px 0; }
     .case-grid { grid-template-columns: 1fr; }
     .section-head { align-items: flex-start; flex-direction: column; }
     .section-head h2 { font-size: 45px; }
