@@ -15,6 +15,8 @@ Production check:
 npm run build
 ```
 
+For the live Competitive Signal Brief tool in local development, create a `.env` file from `.env.example` and set `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`. In production, add the same variable in your Vercel project settings.
+
 ## Content
 
 Writing lives in `src/content/writing`. Every Markdown file becomes a page and automatically appears in the writing archive.

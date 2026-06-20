@@ -19,6 +19,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
       <p class="hero__summary"><span>I’m Kritika, a product marketer with 7+ years across AI, SaaS, advertising platforms, and consumer products.</span> <span>I turn customer evidence into positioning, launches, and adoption programs that product and sales teams can use.</span></p>
       <div class="hero__actions">
         <a class="hero__primary" href="/about"><UserRound size={16} /> About me</a>
+        <a class="hero__tool" href="/competitive-signal-brief"><ArrowRight size={16} /> Try AI brief</a>
         <a class="hero__secondary" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">
           <svg class="linkedin-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.4 7.2H2V22h3.4V7.2ZM3.7 2A2 2 0 1 0 3.7 6a2 2 0 0 0 0-4ZM22 13.5c0-4.5-2.4-6.6-5.6-6.6-2.6 0-3.7 1.4-4.4 2.4V7.2H8.6V22H12v-7.3c0-1.9.4-3.8 2.8-3.8 2.4 0 2.4 2.2 2.4 3.9V22H22v-8.5Z" /></svg>
           LinkedIn
@@ -123,10 +124,11 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
   .hero h1 em { color: var(--coral); font-weight: 400; }
   .hero__summary { max-width: 850px; margin: 0; font-size: 18px; line-height: 1.55; }
   .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 30px; }
-  .hero__primary, .hero__secondary { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
+  .hero__primary, .hero__secondary, .hero__tool { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
   .linkedin-mark { width: 16px; height: 16px; fill: currentColor; flex: 0 0 auto; }
   .hero__primary { background: var(--ink); color: white; }
   .hero__secondary { border: 1px solid var(--ink); }
+  .hero__tool { border: 1px solid rgba(240, 82, 54, 0.28); background: rgba(240, 82, 54, 0.08); color: var(--ink); }
   .credibility { margin-top: auto; padding: 24px 0 26px; display: grid; grid-template-columns: 145px repeat(4, minmax(0, 1fr)); align-items: center; gap: 24px; border-bottom: 1px solid var(--ink); }
   .credibility > p { margin: 0; max-width: 90px; color: var(--muted); font-size: 9px; font-weight: 750; line-height: 1.35; letter-spacing: 0.12em; }
   .credibility__item { min-width: 0; display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: 14px; }
@@ -175,7 +177,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
     .hero__summary { font-size: 16px; }
     .hero__summary span:last-child { display: none; }
     .hero__actions { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-    .hero__primary, .hero__secondary { min-width: 0; min-height: 42px; padding: 0 7px; gap: 5px; font-size: 11px; white-space: nowrap; }
+    .hero__primary, .hero__secondary, .hero__tool { min-width: 0; min-height: 42px; padding: 0 7px; gap: 5px; font-size: 11px; white-space: nowrap; }
     .credibility { margin-top: 30px; padding: 18px 0 20px; gap: 16px 10px; border-top: 1px solid var(--line); }
     .credibility__item { grid-template-columns: 58px minmax(0, 1fr); gap: 9px; }
     .credibility__logo { width: 54px; height: 26px; }

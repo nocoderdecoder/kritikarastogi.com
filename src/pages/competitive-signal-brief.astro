@@ -1,0 +1,461 @@
+---
+import { RotateCcw, Sparkles } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/competitive-signal-brief.css';
+---
+
+<BaseLayout
+  title="Competitive Signal Brief — Kritika Rastogi"
+  description="An AI tool for competitive insights, positioning, and market strategy."
+>
+  <div class="brief-page">
+    <section class="page-head band brief-hero">
+      <div class="shell page-head__inner brief-hero__inner">
+        <p class="kicker">AI TOOL · COMPETITIVE INSIGHTS</p>
+        <h1>Competitive Signal,<br /><em>strategic clarity.</em></h1>
+        <p>An AI tool for competitive insights, positioning, and market strategy based on my market intelligence approach.</p>
+      </div>
+    </section>
+
+    <section class="brief-main">
+      <div class="shell">
+        <div class="preset-row">
+          <button class="demo-button" type="button" data-demo-fill>
+            <Sparkles size={14} />
+            Fill demo with AI
+          </button>
+          <div class="preset-row__presets" data-presets></div>
+        </div>
+
+        <form class="brief-form" data-brief-form>
+          <div class="brief-form-grid">
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="decisionFocus">Decision Focus</label>
+              </div>
+              <input id="decisionFocus" name="decisionFocus" list="decision-focus-options" placeholder="What decision should this brief support?" required />
+              <datalist id="decision-focus-options">
+                <option value="Find a positioning opportunity"></option>
+                <option value="Pressure-test launch messaging"></option>
+                <option value="Compare feature parity risk"></option>
+                <option value="Diagnose win/loss pressure"></option>
+                <option value="Map a white-space opportunity"></option>
+                <option value="Other"></option>
+              </datalist>
+            </div>
+
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="company">Company</label>
+              </div>
+              <input id="company" name="company" placeholder="Company name" required />
+            </div>
+
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="product">Product</label>
+              </div>
+              <input id="product" name="product" placeholder="Product or offer" required />
+            </div>
+
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="category">Category</label>
+              </div>
+              <input id="category" name="category" placeholder="Market or category" required />
+            </div>
+
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="buyer">Target Buyer</label>
+              </div>
+              <div class="input-wrap">
+                <input id="buyer" name="buyer" placeholder="Who makes or shapes the decision?" required />
+                <button class="field-action field-action--inline" type="button" data-suggest-field="buyer" aria-label="Generate buyer suggestions with AI">
+                  <Sparkles size={12} />
+                  <span>AI</span>
+                </button>
+              </div>
+              <div class="suggestions" data-suggestions-for="buyer" hidden></div>
+            </div>
+
+            <div class="brief-field">
+              <div class="brief-label-row">
+                <label for="competitors">Competitors</label>
+              </div>
+              <div class="input-wrap">
+                <input id="competitors" name="competitors" placeholder="Direct and adjacent competitors" required />
+                <button class="field-action field-action--inline" type="button" data-suggest-field="competitors" aria-label="Generate competitor suggestions with AI">
+                  <Sparkles size={12} />
+                  <span>AI</span>
+                </button>
+              </div>
+              <div class="suggestions" data-suggestions-for="competitors" hidden></div>
+            </div>
+
+            <div class="brief-field brief-field--wide">
+              <div class="brief-label-row">
+                <label for="jobToBeDone">Job To Be Done</label>
+              </div>
+              <div class="input-wrap input-wrap--textarea">
+                <textarea id="jobToBeDone" name="jobToBeDone" placeholder="What outcome is the buyer hiring this product to achieve?" required></textarea>
+                <button class="field-action field-action--inline field-action--textarea" type="button" data-suggest-field="jobToBeDone" aria-label="Generate job to be done suggestions with AI">
+                  <Sparkles size={12} />
+                  <span>AI</span>
+                </button>
+              </div>
+              <div class="suggestions" data-suggestions-for="jobToBeDone" hidden></div>
+            </div>
+
+            <div class="brief-field brief-field--wide">
+              <div class="brief-label-row">
+                <label for="alternatives">Alternatives</label>
+              </div>
+              <div class="input-wrap">
+                <input id="alternatives" name="alternatives" placeholder="Spreadsheets, agencies, internal teams, suites, or doing nothing" />
+                <button class="field-action field-action--inline" type="button" data-suggest-field="alternatives" aria-label="Generate alternative suggestions with AI">
+                  <Sparkles size={12} />
+                  <span>AI</span>
+                </button>
+              </div>
+              <div class="suggestions" data-suggestions-for="alternatives" hidden></div>
+            </div>
+
+            <div class="brief-field brief-field--wide">
+              <div class="brief-label-row">
+                <label for="notes">Notes</label>
+              </div>
+              <textarea id="notes" name="notes" placeholder="Context, hypotheses, product truths, or buyer objections"></textarea>
+            </div>
+          </div>
+
+          <div class="brief-actions">
+            <button class="brief-button" type="submit" data-submit><Sparkles size={15} /> Generate brief</button>
+            <button class="secondary-button" type="button" data-reset><RotateCcw size={14} /> Reset</button>
+            <span class="brief-status" data-form-status></span>
+          </div>
+        </form>
+
+        <div class="error-card" data-error hidden></div>
+
+        <section class="brief-result" aria-live="polite">
+          <div class="result-placeholder" data-placeholder>
+            <p class="kicker">Output</p>
+            <h2>Your brief will appear here.</h2>
+          </div>
+          <div data-result hidden></div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import { SAMPLE_PRESETS, emptyInput, toShareText, type BriefInput, type CompetitiveSignalBrief } from '../lib/competitiveSignalBrief';
+
+    const form = document.querySelector<HTMLFormElement>('[data-brief-form]')!;
+    const resultRoot = document.querySelector<HTMLElement>('[data-result]')!;
+    const placeholder = document.querySelector<HTMLElement>('[data-placeholder]')!;
+    const status = document.querySelector<HTMLElement>('[data-form-status]')!;
+    const errorBox = document.querySelector<HTMLElement>('[data-error]')!;
+    const presetsRoot = document.querySelector<HTMLElement>('[data-presets]')!;
+    const submitButton = document.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const resetButton = document.querySelector<HTMLButtonElement>('[data-reset]')!;
+    const demoButton = document.querySelector<HTMLButtonElement>('[data-demo-fill]')!;
+    const suggestButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-suggest-field]'));
+    const submitMarkup = submitButton.innerHTML;
+    const demoMarkup = demoButton.innerHTML;
+
+    function setInput(input: BriefInput) {
+      for (const [key, value] of Object.entries(input)) {
+        const field = form.elements.namedItem(key) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (field) field.value = value;
+      }
+    }
+
+    function currentInput(): BriefInput {
+      const data = new FormData(form);
+      return {
+        decisionFocus: String(data.get('decisionFocus') || ''),
+        company: String(data.get('company') || ''),
+        product: String(data.get('product') || ''),
+        category: String(data.get('category') || ''),
+        buyer: String(data.get('buyer') || ''),
+        competitors: String(data.get('competitors') || ''),
+        jobToBeDone: String(data.get('jobToBeDone') || ''),
+        alternatives: String(data.get('alternatives') || ''),
+        notes: String(data.get('notes') || '')
+      };
+    }
+
+    function escapeHtml(value: string) {
+      return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function compactText(value: string, maxWords = 24) {
+      const cleaned = value.replace(/\s+/g, ' ').trim();
+      if (!cleaned) return '';
+      const firstSentence = cleaned.split(/(?<=[.!?])\s+/)[0] || cleaned;
+      const words = firstSentence.split(' ');
+      return words.length <= maxWords ? firstSentence : `${words.slice(0, maxWords).join(' ')}...`;
+    }
+
+    function hideAllSuggestions(exceptField?: keyof BriefInput) {
+      document.querySelectorAll<HTMLElement>('[data-suggestions-for]').forEach((node) => {
+        if (exceptField && node.dataset.suggestionsFor === exceptField) return;
+        node.hidden = true;
+        node.innerHTML = '';
+      });
+    }
+
+    function setSuggestions(field: keyof BriefInput, suggestions: string[]) {
+      const root = document.querySelector<HTMLElement>(`[data-suggestions-for="${field}"]`);
+      const target = form.elements.namedItem(field) as HTMLInputElement | HTMLTextAreaElement | null;
+      if (!root || !target || !suggestions.length) return;
+      hideAllSuggestions(field);
+      root.innerHTML = suggestions.map((suggestion) => `<button type="button" class="suggestion-pill">${escapeHtml(suggestion)}</button>`).join('');
+      root.hidden = false;
+      root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => {
+        button.addEventListener('click', () => {
+          target.value = button.textContent || '';
+          hideAllSuggestions();
+        });
+      });
+    }
+
+    function setGeneratingState(isGenerating: boolean) {
+      form.classList.toggle('is-generating', isGenerating);
+      form.setAttribute('aria-busy', String(isGenerating));
+      submitButton.disabled = isGenerating;
+      resetButton.disabled = isGenerating;
+      demoButton.disabled = isGenerating;
+      suggestButtons.forEach((button) => {
+        button.disabled = isGenerating;
+      });
+      submitButton.innerHTML = isGenerating
+        ? '<span class="button-loader" aria-hidden="true"></span><span>Generating brief…</span>'
+        : submitMarkup;
+    }
+
+    async function fillDemo() {
+      errorBox.hidden = true;
+      hideAllSuggestions();
+      demoButton.disabled = true;
+      demoButton.innerHTML = '<span class="button-loader button-loader--dark" aria-hidden="true"></span><span>Filling demo…</span>';
+
+      try {
+        const response = await fetch('/api/competitive-signal-brief', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ mode: 'demo' })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Demo fill failed.');
+        setInput(data.input);
+        status.textContent = 'Demo scenario loaded.';
+      } catch (error) {
+        errorBox.textContent = error instanceof Error ? error.message : 'Demo fill failed.';
+        errorBox.hidden = false;
+      } finally {
+        demoButton.disabled = false;
+        demoButton.innerHTML = demoMarkup;
+      }
+    }
+
+    async function suggestField(field: keyof BriefInput, button: HTMLButtonElement) {
+      const originalMarkup = button.innerHTML;
+      button.disabled = true;
+      button.innerHTML = '<span>Thinking…</span>';
+      errorBox.hidden = true;
+      try {
+        const response = await fetch('/api/competitive-signal-brief', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ mode: 'suggest', field, input: currentInput() })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Suggestions failed.');
+        setSuggestions(field, data.suggestions || []);
+      } catch (error) {
+        errorBox.textContent = error instanceof Error ? error.message : 'Suggestions failed.';
+        errorBox.hidden = false;
+      } finally {
+        button.disabled = false;
+        button.innerHTML = originalMarkup;
+      }
+    }
+
+    function renderBrief(input: BriefInput, brief: CompetitiveSignalBrief) {
+      const themes = brief.themes.slice(0, 3);
+      const actions = brief.actions.slice(0, 3);
+      const talkTrack = brief.talkTrack.slice(0, 3);
+      const recommendation = compactText(brief.overview.headline, 20);
+      const summary = compactText(brief.overview.summary, 34);
+      const marketShape = compactText(brief.overview.marketShape, 22);
+
+      resultRoot.innerHTML = `
+        <div class="result-shell">
+          <div class="result-topbar">
+            <div>
+              <p class="kicker">Competitive Signal Brief</p>
+              <h2>${escapeHtml(input.company)} · ${escapeHtml(input.product)}</h2>
+            </div>
+            <div class="result-topbar__actions">
+              <div class="confidence-pill">${escapeHtml(brief.confidence)} confidence</div>
+              <button class="inline-button" type="button" data-copy-brief>Copy brief</button>
+            </div>
+          </div>
+          <div class="recommendation-card">
+            <p class="kicker">Recommended position</p>
+            <h3>${escapeHtml(recommendation)}</h3>
+            <p>${escapeHtml(summary)}</p>
+          </div>
+
+          <div class="insight-board">
+            <article class="insight-panel insight-panel--mini">
+              <p class="kicker">Audience</p>
+              <p class="metric-copy">${escapeHtml(compactText(brief.whiteSpace.audience, 18))}</p>
+            </article>
+
+            <article class="insight-panel insight-panel--mini">
+              <p class="kicker">Angle</p>
+              <p class="metric-copy">${escapeHtml(compactText(brief.whiteSpace.opportunity, 18))}</p>
+            </article>
+
+            <article class="insight-panel insight-panel--mini">
+              <p class="kicker">Market signal</p>
+              <p class="metric-copy">${escapeHtml(marketShape)}</p>
+            </article>
+
+            <article class="insight-panel insight-panel--wide">
+              <p class="kicker">Strategic signals</p>
+              <div class="signal-grid">
+                ${themes.map((theme) => `
+                  <article class="signal-card">
+                    <p class="kicker">${escapeHtml(theme.label)}</p>
+                    <h4>${escapeHtml(compactText(theme.observation, 9))}</h4>
+                    <p>${escapeHtml(compactText(theme.implication, 16))}</p>
+                  </article>
+                `).join('')}
+              </div>
+            </article>
+
+            <article class="insight-panel">
+              <p class="kicker">Three lines to use</p>
+              <ul class="message-list">
+                ${talkTrack.map((line) => `<li>${escapeHtml(compactText(line, 16))}</li>`).join('')}
+              </ul>
+            </article>
+
+            <article class="insight-panel">
+              <p class="kicker">Next moves</p>
+              <div class="action-compact-list">
+                ${actions.map((action) => `
+                  <article class="action-compact">
+                    <div class="action-compact__top">
+                      <span class="action-owner">${escapeHtml(action.owner)}</span>
+                    </div>
+                    <p class="action-compact__action">${escapeHtml(compactText(action.action, 14))}</p>
+                    <p class="action-compact__why">${escapeHtml(compactText(action.why, 16))}</p>
+                  </article>
+                `).join('')}
+              </div>
+            </article>
+          </div>
+        </div>
+      `;
+      placeholder.hidden = true;
+      resultRoot.hidden = false;
+
+      const copyButton = resultRoot.querySelector<HTMLButtonElement>('[data-copy-brief]');
+      copyButton?.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(toShareText(input, brief));
+        status.textContent = 'Brief copied.';
+      });
+    }
+
+    presetsRoot.innerHTML = SAMPLE_PRESETS.map((preset) => `
+      <button class="preset-button" type="button" data-preset="${preset.id}">${preset.label}</button>
+    `).join('');
+
+    presetsRoot.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const preset = SAMPLE_PRESETS.find((item) => item.id === button.dataset.preset);
+        if (!preset) return;
+        setInput(preset.input);
+        status.textContent = `Loaded ${preset.label}.`;
+        errorBox.hidden = true;
+      });
+    });
+
+    demoButton.addEventListener('click', fillDemo);
+
+    document.querySelectorAll<HTMLButtonElement>('[data-suggest-field]').forEach((button) => {
+      button.addEventListener('click', () => suggestField(button.dataset.suggestField as keyof BriefInput, button));
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('[data-suggestions-for]')) return;
+      if (target.closest('[data-suggest-field]')) return;
+      hideAllSuggestions();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') hideAllSuggestions();
+    });
+
+    form.querySelectorAll('input, textarea').forEach((field) => {
+      field.addEventListener('focus', () => {
+        const wrapper = field.closest('.brief-field');
+        const fieldName = field.getAttribute('name');
+        if (!wrapper || !fieldName) {
+          hideAllSuggestions();
+          return;
+        }
+        const currentSuggestionRoot = wrapper.querySelector<HTMLElement>(`[data-suggestions-for="${fieldName}"]`);
+        if (!currentSuggestionRoot || currentSuggestionRoot.hidden) hideAllSuggestions();
+      });
+    });
+
+    resetButton.addEventListener('click', () => {
+      setInput(emptyInput());
+      errorBox.hidden = true;
+      status.textContent = '';
+      hideAllSuggestions();
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorBox.hidden = true;
+      status.textContent = 'Generating brief…';
+      hideAllSuggestions();
+      setGeneratingState(true);
+
+      try {
+        const input = currentInput();
+        const response = await fetch('/api/competitive-signal-brief', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ mode: 'brief', input })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'The brief could not be generated.');
+        renderBrief(input, data.brief);
+        status.textContent = 'Brief ready.';
+        resultRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (error) {
+        errorBox.textContent = error instanceof Error ? error.message : 'The brief could not be generated.';
+        errorBox.hidden = false;
+        status.textContent = '';
+      } finally {
+        setGeneratingState(false);
+      }
+    });
+  </script>
+</BaseLayout>
