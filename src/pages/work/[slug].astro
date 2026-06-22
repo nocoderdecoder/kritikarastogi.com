@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { caseStudies, type CaseStudy } from '../../data/caseStudies';
 
+export const prerender = true;
+
 export function getStaticPaths() {
   return caseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
 }
