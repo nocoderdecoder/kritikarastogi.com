@@ -25,6 +25,8 @@ export type CaseStudy = {
     title: string;
     items: { heading: string; body: string }[];
     pdf?: string;
+    pdfLabel?: string;
+    image?: string;
   };
   outcome: string;
   reflection: string;
@@ -71,7 +73,8 @@ export const caseStudies: CaseStudy[] = [
         { heading: 'Augmented', body: 'AI accelerates individual recruiting tasks.' },
         { heading: 'Agentic', body: 'AI executes the recruiting workflow while recruiters own hiring decisions. This is where Sprouts AI plays.' }
       ],
-      pdf: '/sproutsai-market-framework.pdf'
+      pdf: '/sproutsai-market-framework.pdf',
+      pdfLabel: 'See the full framework'
     },
     outcome: 'The ICP and positioning work increased lead-to-opportunity conversion by 30%, closed 3 startup customers using the new framework, improved pipeline quality by concentrating acquisition on the highest-fit segment, and established a repeatable GTM motion and category narrative for future growth.',
     reflection: 'In emerging categories, customers rarely buy technology because it is new. They buy solutions to existing problems.'
@@ -120,41 +123,43 @@ export const caseStudies: CaseStudy[] = [
     slug: 'gojek-ads-platform',
     company: 'Gojek',
     logo: '/logos/gojek.svg',
-    title: 'Building an ads story that worked from SMB counter to enterprise boardroom',
-    shortTitle: 'One platform story for two very different buyers',
-    eyebrow: 'PLATFORM GTM',
-    summary: 'Launched four zero-to-one products and built a scalable enablement system for a complex ads and promotions portfolio.',
-    metric: '$11M',
-    metricLabel: 'incremental revenue',
+    title: 'Transforming SMB Advertising Through a Product-Led Self-Serve Platform',
+    shortTitle: 'From sales-led to product-led SMB advertising growth',
+    eyebrow: 'Zero-to-One Launch · Hybrid GTM Motion',
+    companyBio: 'Gojek is Southeast Asia\'s leading super app, offering transportation, food delivery, payments, and commerce services',
+    summary: 'Led the go-to-market strategy for Gojek\'s first self-serve advertising platform, transforming advertising from a sales-led service into a scalable product-led growth motion through customer research, product strategy, positioning, and lifecycle activation',
+    metric: '17.5%',
+    metricLabel: 'SMB Ad Adoption',
     secondaryMetrics: [
-      { value: '35%', label: '30-day adoption' },
-      { value: '34%', label: 'ARR growth' },
-      { value: '23%', label: 'merchant satisfaction lift' }
+      { value: '23%', label: 'advertising inventory utilization improvement' },
+      { value: '8,000+', label: 'incremental merchant orders' },
+      { value: '3', label: 'months to exceed adoption goal' }
     ],
-    tags: ['B2B', 'Platform', 'GTM', 'Sales enablement'],
+    tags: ['Marketplace', 'Product Launch', 'Product-Led Growth', 'Monetization', 'GTM Strategy'],
     color: 'blue',
-    role: 'B2B Product Marketing Manager',
+    role: 'Product and Growth Marketing Manager',
     period: 'Apr 2020–Jul 2022',
-    ownership: 'Owned portfolio GTM, product narratives, and enablement; worked with product, sales, performance marketing, and merchant teams.',
-    measurementNote: '$11M is incremental revenue from the ads and promotions portfolio. Adoption refers to the first 30 days after launch.',
-    challenge: 'SMBs wanted simple growth they could see. Enterprise advertisers needed reach, control, and evidence. A single product catalog had to make sense to both without becoming generic.',
-    insight: 'The common job was not “buy ads.” It was to turn moments of customer intent inside a super app into measurable merchant growth. Proof and packaging could then flex by buyer maturity.',
+    ownership: 'Led customer research, ICP definition, positioning, messaging, GTM strategy, launch planning, and sales enablement — partnering with Product, Engineering, Sales, Lifecycle Marketing, Customer Success, Design, and Analytics to launch and scale the self-serve advertising platform',
+    measurementNote: 'SMB adoption figures reflect the first three months post-launch. Inventory utilization and merchant orders were measured across the self-serve platform launch period.',
+    challenge: 'Despite SMBs representing the majority of Gojek\'s merchant base, advertising adoption remained at just 5%, leaving 30–40% of advertising inventory underutilized.\n\nThe initial assumption was that SMBs weren\'t interested in advertising. Customer research revealed a different reality. Merchants wanted to grow but perceived advertising as complicated, expensive, and designed for large brands. At the same time, the sales-assisted model couldn\'t scale to support thousands of SMB merchants.\n\nThe challenge wasn\'t creating demand; it was removing friction and giving merchants the confidence to advertise independently.',
+    insight: 'Growth-oriented SMBs didn\'t need more sales support. They needed a product that felt simple enough to use on their own.\n\nThe biggest adoption barrier wasn\'t awareness; it was confidence.\n\nThis shifted our strategy from scaling sales capacity to scaling product adoption.',
     approach: [
-      { number: '01', title: 'Build from demand', body: 'Combined voice-of-customer, competitive, performance, and sales data to identify unmet jobs and prioritize the portfolio roadmap.' },
-      { number: '02', title: 'Launch a coherent portfolio', body: 'Created product narratives and full-funnel launch strategies for four new products and three innovative ad formats.' },
-      { number: '03', title: 'Scale the field', body: 'Built a centralized library spanning 13+ asset types, including 40+ case studies and 26+ pitch decks.' }
+      { number: '01', title: 'Define the Right Customer', body: 'Partnered with Sales, Customer Success, and Analytics to identify merchants most likely to adopt self-serve advertising, prioritizing digitally mature SMBs actively investing in business growth.' },
+      { number: '02', title: 'Reduce Adoption Friction', body: 'Worked with Product and Engineering to prioritize features that directly addressed customer barriers, including guided campaign creation, pre-configured campaign bundles, and an ROI dashboard.' },
+      { number: '03', title: 'Build Positioning Around Simplicity', body: 'Positioned the platform as an accessible business growth tool by emphasizing simplicity, affordability, and merchant empowerment instead of advertising features.' },
+      { number: '04', title: 'Launch an Education-Led GTM Motion', body: 'Designed a lifecycle-led launch strategy combining webinars, product demos, merchant success stories, onboarding journeys, in-product education, and sales enablement to build merchant confidence before driving adoption.' },
+      { number: '05', title: 'Align the Organization', body: 'Aligned Product, Sales, Marketing, Lifecycle, Customer Success, Design, and Analytics around a shared launch strategy while positioning self-serve as an account expansion opportunity rather than a replacement for the sales motion.' }
     ],
     artifact: {
-      label: 'VALUE ARCHITECTURE',
-      title: 'Same platform. Proof matched to buyer maturity.',
-      items: [
-        { heading: 'SMB promise', body: 'Reach nearby customers at the moment they are deciding, with a setup simple enough to run yourself.' },
-        { heading: 'Enterprise promise', body: 'Turn super-app intent signals into scalable reach, controlled activation, and measurable commercial lift.' },
-        { heading: 'Shared proof', body: 'Incrementality, engagement, spend growth, and merchant outcomes, not impressions alone.' }
-      ]
+      label: 'POSITIONING & MESSAGING ARCHITECTURE',
+      title: '"Now you can run ads yourself, like a big brand in just a few clicks"',
+      items: [],
+      image: '/gojek-positioning-architecture.png',
+      pdf: '/gojek-smb-ads-gtm.pdf',
+      pdfLabel: 'See the full GTM launch strategy'
     },
-    outcome: 'The portfolio generated $11M in incremental revenue. Launches reached 35% adoption in 30 days, while enablement helped drive 21% advertiser spend growth and 34% ARR growth.',
-    reflection: 'We kept one platform promise, then changed the proof: ease and immediate demand for SMBs; reach, control, and incrementality for enterprise teams.'
+    outcome: 'The self-serve platform increased SMB advertising adoption from 5% to 17.5% in three months, exceeding the 15% launch goal, improving inventory utilization by 23%, and generating 8,000+ incremental merchant orders',
+    reflection: 'Customers don\'t adopt products simply because they\'re available. They adopt them when they feel confident using them. For self-serve products, success comes from reducing friction, simplifying the experience, and building customer confidence through the right combination of product, positioning, and education.'
   },
   {
     slug: 'multi-agent-trends',

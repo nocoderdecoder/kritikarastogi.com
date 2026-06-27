@@ -72,14 +72,21 @@ const next = caseStudies[(index + 1) % caseStudies.length];
             <p>STRATEGIC ARTIFACT / RECONSTRUCTED</p>
             <h2>{study.artifact.title}</h2>
           </div>
-          <div class="artifact__items">
-            {study.artifact.items.map((item, itemIndex) => (
-              <div><span>0{itemIndex + 1}</span><h3>{item.heading}</h3><p>{item.body}</p></div>
-            ))}
-          </div>
+          {study.artifact.image && (
+            <div class="artifact__image">
+              <img src={study.artifact.image} alt={study.artifact.title} />
+            </div>
+          )}
+          {study.artifact.items.length > 0 && (
+            <div class="artifact__items">
+              {study.artifact.items.map((item, itemIndex) => (
+                <div><span>0{itemIndex + 1}</span><h3>{item.heading}</h3><p>{item.body}</p></div>
+              ))}
+            </div>
+          )}
           {study.artifact.pdf && (
             <div class="artifact__pdf">
-              <a href={study.artifact.pdf} target="_blank" rel="noreferrer">See the full framework <ArrowRight size={14} /></a>
+              <a href={study.artifact.pdf} target="_blank" rel="noreferrer">{study.artifact.pdfLabel ?? 'See the full framework'} <ArrowRight size={14} /></a>
             </div>
           )}
         </div>
@@ -151,6 +158,8 @@ const next = caseStudies[(index + 1) % caseStudies.length];
   .artifact__title { display: grid; grid-template-columns: 180px 1fr; gap: 40px; }
   .artifact__title p { font-size: 9px; letter-spacing: 0.12em; }
   .artifact__title h2 { margin: 0; max-width: 700px; font: 400 46px/1.05 var(--serif); }
+  .artifact__image { margin-top: 48px; }
+  .artifact__image img { width: 100%; height: auto; display: block; }
   .artifact__items { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
   .artifact__pdf { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
   .artifact__pdf a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
