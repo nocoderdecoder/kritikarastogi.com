@@ -84,29 +84,32 @@ export const caseStudies: CaseStudy[] = [
     slug: 'burger-king-loyalty',
     company: 'Burger King Indonesia',
     logo: '/logos/burger-king.svg',
-    title: 'Designing loyalty around behavior, not blanket discounts',
-    shortTitle: 'A loyalty system built for 11 distinct audiences',
-    eyebrow: 'LIFECYCLE & ADOPTION',
-    summary: 'Turned behavioral data from more than one million users into a segmented value system that increased frequency and retention.',
-    metric: '2x',
-    metricLabel: 'purchase frequency',
+    title: 'Building Burger King\'s First Loyalty Program to Drive Retention and Customer Lifetime Value',
+    shortTitle: 'From promotion-led campaigns to a scalable loyalty retention engine',
+    eyebrow: 'ZERO-TO-ONE PRODUCT LAUNCH',
+    companyBio: 'Burger King Indonesia is one of the country\'s largest quick-service restaurant (QSR) brands, serving millions of customers across dine-in, delivery, and digital channels',
+    summary: 'Led the end-to-end go-to-market strategy for Burger King\'s first loyalty program in Indonesia, transforming retention from promotion-led campaigns to a scalable loyalty engine through customer research, positioning, lifecycle strategy, and cross-functional execution',
+    metric: '42%',
+    metricLabel: 'Loyalty Program Adoption',
     secondaryMetrics: [
-      { value: '14%', label: 'retention improvement' },
-      { value: '33%', label: 'feature adoption increase' },
-      { value: '1M+', label: 'users analyzed' }
+      { value: '53%', label: 'first redemption rate' },
+      { value: '9%', label: '90-day repeat purchase rate increase YoY' },
+      { value: '10%', label: 'revenue uplift in first year' }
     ],
-    tags: ['B2C', 'Lifecycle', 'Segmentation', 'Experimentation'],
+    tags: ['Loyalty', 'Product Launch', 'Retention', 'CRM', 'GTM Strategy'],
     color: 'green',
-    role: 'Digital Product Marketing Manager',
+    role: 'Product & Growth Marketing',
     period: 'Jul 2022–Jun 2024',
-    ownership: 'Led loyalty and gamification GTM with product, CRM, design, engineering, and data teams; owned segmentation, messaging, and lifecycle experimentation.',
-    measurementNote: 'Purchase frequency, retention, adoption, and app revenue were measured across the loyalty and lifecycle program, not a single campaign.',
-    challenge: 'A broad loyalty proposition treated very different customers as if they were motivated by the same reward. That made communications easy to send but less relevant to receive.',
-    insight: 'Frequency, recency, basket behavior, and reward sensitivity revealed 11 useful customer groups. Each segment had a different reason to return, so the product story had to adapt without fragmenting the brand.',
+    ownership: 'Led customer research, business case development, positioning, GTM strategy, launch planning, and adoption strategy — partnering with Product, Engineering, CRM, Finance, Operations, Marketing, and Store Operations to launch Burger King\'s first loyalty program',
+    measurementNote: 'Adoption, redemption, and revenue metrics reflect the six-month post-launch period for Burger King Indonesia\'s first loyalty program.',
+    challenge: 'Burger King\'s mobile app continued to acquire new users, but retention remained 30–40% below target. Customer engagement depended heavily on coupons and short-term promotions, making repeat purchases difficult to sustain.\n\nThe challenge wasn\'t simply launching a loyalty feature. It was creating a long-term retention engine that increased customer lifetime value while reducing dependence on discounts.',
+    insight: 'Customers didn\'t join loyalty programs to collect points. They joined because they expected immediate value and meaningful rewards.\n\nResearch also revealed that redemption, not enrollment, was the biggest barrier to long-term engagement. If rewards were difficult to understand or redeem, customers quickly abandoned the program.\n\nThis shifted our strategy from building a points program to designing an experience that delivered value from the very first interaction.',
     approach: [
-      { number: '01', title: 'Model real behavior', body: 'Partnered with data teams to cluster 1M+ users into 11 actionable personas based on observed purchase patterns.' },
-      { number: '02', title: 'Create dynamic value', body: 'Designed rewards and lifecycle messages around the next behavior each persona was most likely to adopt.' },
-      { number: '03', title: 'Learn in market', body: 'Used A/B tests across CRM, in-app, paid, organic, and social channels to refine message and offer combinations.' }
+      { number: '01', title: 'Build the Business Case', body: 'Partnered with Finance, Product, Marketing, and Operations to develop a phased investment strategy with clear six-month, one-year, and three-year business goals, aligning stakeholders around both short-term adoption and long-term customer lifetime value.' },
+      { number: '02', title: 'Understand Customer Motivation', body: 'Conducted competitive benchmarking, customer research, focus groups, app review analysis, and behavioral segmentation to identify what motivated customers to join and actively use loyalty programs.' },
+      { number: '03', title: 'Position Around Exclusivity', body: 'Developed and tested multiple positioning concepts before selecting "Feel Like a King Every Order," emphasizing exclusive rewards, instant redemption, and recognition instead of discounts.' },
+      { number: '04', title: 'Design a Multi-Channel GTM Strategy', body: 'Built an integrated launch strategy across CRM, push notifications, in-app messaging, checkout experiences, partnerships, social media, influencers, and in-store activation to educate customers and maximize adoption.' },
+      { number: '05', title: 'Prepare the Organization', body: 'Aligned Product, Engineering, CRM, Marketing, Finance, Operations, and Store Teams around launch readiness, while simplifying the redemption journey based on beta feedback before nationwide rollout.' }
     ],
     artifact: {
       label: 'SEGMENTATION LOGIC',
@@ -117,8 +120,8 @@ export const caseStudies: CaseStudy[] = [
         { heading: 'At-risk regulars', body: 'Acknowledge the lapse and offer a relevant path back, rather than another generic promotion.' }
       ]
     },
-    outcome: 'The combined loyalty, gamification, and lifecycle program doubled purchase frequency, improved retention by 14%, increased adoption by 33%, and contributed to 24% YoY app revenue growth.',
-    reflection: 'Our lifecycle work improved when each segment had one observable next behavior, rather than a different promotional message for its own sake.'
+    outcome: 'The loyalty program achieved 42% adoption among monthly active users within six months, delivered a 53% first redemption rate, increased the 90-day repeat purchase rate by 9% YoY, contributed to a 10% revenue uplift in the first year, and reduced discount-related customer support tickets by 28%',
+    reflection: 'Successful loyalty programs don\'t create customer loyalty — valuable customer experiences do. Product Marketing isn\'t just about launching a feature. It\'s about understanding customer motivations, reducing friction, and creating experiences that encourage customers to return long after the launch campaign ends.'
   },
   {
     slug: 'gojek-ads-platform',
