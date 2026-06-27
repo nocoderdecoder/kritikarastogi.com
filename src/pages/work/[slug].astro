@@ -22,7 +22,8 @@ const next = caseStudies[(index + 1) % caseStudies.length];
         <a class="back-link" href="/work"><ArrowLeft size={15} /> All work</a>
         <div class="case-hero__grid">
           <div>
-            <p class="kicker">{study.eyebrow} · {study.company}</p>
+            <p class="kicker">{study.eyebrow} · {study.company}{study.eyebrowSuffix ? ` · ${study.eyebrowSuffix}` : ''}</p>
+            {study.companyBio && <p class="case-hero__company-bio">{study.companyBio}</p>}
             <h1>{study.title}</h1>
             <p class="case-hero__summary">{study.summary}</p>
           </div>
@@ -36,7 +37,6 @@ const next = caseStudies[(index + 1) % caseStudies.length];
         </ul>
         <dl class="case-scope">
           <div><dt>Role</dt><dd>{study.role}</dd></div>
-          <div><dt>Period</dt><dd>{study.period}</dd></div>
           <div><dt>My ownership</dt><dd>{study.ownership}</dd></div>
         </dl>
       </div>
@@ -120,12 +120,13 @@ const next = caseStudies[(index + 1) % caseStudies.length];
   .case-hero--ink { background: var(--ink); color: white; }
   .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 78px; font-size: 13px; }
   .case-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 70px; align-items: end; }
+  .case-hero__company-bio { margin: 14px 0 0; max-width: 620px; font-size: 13px; opacity: 0.7; }
   .case-hero h1 { margin: 24px 0 28px; max-width: 980px; font: 400 71px/0.98 var(--serif); }
   .case-hero__summary { max-width: 750px; margin: 0 0 30px; font-size: 18px; }
   .case-hero__metric { text-align: right; }
   .case-hero__metric strong { display: block; font: 400 82px/0.9 var(--serif); }
   .case-hero__metric span { display: block; margin-top: 13px; font-size: 13px; }
-  .case-scope { display: grid; grid-template-columns: 1fr .65fr 2fr; gap: 0; margin: 34px 0 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
+  .case-scope { display: grid; grid-template-columns: 1fr 2fr; gap: 0; margin: 34px 0 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
   .case-scope div { padding: 17px 22px 17px 0; }
   .case-scope div + div { padding-left: 22px; border-left: 1px solid currentColor; }
   .case-scope dt { margin-bottom: 6px; font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }

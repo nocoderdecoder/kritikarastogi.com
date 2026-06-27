@@ -5,6 +5,8 @@ export type CaseStudy = {
   title: string;
   shortTitle: string;
   eyebrow: string;
+  eyebrowSuffix?: string;
+  companyBio?: string;
   summary: string;
   metric: string;
   metricLabel: string;
@@ -31,24 +33,26 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'sproutsai-ai-workflows',
-    company: 'SproutsAI',
+    company: 'Sprouts AI',
     logo: '/logos/sproutsai.png',
-    title: 'Repositioning recruiting tools around completed AI workflows',
+    title: 'Defining the Market Strategy for an Early-Stage Agentic Recruiting Platform',
     shortTitle: 'From recruiting features to completed workflows',
-    eyebrow: 'AI PRODUCT LAUNCH',
-    summary: 'Built the market foundation for two zero-to-one AI products, grounding positioning and roadmap decisions in 42+ customer conversations.',
-    metric: '12%',
-    metricLabel: 'ARR increase',
+    eyebrow: 'AI PRODUCT MARKETING',
+    eyebrowSuffix: 'B2B SaaS',
+    companyBio: 'Sprouts AI is an early-stage AI recruiting startup building agentic hiring solutions that automate the recruiting workflow from job creation to offer management',
+    summary: 'Defined the ICP, category strategy, positioning, and go-to-market foundation for two zero-to-one AI recruiting products through customer discovery, competitive intelligence, and 42+ customer interviews',
+    metric: '30%',
+    metricLabel: 'Lead-to-Opportunity Conversion',
     secondaryMetrics: [
       { value: '30%', label: 'increase in lead-to-opportunity conversion' },
       { value: '3', label: 'startup customers closed with ICP framework' },
       { value: '42+', label: 'customer interviews conducted' }
     ],
-    tags: ['AI', 'B2B SaaS', 'Positioning', 'Customer research'],
+    tags: ['AI SaaS', 'Customer Discovery', 'Competitive Intelligence', 'Positioning', 'GTM Strategy'],
     color: 'coral',
-    role: 'AI Product Marketing Manager, part-time',
+    role: 'AI Product Marketing Manager',
     period: 'Jun–Aug 2025',
-    ownership: 'Owned customer research, positioning, launch narrative, and sales enablement; partnered with product, sales, and leadership.',
+    ownership: 'Led customer discovery, competitive intelligence, ICP definition, positioning, messaging, and GTM strategy — partnering closely with founders, Product, Sales, and Leadership to define the company\'s market strategy and commercial narrative',
     measurementNote: 'Conversion and pipeline metrics reflect the period following ICP definition and positioning launch. The 12% ARR movement was a company result; the launches contributed to it but are not presented as sole attribution.',
     challenge: 'The recruiting technology market was becoming increasingly crowded with ATS platforms, recruiting automation tools, and AI-powered assistants. While customers were interested in AI, most viewed existing solutions as incremental productivity tools rather than a fundamentally different way of hiring.\n\nThe challenge was identifying the right customer segment and developing a positioning strategy that clearly differentiated Sprouts AI.',
     insight: 'Recruiters weren\'t looking for more AI features. They wanted less manual work.\n\nMost recruiting tools automated individual tasks but still required recruiters to coordinate multiple systems and workflows. This revealed an opportunity to position Sprouts AI around workflow ownership rather than task automation.',
