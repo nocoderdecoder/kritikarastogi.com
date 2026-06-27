@@ -11,13 +11,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>I’ve built product stories in India, Indonesia, Thailand, and Silicon Valley.</h1>
       </div>
       <div class="about-hero__copy">
-        <p>I’m Kritika, a product marketer based in Sunnyvale with 7+ years of experience across AI, SaaS, advertising platforms, and consumer products.</p>
-        <p>I started in telecom and real estate, moved to Indonesia to work on Gojek’s advertising platform and Burger King’s loyalty product, and most recently launched AI recruiting workflows in Palo Alto. I like interviewing customers, working through messy market evidence, and turning it into language that product and sales teams can actually use.</p>
-        <div class="about-actions">
-          <a class="primary-action" href="/Kritika-Rastogi-Resume.pdf"><Download size={16} /> Download resume</a>
-          <a class="arrow-link" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={16} /></a>
-          <a class="arrow-link" href="mailto:kritikarastogi240@gmail.com">Email <ArrowUpRight size={16} /></a>
-        </div>
+        <p>Every role in my career shaped how I think about Product Marketing.</p>
+        <p><strong>Markets matter.</strong> My first PMM role at a real estate marketplace showed me that growth starts with understanding customer behavior, incentives, and market dynamics.</p>
+        <p><strong>Customers buy outcomes.</strong> Enterprise sales at Vodafone taught me to translate product capabilities into business value and build go-to-market strategies around customer outcomes.</p>
+        <p><strong>Positioning changes everything.</strong> At Gojek, I learned how the right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
+        <p><strong>Growth should create business value.</strong> Managing the delivery P&L at Burger King taught me to balance customer growth with commercial outcomes and profitability.</p>
+        <p><strong>AI needs clarity, not complexity.</strong> Working on AI products at Carnegie Mellon, SproutsAI, and Honda Research Institute reinforced that even the best technology succeeds only when customers understand why it matters.</p>
+        <p>Together, these experiences shaped how I approach Product Marketing today: combining customer insight, product strategy, and commercial thinking to build scalable go-to-market strategies that drive adoption and business growth.</p>
       </div>
     </div>
   </header>
@@ -62,9 +62,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
   .about-hero { padding: 95px 0 110px; }
   .about-hero__grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; }
-  .about-hero h1 { margin: 25px 0 0; max-width: 720px; font: 400 73px/0.98 var(--serif); }
-  .about-hero__copy > p:first-child { margin-top: 40px; font: 400 29px/1.25 var(--serif); }
-  .about-hero__copy > p:nth-child(2) { color: var(--muted); }
+  .about-hero h1 { margin: 25px 0 0; max-width: 720px; font: 400 69px/0.98 var(--serif); }
+  .about-hero__copy > p:first-child { margin-top: 40px; font: 400 22px/1.3 var(--serif); }
+  .about-hero__copy > p { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+  .about-hero__copy > p:first-child { color: var(--ink); }
+  .about-hero__copy strong { color: var(--ink); }
   .about-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
   .primary-action { display: inline-flex; align-items: center; gap: 9px; padding: 13px 16px; background: var(--ink); color: white; font-size: 13px; }
   .principles { padding: 100px 0; background: var(--green); }
