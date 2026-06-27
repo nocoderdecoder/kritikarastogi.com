@@ -84,9 +84,14 @@ const next = caseStudies[(index + 1) % caseStudies.length];
               ))}
             </div>
           )}
-          {study.artifact.pdf && (
+          {(study.artifact.pdf || (study.artifact.links && study.artifact.links.length > 0)) && (
             <div class="artifact__pdf">
-              <a href={study.artifact.pdf} target="_blank" rel="noreferrer">{study.artifact.pdfLabel ?? 'See the full framework'} <ArrowRight size={14} /></a>
+              {study.artifact.pdf && (
+                <a href={study.artifact.pdf} target="_blank" rel="noreferrer">{study.artifact.pdfLabel ?? 'See the full framework'} <ArrowRight size={14} /></a>
+              )}
+              {study.artifact.links && study.artifact.links.map((link) => (
+                <a href={link.url} target="_blank" rel="noreferrer">{link.label} <ArrowRight size={14} /></a>
+              ))}
             </div>
           )}
         </div>
@@ -161,7 +166,7 @@ const next = caseStudies[(index + 1) % caseStudies.length];
   .artifact__image { margin-top: 48px; }
   .artifact__image img { width: 100%; height: auto; display: block; }
   .artifact__items { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
-  .artifact__pdf { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .artifact__pdf { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 20px; }
   .artifact__pdf a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
   .artifact__pdf a:hover { color: var(--coral); }
   .artifact__items > div { padding: 22px 22px 0 0; }

@@ -27,6 +27,7 @@ export type CaseStudy = {
     pdf?: string;
     pdfLabel?: string;
     image?: string;
+    links?: { label: string; url: string }[];
   };
   outcome: string;
   reflection: string;
@@ -163,42 +164,46 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'multi-agent-trends',
-    company: '99P Labs',
+    company: 'Honda Research Institute',
     logo: '/logos/99p-labs.png',
-    title: 'Prototyping a multi-agent system for trend intelligence',
-    shortTitle: 'From information overload to evidence-backed signals',
-    eyebrow: 'AI PROTOTYPE',
-    summary: 'Co-developed a working prototype that uses specialized agents to discover, challenge, and synthesize emerging market signals.',
-    metric: '1',
-    metricLabel: 'working prototype',
+    title: 'Building an LLM Multi-Agent System for Trend Identification',
+    shortTitle: 'From fragmented research to evidence-based trend intelligence',
+    eyebrow: 'AI PRODUCT STRATEGY',
+    companyBio: 'Honda Research Institute (HRI) conducts advanced research across AI, robotics, mobility, and neuroscience to identify emerging technologies that shape Honda\'s long-term innovation strategy',
+    summary: 'Defined the product vision, AI workflow, and MVP strategy for a multi-agent trend intelligence platform that transformed fragmented research into structured, evidence-based insights through customer discovery and human-centered AI design',
+    metric: '30%',
+    metricLabel: 'Reduction in Time-to-Insight',
     secondaryMetrics: [
-      { value: 'Multi', label: 'agent research workflow' },
-      { value: 'Traceable', label: 'evidence model' },
-      { value: '2025', label: 'prototype published' }
+      { value: '8', label: 'information sources unified into one workflow' },
+      { value: '27', label: 'researchers and stakeholders supported' },
+      { value: '21', label: 'researcher interviews conducted' }
     ],
-    tags: ['Agentic AI', 'Market intelligence', 'Prototype', 'Systems thinking'],
+    tags: ['AI Products', 'Multi-Agent Systems', 'Customer Discovery', 'Product Strategy', 'Human-Centered AI'],
     color: 'ink',
-    role: 'Graduate innovation project, 99P Labs',
+    role: 'AI Product Strategy',
     period: '2025',
-    ownership: 'Co-developed the research workflow, agent responsibilities, evidence model, and prototype documentation.',
-    measurementNote: 'This is a working prototype and learning project. It does not claim a commercial outcome.',
-    challenge: 'Trend research is often a pile of links followed by a confident summary. The harder problem is distinguishing a durable market signal from a temporary spike in attention.',
-    insight: 'Separating discovery, validation, contradiction, and synthesis creates productive tension. The system becomes more useful when each conclusion can be traced back to evidence and challenged.',
+    ownership: 'Led customer discovery, product strategy, MVP definition, AI workflow design, and stakeholder alignment — partnering with researchers, AI engineers, and product teams to translate user needs into an AI-powered multi-agent system',
+    measurementNote: 'Time-to-insight reduction and adoption figures reflect the MVP development and deployment period at Honda Research Institute.',
+    challenge: 'Researchers relied on a fragmented, manual process to identify emerging technology trends across research papers, patents, industry reports, conferences, news, and expert insights.\n\nWhile AI could summarize information, existing tools lacked transparency and explainability, making researchers hesitant to trust AI-generated recommendations.\n\nThe challenge wasn\'t accessing information. It was helping researchers transform fragmented information into evidence-based decisions.',
+    insight: 'Customer interviews revealed that researchers didn\'t struggle to find information. They struggled to determine which signals mattered.\n\nThe opportunity wasn\'t to build another AI search tool. It was to create an AI system that could evaluate, prioritize, and synthesize evidence while keeping researchers in control of the final decision.',
     approach: [
-      { number: '01', title: 'Decompose the judgment', body: 'Assigned distinct roles for signal discovery, source validation, counterargument, and synthesis.' },
-      { number: '02', title: 'Preserve provenance', body: 'Designed outputs so claims retained links to supporting evidence instead of disappearing into a summary.' },
-      { number: '03', title: 'Prototype the loop', body: 'Built the workflow in OpenCode and documented where human judgment should remain in the system.' }
+      { number: '01', title: 'Understand the Research Workflow', body: 'Interviewed 21 researchers and innovation leaders to map how trends were identified, evaluated, and translated into research recommendations.' },
+      { number: '02', title: 'Define the Product Vision', body: 'Shifted the product vision from AI-powered search to an AI-assisted decision support system that could evaluate evidence, identify patterns, and generate transparent trend recommendations.' },
+      { number: '03', title: 'Design the Multi-Agent Workflow', body: 'Worked with AI engineers to define a multi-agent architecture where specialized agents collaborated to define research scope, aggregate signals, score evidence quality, and generate explainable trend insights.' },
+      { number: '04', title: 'Prioritize the MVP', body: 'Balanced customer value, technical feasibility, and trust by prioritizing multi-source signal aggregation, trend clustering, confidence scoring, AI-generated summaries, and human validation workflows.' },
+      { number: '05', title: 'Drive Cross-Functional Development', body: 'Partnered with researchers and engineering teams throughout development, translating user needs into product requirements, validating workflows, and refining agent outputs through continuous feedback.' }
     ],
     artifact: {
-      label: 'AGENT WORKFLOW',
-      title: 'A research room, not a single oracle',
-      items: [
-        { heading: 'Scout', body: 'Finds weak signals across product, customer, company, and cultural sources.' },
-        { heading: 'Skeptic', body: 'Looks for contradictory evidence, recycled narratives, and unsupported momentum.' },
-        { heading: 'Strategist', body: 'Connects validated signals to customer behavior and commercial implications.' }
+      label: 'LLM MULTI-AGENT SYSTEM',
+      title: 'A Trend Identification System Using LLMs',
+      items: [],
+      image: '/hri-trend-identification-system.png',
+      links: [
+        { label: 'Read full article on Medium', url: 'https://medium.com/99p-labs/a-multi-agent-system-to-identify-trends-using-llms-eff89bd9c983' },
+        { label: 'View on GitHub', url: 'https://github.com/kritikarastogi240-crypto/honda-b-trendly' }
       ]
     },
-    outcome: 'The prototype demonstrated how multi-agent design can make trend identification more structured, inspectable, and useful for product and marketing decisions.',
-    reflection: 'Separating discovery from challenge made the output easier to inspect because the system had to show both the supporting evidence and the objection.'
+    outcome: 'The multi-agent system reduced researcher time-to-insight by 30%, unified 8 information sources into a single workflow, supported adoption across 27 researchers and cross-functional stakeholders, and established a scalable framework for evidence-based trend intelligence',
+    reflection: 'Successful AI products begin with customer problems, not AI capabilities. The most valuable AI systems don\'t replace human expertise — they enhance it by making complex decisions more transparent, explainable, and actionable'
   }
 ];
