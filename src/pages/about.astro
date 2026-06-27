@@ -7,17 +7,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <header class="about-hero band">
     <div class="shell about-hero__grid">
       <div>
-        <p class="kicker">ABOUT KRITIKA</p>
+        <p class="kicker">ABOUT ME</p>
         <h1>I’ve built product stories in India, Indonesia, Thailand, and Silicon Valley.</h1>
       </div>
       <div class="about-hero__copy">
-        <p>Every role in my career shaped how I think about Product Marketing.</p>
-        <p><strong>Markets matter.</strong> My first PMM role at a real estate marketplace showed me that growth starts with understanding customer behavior, incentives, and market dynamics.</p>
-        <p><strong>Customers buy outcomes.</strong> Enterprise sales at Vodafone taught me to translate product capabilities into business value and build go-to-market strategies around customer outcomes.</p>
-        <p><strong>Positioning changes everything.</strong> At Gojek, I learned how the right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
-        <p><strong>Growth should create business value.</strong> Managing the delivery P&L at Burger King taught me to balance customer growth with commercial outcomes and profitability.</p>
-        <p><strong>AI needs clarity, not complexity.</strong> Working on AI products at Carnegie Mellon, SproutsAI, and Honda Research Institute reinforced that even the best technology succeeds only when customers understand why it matters.</p>
-        <p>Together, these experiences shaped how I approach Product Marketing today: combining customer insight, product strategy, and commercial thinking to build scalable go-to-market strategies that drive adoption and business growth.</p>
+        <p><strong>Every role in my career shaped how I think about Product and Growth Marketing</strong></p>
+        <p><strong class="about-label">Markets matter.</strong> My first product and growth marketing role at a <strong>real estate marketplace</strong> showed me that growth starts with understanding customer behavior, incentives, and market dynamics.</p>
+        <div class="about-arrow">➤</div>
+        <p><strong class="about-label">Customers buy outcomes.</strong> Enterprise sales at <strong>Vodafone</strong> taught me to translate product capabilities into business value and build go-to-market strategies around customer outcomes.</p>
+        <div class="about-arrow">➤</div>
+        <p><strong class="about-label">Positioning changes everything.</strong> At <strong>Gojek</strong>, I learned how the right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
+        <div class="about-arrow">➤</div>
+        <p><strong class="about-label">Growth should create business value.</strong> Managing the delivery P&L at <strong>Burger King App</strong> taught me to balance customer growth with commercial outcomes and profitability.</p>
+        <div class="about-arrow">➤</div>
+        <p><strong class="about-label">AI needs clarity, not complexity.</strong> Working on AI products at <strong>Carnegie Mellon</strong>, <strong>SproutsAI</strong>, and <strong>Honda Research Institute</strong> reinforced that even the best technology succeeds only when customers understand why it matters.</p>
+        <div class="about-arrow">➤</div>
+        <p><strong><em>Together, these experiences shaped how I approach Product Marketing today: combining customer insight, product strategy, and commercial thinking to build scalable go-to-market strategies that drive adoption and business growth.</em></strong></p>
       </div>
     </div>
   </header>
@@ -61,12 +66,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .about-hero { padding: 95px 0 110px; }
-  .about-hero__grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; }
-  .about-hero h1 { margin: 25px 0 0; max-width: 720px; font: 400 69px/0.98 var(--serif); }
-  .about-hero__copy > p:first-child { margin-top: 40px; font: 400 22px/1.3 var(--serif); }
-  .about-hero__copy > p { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
-  .about-hero__copy > p:first-child { color: var(--ink); }
-  .about-hero__copy strong { color: var(--ink); }
+  .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter); align-items: center; }
+  .about-hero h1 { margin: 25px 0 0; max-width: 620px; font: 400 69px/0.98 var(--serif); }
+  .about-hero__copy > p:first-child { margin-top: 40px; font-size: 22px; line-height: 1.6; }
+  .about-hero__copy > p { margin: 10px 0 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
+  .about-hero__copy > p:first-child { color: var(--ink); font-family: var(--serif); }
+  .about-hero__copy strong { color: var(--ink); font-weight: 700; }
+  .about-hero__copy .about-label { font-size: 20px; font-weight: 800; }
+  .about-hero__copy > p:last-of-type { font-size: 18px; text-align: center; }
+  .about-arrow { margin: 6px 0; color: var(--coral); font-size: 22px; line-height: 1; font-weight: 700; text-align: center; display: block; transform: rotate(90deg); }
   .about-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
   .primary-action { display: inline-flex; align-items: center; gap: 9px; padding: 13px 16px; background: var(--ink); color: white; font-size: 13px; }
   .principles { padding: 100px 0; background: var(--green); }
