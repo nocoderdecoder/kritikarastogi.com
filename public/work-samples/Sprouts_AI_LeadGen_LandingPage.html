@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sprouts AI — Lead Gen Landing Page</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; padding: 32px; }
+
+  .page-header {
+    background: #1B3A6B;
+    border-radius: 10px;
+    padding: 22px 32px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .page-header h1 { color: #fff; font-size: 18px; font-weight: 800; }
+  .page-header h1 span { color: #0D7377; }
+  .page-header p { color: #8aadcc; font-size: 11.5px; margin-top: 3px; }
+  .meta-pill { background: rgba(13,115,119,0.25); color: #7ec8ca; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; text-align: center; }
+  .meta-pill span { display: block; font-size: 10px; opacity: 0.8; margin-top: 2px; }
+
+  .context-bar {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 24px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    border-left: 4px solid #0D7377;
+    font-size: 11.5px;
+  }
+  .context-bar label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #0D7377; display: block; margin-bottom: 3px; }
+
+  /* THE ACTUAL LANDING PAGE MOCKUP */
+  .lp-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Nav bar */
+  .lp-nav {
+    background: #fff;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+  }
+  .lp-logo { font-size: 16px; font-weight: 900; color: #0D7377; letter-spacing: 1px; }
+  .lp-logo span { color: #1B3A6B; font-weight: 400; font-size: 12px; margin-left: 6px; }
+  .lp-nav-cta { background: #0D7377; color: #fff; font-size: 11px; font-weight: 700; padding: 7px 16px; border-radius: 16px; }
+
+  /* Hero section */
+  .lp-hero {
+    background: linear-gradient(135deg, #1B3A6B 0%, #0a2448 100%);
+    padding: 52px 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 40px;
+    align-items: center;
+  }
+  .lp-hero-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #0D7377; margin-bottom: 14px; }
+  .lp-hero h1 { font-size: 30px; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+  .lp-hero h1 em { color: #0D7377; font-style: normal; }
+  .lp-hero-sub { font-size: 13px; color: #b0bfd8; line-height: 1.65; margin-bottom: 20px; }
+  .lp-hero-bullets { list-style: none; }
+  .lp-hero-bullets li { font-size: 12.5px; color: #d0dcea; padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .lp-hero-bullets li::before { content: "✓"; color: #0D7377; font-weight: 900; flex-shrink: 0; }
+
+  /* Form card */
+  .form-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .form-card h3 { font-size: 15px; font-weight: 800; color: #1B3A6B; margin-bottom: 4px; }
+  .form-card p { font-size: 11.5px; color: #666; margin-bottom: 18px; }
+  .form-field { margin-bottom: 12px; }
+  .form-field label { font-size: 10.5px; font-weight: 700; color: #444; display: block; margin-bottom: 4px; }
+  .form-field .input-mock {
+    width: 100%;
+    background: #f5f7fa;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #aaa;
+  }
+  .form-field .input-mock.filled { color: #333; border-color: #0D7377; background: #fff; }
+  .form-submit {
+    width: 100%;
+    background: #0D7377;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 13px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 6px;
+    cursor: pointer;
+  }
+  .form-privacy { font-size: 10px; color: #aaa; text-align: center; margin-top: 10px; }
+
+  /* Social proof strip */
+  .lp-proof-strip {
+    background: #f4f7fb;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-bottom: 1px solid #e8edf3;
+  }
+  .proof-label { font-size: 10.5px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+  .proof-stats { display: flex; gap: 28px; }
+  .proof-stat { text-align: center; }
+  .proof-stat .num { font-size: 18px; font-weight: 900; color: #1B3A6B; }
+  .proof-stat .lbl { font-size: 10px; color: #777; }
+
+  /* What you get */
+  .lp-content { padding: 36px 40px; }
+  .lp-content h2 { font-size: 20px; font-weight: 800; color: #1B3A6B; margin-bottom: 6px; }
+  .lp-content .sub { font-size: 12.5px; color: #666; margin-bottom: 24px; }
+
+  .chapters { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+  .chapter {
+    border: 1.5px solid #e0e8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .chapter-num { font-size: 22px; font-weight: 900; color: #0D7377; flex-shrink: 0; line-height: 1; }
+  .chapter h4 { font-size: 12px; font-weight: 700; color: #1B3A6B; margin-bottom: 3px; }
+  .chapter p { font-size: 11px; color: #666; line-height: 1.5; }
+
+  /* Testimonial */
+  .lp-quote {
+    background: #f4f7fb;
+    border-left: 4px solid #0D7377;
+    border-radius: 0 8px 8px 0;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+  }
+  .lp-quote p { font-size: 13px; color: #333; font-style: italic; line-height: 1.65; margin-bottom: 8px; }
+  .lp-quote .attr { font-size: 11px; font-weight: 700; color: #1B3A6B; }
+
+  /* Bottom CTA */
+  .lp-bottom-cta {
+    background: linear-gradient(135deg, #0D7377, #085558);
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .lp-bottom-cta h3 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .lp-bottom-cta p { font-size: 12px; color: rgba(255,255,255,0.75); }
+  .lp-bottom-btn { background: #fff; color: #0D7377; font-size: 12px; font-weight: 800; padding: 12px 22px; border-radius: 20px; white-space: nowrap; }
+
+  /* LP Footer */
+  .lp-footer { background: #1B3A6B; padding: 14px 40px; display: flex; justify-content: space-between; font-size: 10.5px; color: #6a8fbd; }
+
+  /* ANNOTATION LAYER */
+  .annotations { max-width: 860px; margin: 20px auto 0; }
+  .annotation-title { font-size: 13px; font-weight: 800; color: #1B3A6B; margin-bottom: 12px; }
+  .annotation-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .annotation {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border-top: 3px solid #0D7377;
+  }
+  .annotation label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #0D7377; display: block; margin-bottom: 5px; }
+  .annotation p { font-size: 11px; color: #555; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER (PMM annotation) -->
+<div class="page-header">
+  <div>
+    <h1><span>Sprouts AI</span> — Lead Gen Landing Page</h1>
+    <p>Lead Generation · Lead Magnet · "Hiring Without Headcount" Playbook Download</p>
+  </div>
+  <div class="meta-pill">PMM Work Sample<span>Kitty Rastogi · 2024</span></div>
+</div>
+
+<div class="context-bar">
+  <div><label>Asset Type</label>Lead magnet landing page — gated content download</div>
+  <div><label>Lead Magnet</label>"Hiring Without Headcount: The Lean TA Playbook" (PDF guide)</div>
+  <div><label>Goal</label>Capture email + company info from ICP prospects in exchange for a high-value resource</div>
+</div>
+
+<!-- LANDING PAGE MOCKUP -->
+<div class="lp-wrapper">
+
+  <!-- Nav -->
+  <div class="lp-nav">
+    <div class="lp-logo">SPROUTS AI <span>Agentic Recruiting</span></div>
+    <div class="lp-nav-cta">Request a Demo</div>
+  </div>
+
+  <!-- Hero + Form -->
+  <div class="lp-hero">
+    <div>
+      <div class="lp-hero-eyebrow">Free Playbook → Instant Download</div>
+      <h1>Hiring Without<br><em>Headcount.</em></h1>
+      <p class="lp-hero-sub">The tactical playbook for lean recruiting teams that need to hire fast — without adding a recruiter or buying more software.</p>
+      <ul class="lp-hero-bullets">
+        <li>How to identify where your hiring workflow breaks down</li>
+        <li>The tool consolidation framework used by 3-person TA teams closing 25+ roles per quarter</li>
+        <li>How to run an agentic recruiting pilot in 48 hours</li>
+        <li>Scripts and templates included</li>
+      </ul>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card">
+      <h3>Get the Free Playbook</h3>
+      <p>Instant access — no credit card required.</p>
+      <div class="form-field">
+        <label>First Name</label>
+        <div class="input-mock filled">Jordan</div>
+      </div>
+      <div class="form-field">
+        <label>Work Email</label>
+        <div class="input-mock filled">jordan@techstartup.com</div>
+      </div>
+      <div class="form-field">
+        <label>Company Name</label>
+        <div class="input-mock filled">TechStartup Inc.</div>
+      </div>
+      <div class="form-field">
+        <label>How many open roles are you managing right now?</label>
+        <div class="input-mock filled">10–15 roles</div>
+      </div>
+      <div class="form-submit">Download the Free Playbook →</div>
+      <div class="form-privacy">No spam. Unsubscribe anytime. Your info stays private.</div>
+    </div>
+  </div>
+
+  <!-- Proof strip -->
+  <div class="lp-proof-strip">
+    <div class="proof-label">Trusted by lean TA teams at</div>
+    <div class="proof-stats">
+      <div class="proof-stat"><div class="num">40%</div><div class="lbl">faster time-to-hire</div></div>
+      <div class="proof-stat"><div class="num">2×</div><div class="lbl">recruiter capacity</div></div>
+      <div class="proof-stat"><div class="num">10+ hrs</div><div class="lbl">saved per week</div></div>
+      <div class="proof-stat"><div class="num">48 hrs</div><div class="lbl">to first live workflow</div></div>
+    </div>
+  </div>
+
+  <!-- Content / What you get -->
+  <div class="lp-content">
+    <h2>What's Inside the Playbook</h2>
+    <p class="sub">A practical guide built from interviews with 40+ recruiting leaders and TA professionals.</p>
+
+    <div class="chapters">
+      <div class="chapter">
+        <div class="chapter-num">01</div>
+        <div>
+          <h4>The Coordination Trap</h4>
+          <p>Why most recruiters spend 60% of their week on work that isn't recruiting — and how to map where it's happening on your team.</p>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">02</div>
+        <div>
+          <h4>The Lean TA Stack</h4>
+          <p>How to evaluate your current tools and identify which ones to consolidate — with a scorecard template included.</p>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">03</div>
+        <div>
+          <h4>Agentic Recruiting 101</h4>
+          <p>What it means for AI to "own" a workflow (vs. just assist), and how to think about human-AI handoffs in hiring.</p>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="chapter-num">04</div>
+        <div>
+          <h4>Run a 48-Hour Pilot</h4>
+          <p>A step-by-step guide to testing agentic recruiting on one active role — with a template for measuring results.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="lp-quote">
+      <p>"I gave Sprouts a job description on Monday. By Wednesday I had 8 qualified candidates on my calendar. I didn't write a single message or send a single calendar invite."</p>
+      <div class="attr">— Series A CEO, Sprouts AI customer</div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="lp-bottom-cta">
+      <div>
+        <h3>Ready to see it on a live role?</h3>
+        <p>Skip the playbook and start a free 48-hour pilot directly on your next open req.</p>
+      </div>
+      <div class="lp-bottom-btn">Start Free Pilot →</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="lp-footer">
+    <span>© 2024 Sprouts AI · getsproutsai.com</span>
+    <span>Privacy Policy · Unsubscribe</span>
+  </div>
+
+</div>
+
+<!-- PMM ANNOTATIONS -->
+<div class="annotations">
+  <div class="annotation-title">PMM Design Decisions</div>
+  <div class="annotation-grid">
+    <div class="annotation">
+      <label>Lead Magnet Choice</label>
+      <p>A playbook outperforms a generic "request demo" page for cold traffic. It offers immediate value, which lowers friction and increases form completion — especially for a skeptical, time-poor recruiter audience.</p>
+    </div>
+    <div class="annotation">
+      <label>Form Qualification Field</label>
+      <p>"How many open roles are you managing?" is a hidden qualification question. It filters for high-fit leads (8+ roles = strong ICP signal) without feeling like a gate. Sales can prioritize follow-up based on the answer.</p>
+    </div>
+    <div class="annotation">
+      <label>Messaging Decisions</label>
+      <p>Hero headline ("Hiring Without Headcount") mirrors the core positioning statement. Chapter titles use customer language from research interviews, not product feature names — making it feel like it's written for them, not at them.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprouts AI — Sales One-Pager</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #222;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    background: #1B3A6B;
+    padding: 40px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(13,115,119,0.18);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 900;
+    color: #0D7377;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .logo span {
+    color: #fff;
+    font-weight: 400;
+    font-size: 13px;
+    display: block;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .cta-pill {
+    background: #0D7377;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+  .hero-headline {
+    font-size: 34px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    max-width: 560px;
+    margin-bottom: 14px;
+  }
+  .hero-headline em {
+    color: #0D7377;
+    font-style: normal;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: #b0bfd8;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* ── PROBLEM ──────────────────────────── */
+  .problem {
+    background: #f4f7fb;
+    padding: 32px 48px;
+    border-bottom: 3px solid #0D7377;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #0D7377;
+    margin-bottom: 16px;
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .problem-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .problem-icon {
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .problem-text strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1B3A6B;
+    margin-bottom: 3px;
+  }
+  .problem-text p {
+    font-size: 11.5px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── HOW IT WORKS ─────────────────────── */
+  .how {
+    padding: 36px 48px;
+    background: #fff;
+  }
+  .how-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1B3A6B;
+    margin-bottom: 24px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    align-items: center;
+    gap: 0;
+  }
+  .step {
+    background: #f4f7fb;
+    border-radius: 12px;
+    padding: 20px 18px;
+    text-align: center;
+    border-top: 3px solid #0D7377;
+  }
+  .step-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0D7377;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .step-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1B3A6B;
+    margin-bottom: 6px;
+  }
+  .step-desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .arrow {
+    text-align: center;
+    font-size: 22px;
+    color: #0D7377;
+    font-weight: 900;
+  }
+
+  /* ── OUTCOMES ─────────────────────────── */
+  .outcomes {
+    background: #1B3A6B;
+    padding: 32px 48px;
+  }
+  .outcomes .section-label { color: #7ec8ca; }
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .outcome-item {
+    background: #1B3A6B;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .outcome-num {
+    font-size: 40px;
+    font-weight: 900;
+    color: #0D7377;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .outcome-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .outcome-desc {
+    font-size: 10.5px;
+    color: #8aadcc;
+    line-height: 1.5;
+  }
+
+  /* ── PROOF + CTA ──────────────────────── */
+  .proof {
+    padding: 32px 48px;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .quote-block {
+    border-left: 4px solid #0D7377;
+    padding-left: 18px;
+  }
+  .quote-text {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.65;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .quote-attr {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1B3A6B;
+  }
+  .icp-block { }
+  .icp-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0D7377;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .icp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .icp-tag {
+    background: #e8f4f5;
+    color: #0D7377;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+  .cta-block {
+    background: #0D7377;
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .cta-block p {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .cta-block small {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .cta-contact {
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ───────────────────────────── */
+  .footer {
+    background: #f4f7fb;
+    padding: 12px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #0D7377;
+  }
+  .footer-left { font-size: 10px; color: #888; }
+  .footer-left strong { color: #1B3A6B; }
+  .footer-right { font-size: 10px; color: #888; }
+
+  @media print {
+    body { max-width: 100%; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .outcomes { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ① HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="logo">
+      Sprouts AI
+      <span>Agentic Recruiting Platform</span>
+    </div>
+    <a class="cta-pill" href="#">Start a Free 48-hr Pilot →</a>
+  </div>
+  <h1 class="hero-headline">
+    Hire Faster.<br>
+    Without Adding <em>Headcount.</em>
+  </h1>
+  <p class="hero-sub">
+    Sprouts AI automates your end-to-end hiring workflow using AI agents —
+    so your team spends time on hiring decisions, not on coordination.
+  </p>
+</section>
+
+<!-- ② THE PROBLEM -->
+<section class="problem">
+  <div class="section-label">The Problem</div>
+  <div class="problem-grid">
+    <div class="problem-item">
+      <div class="problem-icon">⚙️</div>
+      <div class="problem-text">
+        <strong>Too many tools, no workflow</strong>
+        <p>Most recruiters juggle 5+ disconnected tools just to fill one role.</p>
+      </div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">⏱️</div>
+      <div class="problem-text">
+        <strong>15+ hrs/week lost to coordination</strong>
+        <p>Scheduling, follow-up, and status updates eat time that should go to recruiting.</p>
+      </div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">📉</div>
+      <div class="problem-text">
+        <strong>Candidates drop out</strong>
+        <p>Slow responses and fragmented processes cost you candidates to faster-moving teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ HOW IT WORKS -->
+<section class="how">
+  <div class="how-title">How Sprouts AI Works</div>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">You Set the Brief</div>
+      <div class="step-desc">Tell Sprouts the role, your hiring criteria, and what great looks like at your company.</div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">AI Agents Execute</div>
+      <div class="step-desc">Sprouts sources candidates, sends personalized outreach, screens applicants, and schedules interviews — end to end.</div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">You Make the Hire</div>
+      <div class="step-desc">You own every decision. Sprouts removes everything that isn't a decision — so you only show up for what matters.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ④ OUTCOMES -->
+<section class="outcomes">
+  <div class="section-label">What Our Customers See</div>
+  <div class="outcomes-grid">
+    <div class="outcome-item">
+      <div class="outcome-num">40%</div>
+      <div class="outcome-label">Faster Time-to-Hire</div>
+      <div class="outcome-desc">Automated sourcing-to-scheduling cuts weeks off every role</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">2×</div>
+      <div class="outcome-label">Recruiter Capacity</div>
+      <div class="outcome-desc">Same team manages twice the open roles without adding headcount</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">10+</div>
+      <div class="outcome-label">Hours Back Per Week</div>
+      <div class="outcome-desc">Coordination and scheduling handled entirely by AI agents</div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ PROOF + CTA -->
+<section class="proof">
+  <div class="quote-block">
+    <p class="quote-text">
+      "I gave Sprouts a job description on Monday. By Wednesday I had
+      8 qualified candidates on my calendar. I didn't write a single
+      message or send a single calendar invite."
+    </p>
+    <div class="quote-attr">— Series A CEO, Sprouts AI customer</div>
+  </div>
+
+  <div class="icp-block">
+    <div class="icp-title">Built for teams like yours</div>
+    <div class="icp-tags">
+      <span class="icp-tag">10–100 person team</span>
+      <span class="icp-tag">1–2 recruiters</span>
+      <span class="icp-tag">5+ open roles</span>
+      <span class="icp-tag">High-growth hiring</span>
+      <span class="icp-tag">Post-funding scale-up</span>
+    </div>
+    <div class="cta-block">
+      <p>See it on your next open role</p>
+      <small>Live pilot setup in 48 hours — no long implementation, no commitment.</small>
+      <div class="cta-contact">getsproutsai.com &nbsp;·&nbsp; hello@sproutsai.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left"><strong>Sprouts AI</strong> &nbsp;·&nbsp; Agentic Recruiting Platform</div>
+  <div class="footer-right">© 2024 Sprouts AI &nbsp;·&nbsp; getsproutsai.com</div>
+</footer>
+
+</body>
+</html>

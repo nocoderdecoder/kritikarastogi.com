@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BK Indonesia Loyalty — Launch Calendar 2023</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; padding: 28px; }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: #C8102E;
+    border-radius: 10px;
+    padding: 24px 32px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .page-header h1 { color: #fff; font-size: 20px; font-weight: 900; }
+  .page-header h1 span { color: #F5A623; }
+  .page-header p { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 4px; }
+  .meta-pill { background: rgba(245,166,35,0.25); color: #F5A623; font-size: 11px; font-weight: 700; padding: 7px 16px; border-radius: 20px; text-align: center; }
+  .meta-pill span { display: block; font-size: 10px; opacity: 0.8; margin-top: 2px; }
+
+  /* CONTEXT BAR */
+  .context-bar {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 24px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    border-left: 4px solid #C8102E;
+    font-size: 11.5px;
+  }
+  .context-bar label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #C8102E; display: block; margin-bottom: 3px; }
+  .context-bar p { color: #444; line-height: 1.4; }
+
+  /* PHASE LEGEND */
+  .legend {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  .legend-label { font-size: 11px; font-weight: 700; color: #666; margin-right: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #444; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+  /* CALENDAR WRAPPER */
+  .calendar-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+
+  /* PHASE HEADER ROW */
+  .phase-row {
+    display: grid;
+    grid-template-columns: 140px repeat(6, 1fr);
+    border-bottom: 2px solid #eee;
+  }
+  .phase-cell {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 900;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .phase-cell.label { background: #333; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; }
+  .phase-prelaunch { background: #502314; }
+  .phase-launch { background: #C8102E; }
+  .phase-ramadan { background: #8B3A62; }
+  .phase-sustain { background: #FF7D00; }
+  .phase-seasonal { background: #2B6CB0; }
+  .phase-span-2 { grid-column: span 2; border-right: 2px solid rgba(255,255,255,0.2); }
+  .phase-span-1 { grid-column: span 1; border-right: 2px solid rgba(255,255,255,0.2); }
+
+  /* MONTH HEADER ROW */
+  .month-row {
+    display: grid;
+    grid-template-columns: 140px repeat(6, 1fr);
+    background: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .month-cell {
+    padding: 8px 12px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+  }
+  .month-cell.label { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; display: flex; align-items: center; }
+  .month-cell:last-child { border-right: none; }
+
+  /* CHANNEL ROWS */
+  .channel-section-header {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    background: #333;
+    padding: 6px 14px;
+  }
+  .channel-section-header span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #aaa; }
+
+  .channel-row {
+    display: grid;
+    grid-template-columns: 140px repeat(6, 1fr);
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 44px;
+  }
+  .channel-row:hover { background: #fafafa; }
+  .channel-row:last-child { border-bottom: none; }
+
+  .channel-name {
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid #eee;
+    background: #fafafa;
+    gap: 6px;
+  }
+  .channel-name .icon { font-size: 13px; }
+
+  .channel-cell {
+    padding: 6px 8px;
+    border-right: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+  }
+  .channel-cell:last-child { border-right: none; }
+
+  /* ACTIVITY PILLS */
+  .activity {
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.3;
+    display: block;
+    text-align: center;
+  }
+  .act-high { background: #FEE2E2; color: #991B1B; border-left: 3px solid #C8102E; }
+  .act-med { background: #FEF3C7; color: #92400E; border-left: 3px solid #FF7D00; }
+  .act-low { background: #E8F4FD; color: #1E3A5F; border-left: 3px solid #2B6CB0; }
+  .act-special { background: #F3E8FF; color: #6B21A8; border-left: 3px solid #8B3A62; }
+  .act-none { color: #ccc; font-size: 10px; font-weight: 400; text-align: center; font-style: italic; }
+
+  /* KPI CHECKPOINT ROW */
+  .kpi-row-header {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    background: #1a1a1a;
+    padding: 8px 14px;
+  }
+  .kpi-row-header span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #F5A623; }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: 140px repeat(6, 1fr);
+    border-bottom: 1px solid #2a2a2a;
+    background: #1f1f1f;
+    min-height: 52px;
+  }
+  .kpi-label {
+    padding: 8px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #888;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid #2a2a2a;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .kpi-cell {
+    padding: 8px 10px;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: center;
+  }
+  .kpi-cell:last-child { border-right: none; }
+  .kpi-target { font-size: 11px; color: #F5A623; font-weight: 700; }
+  .kpi-metric { font-size: 10px; color: #666; }
+  .kpi-empty { font-size: 10px; color: #333; text-align: center; font-style: italic; }
+
+  /* PHASE SUMMARY CARDS */
+  .phase-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .phase-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .phase-card-header {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phase-card-header .months { font-size: 10px; font-weight: 400; opacity: 0.8; }
+  .phase-card-body { padding: 14px 16px; }
+  .phase-card-body h4 { font-size: 11px; font-weight: 700; color: #333; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .phase-card-body ul { list-style: none; }
+  .phase-card-body ul li { font-size: 11px; color: #555; padding: 3px 0 3px 14px; position: relative; line-height: 1.4; border-bottom: 1px dashed #f0f0f0; }
+  .phase-card-body ul li:last-child { border-bottom: none; }
+  .phase-card-body ul li::before { content: "→"; position: absolute; left: 0; font-size: 9px; top: 5px; }
+  .pc-brown .phase-card-body ul li::before { color: #502314; }
+  .pc-red .phase-card-body ul li::before { color: #C8102E; }
+  .pc-orange .phase-card-body ul li::before { color: #FF7D00; }
+  .pc-blue .phase-card-body ul li::before { color: #2B6CB0; }
+
+  .phase-card-footer {
+    padding: 9px 16px;
+    background: #f8f8f8;
+    font-size: 10.5px;
+    color: #777;
+    border-top: 1px solid #eee;
+  }
+  .phase-card-footer strong { color: #333; }
+
+  /* ANNOTATION */
+  .annotations {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 24px;
+    border-left: 4px solid #C8102E;
+  }
+  .annotations h3 { font-size: 13px; font-weight: 800; color: #333; margin-bottom: 14px; }
+  .annotation-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .ann-item label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #C8102E; display: block; margin-bottom: 5px; }
+  .ann-item p { font-size: 11px; color: #555; line-height: 1.55; }
+
+  .footer { text-align: center; font-size: 10px; color: #aaa; margin-top: 16px; }
+  .footer strong { color: #C8102E; }
+
+  @media print {
+    body { padding: 14px; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <h1><span>Burger King Indonesia</span> — Loyalty Program Launch Calendar</h1>
+    <p>Part 5 of 5 · Campaign Timeline & Channel Activation Plan · January – December 2023</p>
+  </div>
+  <div class="meta-pill">PMM Work Sample<span>Kitty Rastogi · 2024</span></div>
+</div>
+
+<!-- CONTEXT BAR -->
+<div class="context-bar">
+  <div><label>Program Name</label><p>BK Rewards — "Every Meal Counts"</p></div>
+  <div><label>Launch Window</label><p>March 2023 — timed to Ramadan for max cultural resonance</p></div>
+  <div><label>Primary KPI</label><p>500K app downloads, 35% MAU, 20% repeat visit rate by Q3</p></div>
+  <div><label>Key Channels</label><p>App, Social (IG/TikTok), Influencer, OOH, In-Store POS, SMS/Email</p></div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="legend-label">Activity Level:</span>
+  <div class="legend-item"><div class="legend-dot" style="background:#FEE2E2;border-left:3px solid #C8102E;"></div> High intensity</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FEF3C7;border-left:3px solid #FF7D00;"></div> Medium</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#E8F4FD;border-left:3px solid #2B6CB0;"></div> Low / Always-on</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F3E8FF;border-left:3px solid #8B3A62;"></div> Special / Seasonal</div>
+</div>
+
+<!-- MAIN CALENDAR -->
+<div class="calendar-wrapper">
+
+  <!-- PHASE HEADER -->
+  <div class="phase-row">
+    <div class="phase-cell label">Phase</div>
+    <div class="phase-cell phase-prelaunch phase-span-2">PRE-LAUNCH</div>
+    <div class="phase-cell phase-launch phase-span-1" style="border-right:2px solid rgba(255,255,255,0.2);">LAUNCH</div>
+    <div class="phase-cell phase-ramadan phase-span-1" style="border-right:2px solid rgba(255,255,255,0.2);">RAMADAN</div>
+    <div class="phase-cell phase-sustain phase-span-1" style="border-right:2px solid rgba(255,255,255,0.2);">SUSTENANCE</div>
+    <div class="phase-cell phase-seasonal phase-span-1">SEASONAL</div>
+  </div>
+
+  <!-- MONTH HEADER -->
+  <div class="month-row">
+    <div class="month-cell label">Channel</div>
+    <div class="month-cell">Jan 2023</div>
+    <div class="month-cell">Feb 2023</div>
+    <div class="month-cell">Mar 2023</div>
+    <div class="month-cell">Apr 2023</div>
+    <div class="month-cell">May–Jun 2023</div>
+    <div class="month-cell">Jul–Dec 2023</div>
+  </div>
+
+  <!-- PAID SOCIAL -->
+  <div class="channel-section-header">
+    <span>Paid & Owned Social</span>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">📸</span> Instagram</div>
+    <div class="channel-cell"><span class="activity act-med">Teaser campaign<br>"Coming Soon"</span></div>
+    <div class="channel-cell"><span class="activity act-high">Countdown series<br>Influencer collabs</span></div>
+    <div class="channel-cell"><span class="activity act-high">Launch day blitz<br>User UGC reposts</span></div>
+    <div class="channel-cell"><span class="activity act-special">Eid gifting posts<br>Double pts promo</span></div>
+    <div class="channel-cell"><span class="activity act-med">Weekly rewards<br>feature spotlights</span></div>
+    <div class="channel-cell"><span class="activity act-high">Back to School<br>Jul · Xmas/NYE Dec</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">🎵</span> TikTok</div>
+    <div class="channel-cell"><span class="activity act-low">Brand awareness<br>ads only</span></div>
+    <div class="channel-cell"><span class="activity act-med">Challenge seed:<br>#BKRewards</span></div>
+    <div class="channel-cell"><span class="activity act-high">Hero TikTok launch<br>video · boosted</span></div>
+    <div class="channel-cell"><span class="activity act-special">Ramadan/Eid UGC<br>challenge live</span></div>
+    <div class="channel-cell"><span class="activity act-med">Ongoing creator<br>seeding</span></div>
+    <div class="channel-cell"><span class="activity act-med">Seasonal content<br>spikes</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">👥</span> Facebook</div>
+    <div class="channel-cell"><span class="activity act-low">Retargeting existing<br>BK fans</span></div>
+    <div class="channel-cell"><span class="activity act-med">Lookalike audience<br>lead gen ads</span></div>
+    <div class="channel-cell"><span class="activity act-high">App install<br>campaign — peak</span></div>
+    <div class="channel-cell"><span class="activity act-med">Engagement &<br>retention ads</span></div>
+    <div class="channel-cell"><span class="activity act-low">Always-on<br>retargeting</span></div>
+    <div class="channel-cell"><span class="activity act-med">Seasonal promo<br>campaigns</span></div>
+  </div>
+
+  <!-- INFLUENCER -->
+  <div class="channel-section-header">
+    <span>Influencer & PR</span>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">⭐</span> Macro Influencers</div>
+    <div class="channel-cell"><span class="activity act-low">Briefing &<br>contract phase</span></div>
+    <div class="channel-cell"><span class="activity act-med">Exclusive early<br>access reveal</span></div>
+    <div class="channel-cell"><span class="activity act-high">Launch activation:<br>3 key KOLs</span></div>
+    <div class="channel-cell"><span class="activity act-special">Eid collab<br>limited content</span></div>
+    <div class="channel-cell"><span class="activity act-low">Seeding only</span></div>
+    <div class="channel-cell"><span class="activity act-med">Back to School +<br>Xmas activations</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">🤝</span> Micro / Nano</div>
+    <div class="channel-cell"><span class="act-none">—</span></div>
+    <div class="channel-cell"><span class="activity act-low">Recruitment &<br>onboarding</span></div>
+    <div class="channel-cell"><span class="activity act-med">30 micro-creators<br>go live</span></div>
+    <div class="channel-cell"><span class="activity act-med">Ongoing content<br>program</span></div>
+    <div class="channel-cell"><span class="activity act-med">Always-on program<br>weekly cadence</span></div>
+    <div class="channel-cell"><span class="activity act-med">Ongoing + seasonal<br>content drops</span></div>
+  </div>
+
+  <!-- IN-APP & CRM -->
+  <div class="channel-section-header">
+    <span>App / CRM / Push</span>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">📱</span> App Push Notifs</div>
+    <div class="channel-cell"><span class="activity act-low">Early registration<br>waitlist flow</span></div>
+    <div class="channel-cell"><span class="activity act-med">Pre-launch teaser<br>to waitlist</span></div>
+    <div class="channel-cell"><span class="activity act-high">Launch: Welcome<br>bonus push</span></div>
+    <div class="channel-cell"><span class="activity act-special">Ramadan daily<br>iftar deal alerts</span></div>
+    <div class="channel-cell"><span class="activity act-med">Weekly reward<br>reminders</span></div>
+    <div class="channel-cell"><span class="activity act-high">Lapsed user<br>re-engagement</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">✉️</span> SMS / Email</div>
+    <div class="channel-cell"><span class="act-none">—</span></div>
+    <div class="channel-cell"><span class="activity act-low">Waitlist confirm<br>emails</span></div>
+    <div class="channel-cell"><span class="activity act-high">Day-1 welcome<br>email sequence</span></div>
+    <div class="channel-cell"><span class="activity act-med">Weekly digest<br>+ Eid offer</span></div>
+    <div class="channel-cell"><span class="activity act-low">Monthly newsletter<br>+ promo SMS</span></div>
+    <div class="channel-cell"><span class="activity act-med">Win-back flows +<br>holiday emails</span></div>
+  </div>
+
+  <!-- OOH & IN-STORE -->
+  <div class="channel-section-header">
+    <span>OOH / In-Store / Partnership</span>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">🏙️</span> OOH / Billboard</div>
+    <div class="channel-cell"><span class="act-none">—</span></div>
+    <div class="channel-cell"><span class="activity act-med">3-city teaser<br>billboard drop</span></div>
+    <div class="channel-cell"><span class="activity act-high">Full OOH rollout<br>Jakarta + Surabaya</span></div>
+    <div class="channel-cell"><span class="activity act-high">Ramadan creative<br>OOH swap</span></div>
+    <div class="channel-cell"><span class="activity act-low">Sustain messaging<br>key locations</span></div>
+    <div class="channel-cell"><span class="activity act-med">Holiday OOH:<br>Dec only</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">🍔</span> In-Store POS</div>
+    <div class="channel-cell"><span class="activity act-low">Staff training<br>& materials</span></div>
+    <div class="channel-cell"><span class="activity act-med">POS signage<br>installed</span></div>
+    <div class="channel-cell"><span class="activity act-high">Full crew push<br>QR at counter</span></div>
+    <div class="channel-cell"><span class="activity act-high">Ramadan bundle<br>upsell + QR</span></div>
+    <div class="channel-cell"><span class="activity act-med">Evergreen loyalty<br>table cards</span></div>
+    <div class="channel-cell"><span class="activity act-med">Seasonal bundles<br>& POS refresh</span></div>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel-name"><span class="icon">🛵</span> GrabFood / GoFood</div>
+    <div class="channel-cell"><span class="activity act-low">Platform briefing<br>& agreement</span></div>
+    <div class="channel-cell"><span class="activity act-med">Co-marketing deal<br>finalized</span></div>
+    <div class="channel-cell"><span class="activity act-high">Featured banner:<br>"Earn BK Points"</span></div>
+    <div class="channel-cell"><span class="activity act-special">Ramadan: Free<br>delivery + 2× pts</span></div>
+    <div class="channel-cell"><span class="activity act-med">Always-on<br>integration</span></div>
+    <div class="channel-cell"><span class="activity act-med">Holiday promo<br>bundles</span></div>
+  </div>
+
+</div>
+
+<!-- KPI CHECKPOINTS -->
+<div class="calendar-wrapper" style="margin-bottom:20px;">
+  <div class="kpi-row-header">
+    <span>KPI Checkpoints</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-label">App Downloads</div>
+    <div class="kpi-cell"><span class="kpi-target">20K</span><span class="kpi-metric">Waitlist registrations</span></div>
+    <div class="kpi-cell"><span class="kpi-target">80K</span><span class="kpi-metric">Pre-launch signups</span></div>
+    <div class="kpi-cell"><span class="kpi-target">250K</span><span class="kpi-metric">Launch month total</span></div>
+    <div class="kpi-cell"><span class="kpi-target">350K</span><span class="kpi-metric">Cumulative (incl. Eid)</span></div>
+    <div class="kpi-cell"><span class="kpi-target">450K</span><span class="kpi-metric">H1 close</span></div>
+    <div class="kpi-cell"><span class="kpi-target">750K+</span><span class="kpi-metric">Year-end target</span></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-label">MAU / Engagement</div>
+    <div class="kpi-cell"><span class="kpi-empty">—</span></div>
+    <div class="kpi-cell"><span class="kpi-empty">—</span></div>
+    <div class="kpi-cell"><span class="kpi-target">45% open rate</span><span class="kpi-metric">Welcome push CTR</span></div>
+    <div class="kpi-cell"><span class="kpi-target">40% MAU</span><span class="kpi-metric">of registered users</span></div>
+    <div class="kpi-cell"><span class="kpi-target">35% MAU</span><span class="kpi-metric">steady-state target</span></div>
+    <div class="kpi-cell"><span class="kpi-target">38% MAU</span><span class="kpi-metric">year-end w/ holiday spike</span></div>
+  </div>
+  <div class="kpi-row" style="border-bottom:none;">
+    <div class="kpi-label">Repeat Visits</div>
+    <div class="kpi-cell"><span class="kpi-empty">—</span></div>
+    <div class="kpi-cell"><span class="kpi-empty">—</span></div>
+    <div class="kpi-cell"><span class="kpi-target">Baseline set</span><span class="kpi-metric">Track first repeat</span></div>
+    <div class="kpi-cell"><span class="kpi-target">15% repeat rate</span><span class="kpi-metric">among loyalty users</span></div>
+    <div class="kpi-cell"><span class="kpi-target">20% repeat rate</span><span class="kpi-metric">target by Q2 end</span></div>
+    <div class="kpi-cell"><span class="kpi-target">25% repeat rate</span><span class="kpi-metric">year-end goal</span></div>
+  </div>
+</div>
+
+<!-- PHASE SUMMARY CARDS -->
+<div class="phase-summary">
+
+  <div class="phase-card pc-brown">
+    <div class="phase-card-header" style="background:#502314;">
+      Pre-Launch
+      <span class="months">Jan – Feb 2023</span>
+    </div>
+    <div class="phase-card-body">
+      <h4>Objective</h4>
+      <ul>
+        <li>Build anticipation & waitlist</li>
+        <li>Seed influencer awareness</li>
+        <li>Train store crews</li>
+        <li>3-city teaser OOH in Feb</li>
+      </ul>
+    </div>
+    <div class="phase-card-footer"><strong>North Star:</strong> 80K pre-registrations by Feb 28</div>
+  </div>
+
+  <div class="phase-card pc-red">
+    <div class="phase-card-header" style="background:#C8102E;">
+      Launch + Ramadan
+      <span class="months">Mar – Apr 2023</span>
+    </div>
+    <div class="phase-card-body">
+      <h4>Objective</h4>
+      <ul>
+        <li>Drive mass app downloads</li>
+        <li>Ramadan double-points: Iftar deals</li>
+        <li>Eid gifting moment activation</li>
+        <li>GrabFood/GoFood co-promo live</li>
+      </ul>
+    </div>
+    <div class="phase-card-footer"><strong>North Star:</strong> 350K downloads + 15% repeat rate by Apr 30</div>
+  </div>
+
+  <div class="phase-card pc-orange">
+    <div class="phase-card-header" style="background:#FF7D00;">
+      Sustenance
+      <span class="months">May – Jun 2023</span>
+    </div>
+    <div class="phase-card-body">
+      <h4>Objective</h4>
+      <ul>
+        <li>Convert downloaders → habitual users</li>
+        <li>Weekly reward cadence in app</li>
+        <li>Micro-influencer content program</li>
+        <li>Lapsed user re-engagement SMS</li>
+      </ul>
+    </div>
+    <div class="phase-card-footer"><strong>North Star:</strong> 35% MAU + 20% repeat visit rate</div>
+  </div>
+
+  <div class="phase-card pc-blue">
+    <div class="phase-card-header" style="background:#2B6CB0;">
+      Seasonal Spikes
+      <span class="months">Jul – Dec 2023</span>
+    </div>
+    <div class="phase-card-body">
+      <h4>Objective</h4>
+      <ul>
+        <li>Back-to-School push (Jul)</li>
+        <li>Indonesia National Day (Aug)</li>
+        <li>Christmas + Year-End (Dec)</li>
+        <li>Year-end win-back campaign</li>
+      </ul>
+    </div>
+    <div class="phase-card-footer"><strong>North Star:</strong> 750K downloads + 25% repeat rate</div>
+  </div>
+
+</div>
+
+<!-- PMM ANNOTATIONS -->
+<div class="annotations">
+  <h3>PMM Design Decisions</h3>
+  <div class="annotation-grid">
+    <div class="ann-item">
+      <label>Why Ramadan for Launch</label>
+      <p>Ramadan is Indonesia's highest consumption season — dining out (especially for iftar) spikes 30–40%. Loyalty programs launched during high-frequency purchase moments drive faster habit formation. Timed the launch to Mar 23 (Ramadan day 1) to ride organic urgency, not fight for attention.</p>
+    </div>
+    <div class="ann-item">
+      <label>Channel Sequencing Logic</label>
+      <p>Pre-launch channels are teaser-only — no hard sell. Launch month is the only moment all channels run at peak simultaneously. Post-launch shifts from acquisition to retention: push notifications and SMS take over from paid social. OOH sustain is dropped in Q3 to redirect budget to digital re-engagement.</p>
+    </div>
+    <div class="ann-item">
+      <label>KPI Checkpoint Design</label>
+      <p>Three KPIs deliberately track different funnel stages: Downloads = acquisition, MAU = activation, Repeat Visits = retention. The 35% MAU target is the hardest — most loyalty apps fall below 20%. Benchmarked against SEA QSR apps (McD, KFC ID). Repeat visit rate is the true business KPI: each point = ~$1.2M incremental revenue at BK ID scale.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer"><strong>Burger King Indonesia</strong> · BK Rewards Launch Calendar · PMM Work Sample · Kitty Rastogi · 2024</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const samples = [
+  {
+    company: 'Sprouts AI',
+    color: 'coral',
+    items: [
+      { type: 'Battle Card', title: 'Competitive Battle Card : Sprouts AI vs Ashby', file: '/work-samples/Sprouts_AI_Battlecard_vs_Ashby.html', view: true },
+      { type: 'Sales One Pager', title: 'Sales One Pager: Sprouts AI', file: '/work-samples/Sprouts_AI_Sales_OnePager.html', view: true },
+      { type: 'Customer One Pager', title: 'Customer One Pager: Sprouts AI', file: '/work-samples/Sprouts_AI_Customer_OnePager.docx', view: false },
+      { type: 'GTM Enablement', title: 'GTM Enablement Suite', file: '/work-samples/Sprouts_AI_GTM_Enablement_Suite.docx', view: false },
+      { type: 'Sales Deck', title: 'Internal Prep Deck', file: '/work-samples/Sprouts_AI_Internal_PrepDeck.pptx', view: false },
+      { type: 'Landing Page', title: 'Lead Gen Landing Page', file: '/work-samples/Sprouts_AI_LeadGen_LandingPage.html', view: true },
+      { type: 'Ad Copy', title: 'LinkedIn Ads: Demand Gen', file: '/work-samples/Sprouts_AI_LinkedIn_Ads_DemandGen.html', view: true },
+      { type: 'Cheat Sheet', title: 'Lean TA Cheat Sheet', file: '/work-samples/Sprouts_AI_LeanTA_CheatSheet.html', view: true },
+    ]
+  },
+  {
+    company: 'Burger King Indonesia',
+    color: 'green',
+    items: [
+      { type: 'Marketing Brief', title: 'Loyalty Program: Marketing Brief', file: '/work-samples/BK_Loyalty_Part1_MarketingBrief.docx', view: false },
+      { type: 'Research Synthesis', title: 'Loyalty Program: Research Synthesis', file: '/work-samples/BK_Loyalty_Part2_ResearchSynthesis.docx', view: false },
+      { type: 'Positioning', title: 'Loyalty Program: Positioning Strategy', file: '/work-samples/BK_Loyalty_Part3_Positioning.docx', view: false },
+      { type: 'GTM Launch Plan', title: 'Loyalty Program: GTM Launch Plan', file: '/work-samples/BK_Loyalty_Part4_GTMLaunchPlan.docx', view: false },
+      { type: 'Launch Calendar', title: 'Loyalty Program: Launch Calendar', file: '/work-samples/BK_Loyalty_Part5_LaunchCalendar.html', view: true },
+    ]
+  },
+  {
+    company: 'Gojek',
+    color: 'blue',
+    items: [
+      { type: 'GTM Strategy', title: 'SMB Ads: 0-1 GTM Launch Strategy', file: '/gojek-smb-ads-gtm.pdf', view: true },
+    ]
+  },
+  {
+    company: 'Honda Research Institute',
+    color: 'ink',
+    items: [
+      { type: 'Medium Article', title: 'A Multi-Agent System to Identify Trends Using LLMs', file: 'https://medium.com/99p-labs/a-multi-agent-system-to-identify-trends-using-llms-eff89bd9c983', view: true },
+      { type: 'GitHub', title: 'Trendly: Multi-Agent Trend Intelligence System', file: 'https://github.com/kritikarastogi240-crypto/honda-b-trendly', view: true },
+      { type: 'System Diagram', title: 'Trend Identification System: Architecture Overview', file: '/hri-trend-identification-system.png', view: true },
+    ]
+  }
+];
+---
+
+<BaseLayout title="Work Samples | Kritika Rastogi" description="Real deliverables from product marketing engagements across AI, SaaS, and consumer products.">
+  <header class="samples-hero band">
+    <div class="shell">
+      <p class="kicker">WORK SAMPLES</p>
+      <h1>The actual work.</h1>
+      <p class="samples-hero__sub">Battle cards, briefs, positioning docs, GTM plans, real deliverables from real engagements. Reconstructed where needed to protect confidential information.</p>
+    </div>
+  </header>
+
+  {samples.map((group) => (
+    <section class={`samples-group band samples-group--${group.color}`}>
+      <div class="shell">
+        <p class="kicker samples-group__kicker">{group.company}</p>
+        <div class="samples-grid">
+          {group.items.map((item) => (
+            <a class="sample-card" href={item.file} target="_blank" rel="noreferrer">
+              <span class="sample-card__type">{item.type}</span>
+              <h3 class="sample-card__title">{item.title}</h3>
+              <span class="sample-card__action">{item.view ? 'View →' : 'Download →'}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .samples-hero { padding: 95px 0 80px; }
+  .samples-hero h1 { margin: 20px 0 24px; font: 400 82px/0.95 var(--serif); }
+  .samples-hero__sub { max-width: 640px; font-size: 18px; color: var(--muted); line-height: 1.5; }
+
+  .samples-group { padding: 70px 0; }
+  .samples-group--coral { background: var(--paper); }
+  .samples-group--green { background: var(--white); }
+  .samples-group--blue { background: var(--paper); }
+  .samples-group--ink { background: var(--white); }
+  .samples-group__kicker { margin-bottom: 36px; }
+
+  .samples-grid { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+
+  .sample-card { display: flex; flex-direction: column; gap: 12px; padding: 28px; width: calc(25% - 2px); min-width: 240px; flex: 1 1 240px; background: var(--paper); text-decoration: none; color: var(--ink); transition: background 0.15s; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); box-sizing: border-box; }
+  .samples-group--green .sample-card,
+  .samples-group--ink .sample-card { background: var(--white); }
+  .sample-card:hover { background: var(--ink); color: white; }
+
+  .sample-card__type { font-size: 9px; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); }
+  .sample-card:hover .sample-card__type { color: var(--coral); }
+
+  .sample-card__title { margin: 0; font: 400 20px/1.15 var(--serif); flex: 1; }
+
+  .sample-card__action { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .sample-card:hover .sample-card__action { color: white; }
+
+  @media (max-width: 760px) {
+    .samples-hero h1 { font-size: 52px; }
+    .samples-grid { grid-template-columns: 1fr; }
+  }
+</style>

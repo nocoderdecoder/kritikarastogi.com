@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprouts AI — Battlecard vs. Ashby</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #222;
+    background: #fff;
+    padding: 18px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #0D7377;
+  }
+  .header-left .brand { font-size: 22px; font-weight: 900; color: #0D7377; letter-spacing: 1px; }
+  .header-left .vs    { font-size: 13px; font-weight: 700; color: #1B3A6B; margin-top: 2px; }
+  .header-right { text-align: right; font-size: 10px; color: #777; }
+  .header-right strong { color: #1B3A6B; }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid #bbb;
+  }
+
+  .cell {
+    border: 1px solid #bbb;
+    padding: 8px 10px;
+    vertical-align: top;
+  }
+
+  .cell-label {
+    background: #1B3A6B;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    border: 1px solid #1B3A6B;
+  }
+
+  .cell-label.teal { background: #0D7377; border-color: #0D7377; }
+  .cell-label.red  { background: #C0392B; border-color: #C0392B; }
+
+  .cell h4 {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #1B3A6B;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .cell p { font-size: 10.5px; color: #333; line-height: 1.5; margin-bottom: 4px; }
+
+  ul { padding-left: 13px; margin: 3px 0; }
+  ul li { font-size: 10.5px; color: #333; line-height: 1.5; margin-bottom: 2px; }
+
+  /* COMPARISON TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .comp-table th {
+    background: #1B3A6B;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 6px;
+    text-align: center;
+    border: 1px solid #aaa;
+  }
+  .comp-table th.sprouts { background: #0D7377; }
+  .comp-table td {
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    font-size: 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .comp-table td.criteria {
+    text-align: left;
+    background: #f0f4f8;
+    font-weight: 600;
+    color: #1B3A6B;
+    font-size: 10px;
+  }
+  .comp-table tr:nth-child(even) td { background: #f9f9f9; }
+  .comp-table tr:nth-child(even) td.criteria { background: #e8f0f8; }
+
+  .win  { color: #1A7A4A; font-weight: 700; }
+  .lose { color: #C0392B; }
+  .mid  { color: #E67E22; font-weight: 600; }
+
+  /* OBJECTION TABLE */
+  .obj-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .obj-table td {
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    font-size: 10px;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .obj-table td.objection {
+    background: #fdecea;
+    color: #7B241C;
+    font-weight: 600;
+    width: 42%;
+  }
+  .obj-table td.response {
+    background: #e8f5ee;
+    color: #1A5C38;
+  }
+  .obj-table tr { border-bottom: 1px solid #ccc; }
+
+  /* WIN PROOF */
+  .proof-box {
+    background: #e8f4f5;
+    border-left: 3px solid #0D7377;
+    padding: 5px 8px;
+    margin: 4px 0;
+    font-size: 10.5px;
+    color: #085558;
+    line-height: 1.5;
+  }
+  .proof-box strong { color: #0D7377; }
+
+  /* QUOTE */
+  .quote {
+    background: #f0f4f8;
+    border-left: 3px solid #1B3A6B;
+    padding: 5px 8px;
+    margin: 5px 0;
+    font-style: italic;
+    font-size: 10px;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  /* QUESTIONS */
+  .q-item {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+    align-items: flex-start;
+  }
+  .q-num {
+    background: #0D7377;
+    color: #fff;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-text { font-size: 10.5px; color: #333; line-height: 1.45; }
+  .q-intent { font-size: 9.5px; color: #777; font-style: italic; margin-top: 1px; }
+
+  /* PILL TAG */
+  .tag {
+    display: inline-block;
+    background: #0D7377;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 7px;
+    margin: 1px 2px 2px 0;
+    text-transform: uppercase;
+  }
+  .tag.navy { background: #1B3A6B; }
+  .tag.red  { background: #C0392B; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 2px solid #0D7377;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #999;
+  }
+  .footer strong { color: #1B3A6B; }
+
+  @media print {
+    body { padding: 10px; }
+    .grid { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="brand">SPROUTS AI</div>
+    <div class="vs">Competitive Battlecard &nbsp;—&nbsp; vs. Ashby</div>
+  </div>
+  <div class="header-right">
+    <strong>Internal Use Only</strong><br>
+    PMM: Kitty Rastogi &nbsp;|&nbsp; 2024
+  </div>
+</div>
+
+<!-- ROW 1 -->
+<div class="grid">
+
+  <!-- CELL: Overview -->
+  <div>
+    <div class="cell-label">Company &amp; Product Overview</div>
+    <div class="cell">
+      <p><strong>Sprouts AI</strong> is an <strong>Agentic Recruiting Platform</strong> that automates the end-to-end hiring workflow — from job creation to offer management.</p>
+      <br>
+      <p><strong>Built for:</strong> Tech companies (10–100 employees) with lean recruiting teams managing high-growth hiring demands.</p>
+      <br>
+      <p><strong>Top 3 capabilities:</strong></p>
+      <ul>
+        <li>AI agents run sourcing, outreach, screening & scheduling autonomously</li>
+        <li>End-to-end workflow in one platform — no tool-switching</li>
+        <li>Live pipeline visibility across all open roles</li>
+      </ul>
+      <br>
+      <div class="tag">Agentic</div>
+      <div class="tag navy">Workflow Ownership</div>
+      <div class="tag">48-hr Setup</div>
+    </div>
+  </div>
+
+  <!-- CELL: Key Differentiators -->
+  <div>
+    <div class="cell-label teal">Key Differentiators</div>
+    <div class="cell">
+      <p>How does Sprouts AI stack up against Ashby?</p>
+      <br>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th style="text-align:left; background:#f0f4f8; color:#1B3A6B;">Criteria</th>
+            <th class="sprouts">Sprouts AI</th>
+            <th>Ashby</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="criteria">End-to-end automation</td>
+            <td class="win">✔ Full workflow</td>
+            <td class="lose">✘ Task-level only</td>
+          </tr>
+          <tr>
+            <td class="criteria">Recruiter dependency</td>
+            <td class="win">✔ Low — AI executes</td>
+            <td class="lose">✘ High — recruiter drives</td>
+          </tr>
+          <tr>
+            <td class="criteria">Lean team fit (1–2 recruiters)</td>
+            <td class="win">✔ Purpose-built</td>
+            <td class="mid">~ Possible, not optimal</td>
+          </tr>
+          <tr>
+            <td class="criteria">Setup time</td>
+            <td class="win">✔ 48 hours</td>
+            <td class="lose">✘ Weeks of config</td>
+          </tr>
+          <tr>
+            <td class="criteria">AI-native architecture</td>
+            <td class="win">✔ Yes</td>
+            <td class="mid">~ Partial (AI-assisted)</td>
+          </tr>
+          <tr>
+            <td class="criteria">Analytics & reporting</td>
+            <td class="mid">~ Real-time pipeline</td>
+            <td class="win">✔ Deep retrospective</td>
+          </tr>
+          <tr>
+            <td class="criteria">ATS replacement needed</td>
+            <td class="win">✔ No — integrates</td>
+            <td class="lose">✘ Replaces your ATS</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CELL: Why We Win -->
+  <div>
+    <div class="cell-label teal">Why We Win</div>
+    <div class="cell">
+      <p>Ashby makes recruiters <em>faster at tasks</em>. Sprouts AI <em>eliminates the tasks</em> entirely.</p>
+      <br>
+      <div class="proof-box"><strong>+30%</strong> lead-to-opportunity conversion after ICP and positioning shift</div>
+      <div class="proof-box"><strong>2×</strong> recruiter capacity — same team, twice the roles managed</div>
+      <div class="proof-box"><strong>10+ hrs/week</strong> returned per recruiter by eliminating coordination overhead</div>
+      <div class="proof-box"><strong>3 startup customers</strong> closed using the new agentic positioning framework</div>
+      <br>
+      <div class="quote">"I gave Sprouts a job description on Monday. By Wednesday I had 8 qualified candidates on my calendar — I didn't write a single message or send a single invite."<br><strong>— Series A CEO, Sprouts customer</strong></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 2 -->
+<div class="grid" style="margin-top:-1px;">
+
+  <!-- CELL: Customer Pain Points -->
+  <div>
+    <div class="cell-label">Customer Pain Points</div>
+    <div class="cell">
+      <p>Why do customers come to Sprouts?</p>
+      <br>
+      <ul>
+        <li>Managing 10+ open roles as a 1-person TA team</li>
+        <li>Spending 15+ hrs/week on scheduling, follow-up, and status updates — not recruiting</li>
+        <li>Candidates going cold because response time is too slow</li>
+        <li>Juggling 5+ tools for every single hire (ATS + LinkedIn + Calendly + Slack + email)</li>
+        <li>Can't scale hiring without adding recruiter headcount</li>
+        <li>Founders doing recruiting instead of building the company</li>
+      </ul>
+      <br>
+      <p><strong>The core insight:</strong> Buyers don't want more AI features — they want <em>less manual work</em>.</p>
+    </div>
+  </div>
+
+  <!-- CELL: Questions to Ask -->
+  <div>
+    <div class="cell-label teal">Questions to Ask</div>
+    <div class="cell">
+      <p>Use these to reveal Ashby's limitations without attacking directly:</p>
+      <br>
+      <div class="q-item">
+        <div class="q-num">1</div>
+        <div>
+          <div class="q-text">"When a new req opens, how many manual steps does your recruiter take before the first interview is scheduled?"</div>
+          <div class="q-intent">→ Exposes that Ashby doesn't reduce coordination steps</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">2</div>
+        <div>
+          <div class="q-text">"What percentage of your recruiter's week is spent on decisions vs. logistics like scheduling and follow-up?"</div>
+          <div class="q-intent">→ Surfaces the coordination overhead Ashby doesn't solve</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">3</div>
+        <div>
+          <div class="q-text">"If Ashby made your recruiter 30% faster — would that be enough to hit your Q1 hiring plan?"</div>
+          <div class="q-intent">→ Reframes the problem as capacity, not speed</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">4</div>
+        <div>
+          <div class="q-text">"How many different tools does your team use alongside Ashby to run a full hire end-to-end?"</div>
+          <div class="q-intent">→ Highlights the tool fragmentation problem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CELL: Handling Objections -->
+  <div>
+    <div class="cell-label red">Handling Objections</div>
+    <div class="cell">
+      <table class="obj-table">
+        <tr>
+          <td class="objection">"We already use Ashby — it's working for us."</td>
+          <td class="response">Ashby helps you move faster on tasks. Sprouts removes the tasks entirely. Most Ashby users still spend 10+ hrs/week on coordination Sprouts handles automatically. Can we show you the delta?</td>
+        </tr>
+        <tr>
+          <td class="objection">"Ashby has better analytics."</td>
+          <td class="response">Agreed — Ashby's retrospective analytics are strong. Sprouts gives you real-time pipeline visibility plus autonomous execution. You keep your ATS; we add the automation layer on top.</td>
+        </tr>
+        <tr>
+          <td class="objection">"Our team is familiar with Ashby."</td>
+          <td class="response">Familiarity is real value. But Ashby still requires your recruiter to drive every step. When you're managing 12+ roles with one person, familiarity doesn't solve the capacity problem.</td>
+        </tr>
+        <tr>
+          <td class="objection">"We're not sure AI recruiting is ready."</td>
+          <td class="response">We pilot on one active role in 48 hours — you see it run before committing to anything. Your recruiter stays in control of every hiring decision. Low risk, clear signal.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 3 -->
+<div class="grid" style="margin-top:-1px;">
+
+  <!-- CELL: Key Features -->
+  <div>
+    <div class="cell-label">Key Features</div>
+    <div class="cell">
+      <ul>
+        <li><strong>Autonomous sourcing</strong> — AI agents find and qualify candidates based on your role brief and company context</li>
+        <li><strong>Personalized outreach</strong> — AI writes and sends candidate messages grounded in your company's voice</li>
+        <li><strong>Automated screening</strong> — AI pre-qualifies candidates against your criteria before they hit the recruiter's queue</li>
+        <li><strong>Smart scheduling</strong> — End-to-end interview scheduling without a single manual step</li>
+        <li><strong>Pipeline dashboard</strong> — Real-time view of all open roles and candidate status in one place</li>
+        <li><strong>Human-in-the-loop controls</strong> — Recruiters approve, override, and decide at every key milestone</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CELL: Relevant Customers & Sales Tips -->
+  <div>
+    <div class="cell-label teal">Relevant Customers &amp; Use Cases</div>
+    <div class="cell">
+      <p><strong>Who wins with Sprouts:</strong></p>
+      <ul>
+        <li>Series A/B tech startups, 20–100 employees</li>
+        <li>1–2 person TA teams managing 8+ open roles</li>
+        <li>Founders doing recruiting themselves</li>
+        <li>Companies that just raised and need to hire fast</li>
+      </ul>
+      <br>
+      <p><strong>Win scenarios:</strong></p>
+      <div class="proof-box">Lean team replaced 5-tool stack with Sprouts — got 10+ hrs/week back</div>
+      <div class="proof-box">Founder closed 4 critical roles in 6 weeks (previously self-managing)</div>
+      <div class="proof-box">2-person TA team hit Q1 plan of 25 hires without adding headcount</div>
+    </div>
+  </div>
+
+  <!-- CELL: Pricing & Next Steps -->
+  <div>
+    <div class="cell-label">Pricing &amp; Next Steps</div>
+    <div class="cell">
+      <p><strong>Pricing model:</strong></p>
+      <ul>
+        <li>Outcome-based (per role or per hire)</li>
+        <li>No implementation fees</li>
+        <li>No long-term contracts required</li>
+        <li>Pilot on 1 active role — free, no commitment</li>
+      </ul>
+      <br>
+      <p><strong>How to advance the deal:</strong></p>
+      <ul>
+        <li>Propose a 48-hr pilot on one active role</li>
+        <li>Loop in founder or VP of People before proposal</li>
+        <li>Anchor on their outcome metric (time-to-hire or hrs saved)</li>
+      </ul>
+      <br>
+      <p><strong>Qualified deal signals:</strong></p>
+      <div class="tag">5+ open roles</div>
+      <div class="tag navy">1–2 person TA team</div>
+      <div class="tag">Recent funding</div>
+      <div class="tag navy">Hiring urgency</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span><strong>Sprouts AI</strong> &nbsp;|&nbsp; Competitive Battlecard — vs. Ashby &nbsp;|&nbsp; Internal Use Only</span>
+  <span>PMM: Kitty Rastogi &nbsp;|&nbsp; getsproutsai.com</span>
+</div>
+
+</body>
+</html>
