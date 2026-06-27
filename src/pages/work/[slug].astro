@@ -44,8 +44,8 @@ const next = caseStudies[(index + 1) % caseStudies.length];
 
     <section class="setup band">
       <div class="shell setup__grid">
-        <div><p class="kicker">THE CHALLENGE</p><p>{study.challenge}</p></div>
-        <div><p class="kicker">THE INSIGHT</p><p>{study.insight}</p></div>
+        <div><p class="kicker">THE CHALLENGE</p>{study.challenge.split('\n\n').map(p => <p>{p}</p>)}</div>
+        <div><p class="kicker">THE INSIGHT</p>{study.insight.split('\n\n').map(p => <p>{p}</p>)}</div>
       </div>
     </section>
 
@@ -77,6 +77,11 @@ const next = caseStudies[(index + 1) % caseStudies.length];
               <div><span>0{itemIndex + 1}</span><h3>{item.heading}</h3><p>{item.body}</p></div>
             ))}
           </div>
+          {study.artifact.pdf && (
+            <div class="artifact__pdf">
+              <a href={study.artifact.pdf} target="_blank" rel="noreferrer">See the full framework <ArrowRight size={14} /></a>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -127,10 +132,10 @@ const next = caseStudies[(index + 1) % caseStudies.length];
   .case-scope dd { margin: 0; font-size: 12px; line-height: 1.45; }
   .setup { padding: 88px 0; }
   .setup__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 90px; }
-  .setup__grid > div > p:last-child { margin: 20px 0 0; font: 400 27px/1.28 var(--serif); }
+  .setup__grid > div > p:not(.kicker) { margin: 20px 0 0; font: 400 27px/1.28 var(--serif); }
   .approach { padding: 100px 0; background: var(--white); }
   .section-title h2 { margin: 18px 0 56px; font: 400 54px/1 var(--serif); }
-  .approach ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .approach ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); border-top: 1px solid var(--line); }
   .approach li { min-height: 320px; padding: 24px; border-right: 1px solid var(--line); }
   .approach li:first-child { border-left: 1px solid var(--line); }
   .approach li > span { color: var(--coral); font-family: var(--serif); }
@@ -145,7 +150,10 @@ const next = caseStudies[(index + 1) % caseStudies.length];
   .artifact__title { display: grid; grid-template-columns: 180px 1fr; gap: 40px; }
   .artifact__title p { font-size: 9px; letter-spacing: 0.12em; }
   .artifact__title h2 { margin: 0; max-width: 700px; font: 400 46px/1.05 var(--serif); }
-  .artifact__items { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .artifact__items { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+  .artifact__pdf { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .artifact__pdf a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  .artifact__pdf a:hover { color: var(--coral); }
   .artifact__items > div { padding: 22px 22px 0 0; }
   .artifact__items span { color: var(--coral); font: 400 14px/1 var(--serif); }
   .artifact__items h3 { min-height: 60px; margin: 38px 0 14px; font: 400 25px/1.05 var(--serif); }

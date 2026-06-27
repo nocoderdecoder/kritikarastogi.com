@@ -22,6 +22,7 @@ export type CaseStudy = {
     label: string;
     title: string;
     items: { heading: string; body: string }[];
+    pdf?: string;
   };
   outcome: string;
   reflection: string;
@@ -49,21 +50,24 @@ export const caseStudies: CaseStudy[] = [
     period: 'Jun–Aug 2025',
     ownership: 'Owned customer research, positioning, launch narrative, and sales enablement; partnered with product, sales, and leadership.',
     measurementNote: 'The 12% ARR movement was a company result during the launch period. The launches contributed to it; this is not presented as sole attribution.',
-    challenge: 'The product had gained new AI capabilities, but the website and sales story still read like a list of recruiting features. Buyers could not see how the pieces changed the work between opening a role and producing a shortlist.',
-    insight: 'Across 42+ conversations, the recurring problem was the number of handoffs between sourcing, screening, and evaluation. That gave us a more useful organizing idea than simply leading with AI.',
+    challenge: 'The recruiting technology market was becoming increasingly crowded with ATS platforms, recruiting automation tools, and AI-powered assistants. While customers were interested in AI, most viewed existing solutions as incremental productivity tools rather than a fundamentally different way of hiring.\n\nThe challenge was identifying the right customer segment and developing a positioning strategy that clearly differentiated Sprouts AI.',
+    insight: 'Recruiters weren\'t looking for more AI features. They wanted less manual work.\n\nMost recruiting tools automated individual tasks but still required recruiters to coordinate multiple systems and workflows. This revealed an opportunity to position Sprouts AI around workflow ownership rather than task automation.',
     approach: [
-      { number: '01', title: 'Find the buying truth', body: 'Mapped decision-makers, influencers, existing workarounds, and trust barriers through 42+ interviews and live competitive intelligence.' },
-      { number: '02', title: 'Reframe the category', body: 'Defined the products around completed recruiting workflows and measurable time-to-value, not isolated AI features.' },
-      { number: '03', title: 'Make the story usable', body: 'Translated the narrative into demos, one-pagers, pitch decks, FAQs, battlecards, and objection handling for every stage of the sale.' }
+      { number: '01', title: 'Discover the Market', body: 'Conducted 42+ customer interviews across SMB, Mid-Market, and Enterprise organizations while building a competitive intelligence program covering ATS platforms, modern recruiting software, and AI-native competitors.' },
+      { number: '02', title: 'Define the Market Opportunity', body: 'Mapped the recruiting technology landscape from Manual → Assisted → Augmented → Agentic and identified whitespace for an Agentic Recruiting Platform that could automate recruiting workflows end-to-end while keeping humans in control of hiring decisions.' },
+      { number: '03', title: 'Define the ICP & Positioning', body: 'Validated multiple customer segments and identified high-growth technology companies (10–100 employees) with lean recruiting teams as the strongest fit. Developed positioning around workflow ownership instead of AI productivity, shifting the conversation from features to business outcomes.' },
+      { number: '04', title: 'Build the GTM Foundation', body: 'Translated the strategy into repeatable GTM assets, including messaging frameworks, sales decks, product demos, competitive battle cards, objection-handling guides, and a competitive intelligence repository that aligned Product, Founders, and Sales around a common narrative.' }
     ],
     artifact: {
-      label: 'MESSAGING EXCERPT',
-      title: 'From feature language to buyer language',
+      label: 'MARKET EVOLUTION FRAMEWORK',
+      title: 'From task automation to workflow ownership',
       items: [
-        { heading: 'Before', body: 'AI-powered sourcing, ATS, and analytics in one platform.' },
-        { heading: 'Reframed promise', body: 'Build an evidence-backed shortlist in one workflow, with sourcing and screening connected around the same role criteria.' },
-        { heading: 'Support', body: 'Customer interviews, competitive gaps, and a measured 26% reduction in time-to-value supported the workflow story.' }
-      ]
+        { heading: 'Manual', body: 'Recruiters manage every stage of hiring manually.' },
+        { heading: 'Assisted', body: 'ATS platforms organize recruiting activities.' },
+        { heading: 'Augmented', body: 'AI accelerates individual recruiting tasks.' },
+        { heading: 'Agentic', body: 'AI executes the recruiting workflow while recruiters own hiring decisions. This is where Sprouts AI plays.' }
+      ],
+      pdf: '/sproutsai-market-framework.pdf'
     },
     outcome: 'The launches contributed to a 12% increase in ARR while the research program also guided roadmap priorities and the transformation of two legacy products into AI-led workflows.',
     reflection: 'The most useful positioning decision was to show the recruiting workflow buyers could complete, then use the AI capabilities as evidence.'
