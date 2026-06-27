@@ -36,7 +36,7 @@ export const caseStudies: CaseStudy[] = [
     company: 'Sprouts AI',
     logo: '/logos/sproutsai.png',
     title: 'Defining the Market Strategy for an Early-Stage Agentic Recruiting Platform',
-    shortTitle: 'From recruiting features to completed workflows',
+    shortTitle: 'Defining the Market Strategy for an Early-Stage Agentic Recruiting Platform',
     eyebrow: 'AI PRODUCT MARKETING',
     eyebrowSuffix: 'B2B SaaS',
     companyBio: 'Sprouts AI is an early-stage AI recruiting startup building agentic hiring solutions that automate the recruiting workflow from job creation to offer management',
