@@ -40,16 +40,16 @@ export const caseStudies: CaseStudy[] = [
     metric: '12%',
     metricLabel: 'ARR increase',
     secondaryMetrics: [
-      { value: '42+', label: 'user and client interviews' },
-      { value: '26%', label: 'faster time-to-value' },
-      { value: '2', label: 'zero-to-one launches' }
+      { value: '30%', label: 'increase in lead-to-opportunity conversion' },
+      { value: '3', label: 'startup customers closed with ICP framework' },
+      { value: '42+', label: 'customer interviews conducted' }
     ],
     tags: ['AI', 'B2B SaaS', 'Positioning', 'Customer research'],
     color: 'coral',
     role: 'AI Product Marketing Manager, part-time',
     period: 'Jun–Aug 2025',
     ownership: 'Owned customer research, positioning, launch narrative, and sales enablement; partnered with product, sales, and leadership.',
-    measurementNote: 'The 12% ARR movement was a company result during the launch period. The launches contributed to it; this is not presented as sole attribution.',
+    measurementNote: 'Conversion and pipeline metrics reflect the period following ICP definition and positioning launch. The 12% ARR movement was a company result; the launches contributed to it but are not presented as sole attribution.',
     challenge: 'The recruiting technology market was becoming increasingly crowded with ATS platforms, recruiting automation tools, and AI-powered assistants. While customers were interested in AI, most viewed existing solutions as incremental productivity tools rather than a fundamentally different way of hiring.\n\nThe challenge was identifying the right customer segment and developing a positioning strategy that clearly differentiated Sprouts AI.',
     insight: 'Recruiters weren\'t looking for more AI features. They wanted less manual work.\n\nMost recruiting tools automated individual tasks but still required recruiters to coordinate multiple systems and workflows. This revealed an opportunity to position Sprouts AI around workflow ownership rather than task automation.',
     approach: [
@@ -69,8 +69,8 @@ export const caseStudies: CaseStudy[] = [
       ],
       pdf: '/sproutsai-market-framework.pdf'
     },
-    outcome: 'The launches contributed to a 12% increase in ARR while the research program also guided roadmap priorities and the transformation of two legacy products into AI-led workflows.',
-    reflection: 'The most useful positioning decision was to show the recruiting workflow buyers could complete, then use the AI capabilities as evidence.'
+    outcome: 'The ICP and positioning work increased lead-to-opportunity conversion by 30%, closed 3 startup customers using the new framework, improved pipeline quality by concentrating acquisition on the highest-fit segment, and established a repeatable GTM motion and category narrative for future growth.',
+    reflection: 'In emerging categories, customers rarely buy technology because it is new—they buy solutions to existing problems.'
   },
   {
     slug: 'burger-king-loyalty',
