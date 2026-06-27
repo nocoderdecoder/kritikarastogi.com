@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight, Menu, X } from '@lucide/astro';
+import { ArrowUpRight, Download, Menu, X } from '@lucide/astro';
 import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 
@@ -71,21 +71,14 @@ const personSchema = {
         <a href="/work" aria-current={pathname.startsWith('/work') ? 'page' : undefined}>Work</a>
         <a href="/writing" aria-current={pathname.startsWith('/writing') ? 'page' : undefined}>Writing</a>
         <a href="/field-guide" aria-current={pathname.startsWith('/field-guide') ? 'page' : undefined}>Field guide</a>
-<a class="nav-cta" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">
-          LinkedIn <ArrowUpRight size={15} stroke-width={1.8} />
-        </a>
+        <a class="nav-cta" href="mailto:kritikarastogi240@gmail.com">Email</a>
+        <a class="nav-cta" href="/Kritika-Rastogi-Resume.pdf" download><Download size={13} stroke-width={1.8} /> Resume</a>
+        <a class="nav-cta" href="https://www.linkedin.com/in/kritikarastogi240" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15} stroke-width={1.8} /></a>
       </nav>
     </header>
     <main id="main"><slot /></main>
     <footer class="site-footer">
-      <div class="footer-links">
-        <a href="mailto:kritikarastogi240@gmail.com">kritikarastogi240@gmail.com</a>
-        <a href="tel:+12244201991">+1 224 420 1991</a>
-        <a href="/Kritika-Rastogi-Resume.pdf">Resume</a>
-        <a href="https://medium.com/@kritikarastogi240" target="_blank" rel="noreferrer">Medium</a>
-      </div>
       <div class="footer-meta">
-        <span>Sunnyvale, California</span>
         <span>© {new Date().getFullYear()} Kritika Rastogi</span>
       </div>
     </footer>
