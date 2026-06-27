@@ -66,8 +66,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .about-hero { padding: 95px 0 110px; }
-  .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter); align-items: center; }
-  .about-hero h1 { margin: 25px 0 0; max-width: 620px; font: 400 69px/0.98 var(--serif); }
+  .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter) 0 calc(var(--gutter) * 0.4); align-items: center; }
+  .about-hero h1 { margin: 25px 0 0; max-width: 620px; font: 400 74px/0.98 var(--serif); }
   .about-hero__copy > p:first-child { margin-top: 40px; font-size: 22px; line-height: 1.6; }
   .about-hero__copy > p { margin: 10px 0 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
   .about-hero__copy > p:first-child { color: var(--ink); font-family: var(--serif); }
@@ -101,7 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media (max-width: 760px) {
     .about-hero { padding: 65px 0 75px; }
     .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
-    .about-hero h1 { font-size: 50px; }
+    .about-hero h1 { font-size: 55px; }
     .about-hero__copy > p:first-child { margin-top: 0; }
     .about-actions { align-items: flex-start; flex-wrap: wrap; gap: 20px 24px; }
     .principles__grid > div { border-bottom: 1px solid rgba(23,23,22,.25); padding-bottom: 36px; }
