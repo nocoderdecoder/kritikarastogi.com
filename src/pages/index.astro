@@ -33,16 +33,24 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
           <span>CMU · MS Product Management</span>
         </div>
         <div class="credibility__item">
+          <img class="credibility__logo credibility__logo--hri" src="/logos/hri.png" alt="Honda Research Institute" />
+          <span>AI Product Marketing Manager</span>
+        </div>
+        <div class="credibility__item">
+          <img class="credibility__logo credibility__logo--square" src="/logos/sproutsai.png" alt="Sprouts AI" />
+          <span>AI Product Marketing Manager</span>
+        </div>
+        <div class="credibility__item">
           <img class="credibility__logo" src="/logos/gojek.svg" alt="Gojek" />
-          <span>B2B Product Marketing Manager</span>
+          <span>Product and Growth Marketing Manager</span>
         </div>
         <div class="credibility__item">
           <img class="credibility__logo credibility__logo--square" src="/logos/burger-king.svg" alt="Burger King" />
-          <span>Digital Product Marketing Manager</span>
+          <span>Product and Growth Marketing Manager</span>
         </div>
         <div class="credibility__item">
           <img class="credibility__logo" src="/logos/vodafone.svg" alt="Vodafone" />
-          <span>National Account Manager, GTM</span>
+          <span>Strategic Account Executive</span>
         </div>
       </div>
     </div>
@@ -120,20 +128,21 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 <style>
   .hero { min-height: min(730px, calc(100svh - 76px)); padding: clamp(54px, 8vh, 88px) var(--gutter) 0; overflow: hidden; display: flex; }
   .hero__inner { width: min(100%, 1500px); margin: 0 auto; display: flex; flex: 1; flex-direction: column; }
-  .hero h1 { margin: 22px 0 28px; max-width: 1280px; font: 400 82px/0.97 var(--serif); }
+  .hero h1 { margin: 22px 0 28px; max-width: 1280px; font: 400 72px/0.97 var(--serif); }
   .hero h1 em { color: var(--coral); font-weight: 400; }
-  .hero__summary { max-width: 850px; margin: 0; font-size: 18px; line-height: 1.55; }
+  .hero__summary { max-width: 1100px; margin: 0; font-size: 18px; line-height: 1.55; }
   .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 30px; }
   .hero__primary, .hero__secondary, .hero__tool { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
   .linkedin-mark { width: 16px; height: 16px; fill: currentColor; flex: 0 0 auto; }
   .hero__primary { background: var(--ink); color: white; }
   .hero__secondary { border: 1px solid var(--ink); }
   .hero__tool { border: 1px solid rgba(240, 82, 54, 0.28); background: rgba(240, 82, 54, 0.08); color: var(--ink); }
-  .credibility { margin-top: auto; padding: 24px 0 26px; display: grid; grid-template-columns: 145px repeat(4, minmax(0, 1fr)); align-items: center; gap: 24px; border-bottom: 1px solid var(--ink); }
+  .credibility { margin-top: auto; padding: 24px 0 26px; display: grid; grid-template-columns: 145px repeat(6, minmax(0, 1fr)); align-items: center; gap: 16px; border-bottom: 1px solid var(--ink); }
   .credibility > p { margin: 0; max-width: 90px; color: var(--muted); font-size: 9px; font-weight: 750; line-height: 1.35; letter-spacing: 0.12em; }
   .credibility__item { min-width: 0; display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: 14px; }
   .credibility__logo { width: 72px; height: 34px; object-fit: contain; object-position: left center; filter: grayscale(1); opacity: 0.72; }
   .credibility__logo--cmu { height: 29px; mix-blend-mode: multiply; }
+  .credibility__logo--hri { height: 38px; mix-blend-mode: multiply; }
   .credibility__logo--square { width: 42px; height: 42px; }
   .credibility__item span { max-width: 145px; color: var(--muted); font-size: 10px; line-height: 1.35; }
   .work-section { padding: 72px 0 96px; }
