@@ -51,9 +51,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="shell">
       <p class="kicker">EDUCATION</p>
       <div class="education__grid">
-        <div><strong>Carnegie Mellon University</strong><span>MS, Product Management & AI · 2025</span></div>
-        <div><strong>Symbiosis Institute of Business Management</strong><span>MBA · 2018</span></div>
-        <div><strong>Lancaster University</strong><span>BSc, Business Economics (Honors) · 2014</span></div>
+        <div><strong>Carnegie Mellon University</strong><span>MS, Product Management & AI · 2025</span><span class="education__location">Pittsburgh, USA</span></div>
+        <div><strong>Symbiosis Institute of Business Management</strong><span>MBA · 2018</span><span class="education__location">Pune, India</span></div>
+        <div><strong>Lancaster University</strong><span>BA, Business Economics (Honors) · 2014</span><span class="education__location">Lancaster, UK</span></div>
       </div>
     </div>
   </section>
@@ -85,8 +85,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .education { padding: 85px 0; background: var(--white); }
   .education__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; margin-top: 40px; }
   .education strong, .education span { display: block; }
-  .education strong { font: 400 24px/1.1 var(--serif); }
+  .education strong { font: 400 16px/1.1 var(--serif); }
   .education span { margin-top: 9px; color: var(--muted); font-size: 13px; }
+  .education__location { margin-top: 0; color: var(--muted); font-size: 12px; opacity: 0.7; }
   @media (max-width: 760px) {
     .about-hero { padding: 65px 0 75px; }
     .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
