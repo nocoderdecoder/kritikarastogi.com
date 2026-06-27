@@ -70,7 +70,7 @@ export const caseStudies: CaseStudy[] = [
       pdf: '/sproutsai-market-framework.pdf'
     },
     outcome: 'The ICP and positioning work increased lead-to-opportunity conversion by 30%, closed 3 startup customers using the new framework, improved pipeline quality by concentrating acquisition on the highest-fit segment, and established a repeatable GTM motion and category narrative for future growth.',
-    reflection: 'In emerging categories, customers rarely buy technology because it is new—they buy solutions to existing problems.'
+    reflection: 'In emerging categories, customers rarely buy technology because it is new. They buy solutions to existing problems.'
   },
   {
     slug: 'burger-king-loyalty',
