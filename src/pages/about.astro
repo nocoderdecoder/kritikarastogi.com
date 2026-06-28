@@ -11,18 +11,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>I’ve built product stories in India, Indonesia, Thailand, and Silicon Valley.</h1>
       </div>
       <div class="about-hero__copy">
-        <p><strong>Every role in my career shaped how I think about Product and Growth Marketing</strong></p>
-        <p><strong class="about-label">Markets matter.</strong> My first product and growth marketing role at a <strong>real estate marketplace</strong> showed me that growth starts with understanding customer behavior, incentives, and market dynamics.</p>
-        <div class="about-arrow">➤</div>
-        <p><strong class="about-label">Customers buy outcomes.</strong> Enterprise sales at <strong>Vodafone</strong> taught me to translate product capabilities into business value and build go-to-market strategies around customer outcomes.</p>
-        <div class="about-arrow">➤</div>
-        <p><strong class="about-label">Positioning changes everything.</strong> At <strong>Gojek</strong>, I learned how the right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
-        <div class="about-arrow">➤</div>
-        <p><strong class="about-label">Growth should create business value.</strong> Managing the delivery P&L at <strong>Burger King App</strong> taught me to balance customer growth with commercial outcomes and profitability.</p>
-        <div class="about-arrow">➤</div>
-        <p><strong class="about-label">AI needs clarity, not complexity.</strong> Working on AI products at <strong>Carnegie Mellon</strong>, <strong>SproutsAI</strong>, and <strong>Honda Research Institute</strong> reinforced that even the best technology succeeds only when customers understand why it matters.</p>
-        <div class="about-arrow">➤</div>
-        <p><strong><em>Together, these experiences shaped how I approach Product Marketing today: combining customer insight, product strategy, and commercial thinking to build scalable go-to-market strategies that drive adoption and business growth.</em></strong></p>
+        <p class="about-intro">Every role shaped how I think about product and growth.</p>
+        <div class="about-row">
+          <div><p class="about-co">Real Estate Marketplace</p><p class="about-label">Markets matter.</p></div>
+          <p class="about-body">Growth starts with understanding customer behavior, incentives, and market dynamics.</p>
+        </div>
+        <div class="about-row">
+          <div><p class="about-co">Vodafone</p><p class="about-label">Customers buy outcomes.</p></div>
+          <p class="about-body">Enterprise sales taught me to translate product capabilities into business value and build GTM strategies around customer outcomes.</p>
+        </div>
+        <div class="about-row">
+          <div><p class="about-co">Gojek</p><p class="about-label">Positioning changes everything.</p></div>
+          <p class="about-body">The right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
+        </div>
+        <div class="about-row">
+          <div><p class="about-co">Burger King</p><p class="about-label">Growth should create value.</p></div>
+          <p class="about-body">Managing the delivery P&L taught me to balance customer growth with commercial outcomes and profitability.</p>
+        </div>
+        <div class="about-row">
+          <div><p class="about-co">CMU · SproutsAI · Honda Research Institute</p><p class="about-label">AI needs clarity, not complexity.</p></div>
+          <p class="about-body">Even the best technology succeeds only when customers understand why it matters.</p>
+        </div>
       </div>
     </div>
   </header>
@@ -66,15 +75,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .about-hero { padding: 95px 0 110px; }
-  .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter) 0 calc(var(--gutter) * 0.4); align-items: center; }
+  .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter) 0 calc(var(--gutter) * 0.4); align-items: start; }
   .about-hero h1 { margin: 25px 0 0; max-width: 620px; font: 400 74px/0.98 var(--serif); }
-  .about-hero__copy > p:first-child { margin-top: 40px; font-size: 22px; line-height: 1.6; }
-  .about-hero__copy > p { margin: 10px 0 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
-  .about-hero__copy > p:first-child { color: var(--ink); font-family: var(--serif); }
-  .about-hero__copy strong { color: var(--ink); font-weight: 700; }
-  .about-hero__copy .about-label { font-size: 20px; font-weight: 800; }
-  .about-hero__copy > p:last-of-type { font-size: 18px; text-align: center; }
-  .about-arrow { margin: 6px 0; color: var(--coral); font-size: 22px; line-height: 1; font-weight: 700; text-align: center; display: block; transform: rotate(90deg); }
+  .about-intro { font: 400 20px/1.45 var(--serif); margin-bottom: 30px; margin-top: 8px; }
+  .about-row { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 18px 0; border-top: 1px solid var(--line); align-items: start; }
+  .about-row:last-child { border-bottom: 1px solid var(--line); }
+  .about-co { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: 5px; }
+  .about-label { font: 400 19px/1.2 var(--serif); }
+  .about-body { font-size: 14px; line-height: 1.6; color: var(--muted); padding-top: 3px; }
   .about-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
   .primary-action { display: inline-flex; align-items: center; gap: 9px; padding: 13px 16px; background: var(--ink); color: white; font-size: 13px; }
   .principles { padding: 100px 0; background: var(--green); }
@@ -102,7 +110,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .about-hero { padding: 65px 0 75px; }
     .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
     .about-hero h1 { font-size: 55px; }
-    .about-hero__copy > p:first-child { margin-top: 0; }
+    .about-intro { margin-top: 0; }
+    .about-row { grid-template-columns: 1fr; gap: 8px; }
     .about-actions { align-items: flex-start; flex-wrap: wrap; gap: 20px 24px; }
     .principles__grid > div { border-bottom: 1px solid rgba(23,23,22,.25); padding-bottom: 36px; }
     .principles__grid h2 { margin-top: 40px; }
