@@ -2,6 +2,9 @@
   background: var(--paper);
 }
 
+.more-coming { padding: 80px 0; border-top: 1px solid var(--line); }
+.more-coming__text { margin-top: 16px; font: 400 42px/1.05 var(--serif); color: var(--ink); }
+
 .brief-hero {
   padding: 86px 0 92px;
 }
