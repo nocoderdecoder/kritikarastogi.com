@@ -7,30 +7,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <header class="about-hero band">
     <div class="shell about-hero__grid">
       <div>
-        <p class="kicker">ABOUT ME</p>
         <h1>I’ve built product stories in India, Indonesia, Thailand, and Silicon Valley.</h1>
       </div>
       <div class="about-hero__copy">
-        <p class="about-intro">Every role shaped how I think about product and growth.</p>
-        <div class="about-row">
-          <div><p class="about-co">Real Estate Marketplace</p><p class="about-label">Markets matter.</p></div>
-          <p class="about-body">Growth starts with understanding customer behavior, incentives, and market dynamics.</p>
+        <p class="about-intro">What my work taught me.</p>
+        <div class="about-belief">
+          <p class="about-belief__lead">Products rarely fail because they're bad.</p>
+          <p class="about-belief__body">They fail because companies build before they understand the market, customer, and buying decision.</p>
         </div>
-        <div class="about-row">
-          <div><p class="about-co">Vodafone</p><p class="about-label">Customers buy outcomes.</p></div>
-          <p class="about-body">Enterprise sales taught me to translate product capabilities into business value and build GTM strategies around customer outcomes.</p>
+        <div class="about-belief">
+          <p class="about-belief__lead">Research isn't a phase.</p>
+          <p class="about-belief__body">It's how better product decisions, positioning, and go-to-market strategies get made.</p>
         </div>
-        <div class="about-row">
-          <div><p class="about-co">Gojek</p><p class="about-label">Positioning changes everything.</p></div>
-          <p class="about-body">The right positioning and GTM strategy can transform products into scalable monetization opportunities.</p>
+        <div class="about-belief">
+          <p class="about-belief__lead">Positioning isn't messaging.</p>
+          <p class="about-belief__body">It's deciding what the product should mean before deciding what to say.</p>
         </div>
-        <div class="about-row">
-          <div><p class="about-co">Burger King</p><p class="about-label">Growth should create value.</p></div>
-          <p class="about-body">Managing the delivery P&L taught me to balance customer growth with commercial outcomes and profitability.</p>
+        <div class="about-belief">
+          <p class="about-belief__lead">Great launches don't depend on heroics.</p>
+          <p class="about-belief__body">They depend on repeatable systems that every team can execute and scale.</p>
         </div>
-        <div class="about-row">
-          <div><p class="about-co">CMU · SproutsAI · Honda Research Institute</p><p class="about-label">AI needs clarity, not complexity.</p></div>
-          <p class="about-body">Even the best technology succeeds only when customers understand why it matters.</p>
+        <div class="about-belief">
+          <p class="about-belief__lead">Product Marketing isn't a marketing function.</p>
+          <p class="about-belief__body">It's the connective tissue between customers, product, sales, and revenue.</p>
+        </div>
+        <div class="about-belief">
+          <p class="about-belief__lead">AI doesn't change the fundamentals of Product Marketing.</p>
+          <p class="about-belief__body">It makes them more important. Customer discovery, positioning, workflow design, and human-centered adoption matter even more when every product sounds the same.</p>
         </div>
       </div>
     </div>
@@ -77,12 +80,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .about-hero { padding: 95px 0 110px; }
   .about-hero__grid { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; max-width: 1500px; width: min(100%, 1500px); margin: 0 auto; padding: 0 var(--gutter) 0 calc(var(--gutter) * 0.4); align-items: start; }
   .about-hero h1 { margin: 25px 0 0; max-width: 620px; font: 400 74px/0.98 var(--serif); }
-  .about-intro { font: 400 20px/1.45 var(--serif); margin-bottom: 30px; margin-top: 8px; }
-  .about-row { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 18px 0; border-top: 1px solid var(--line); align-items: start; }
-  .about-row:last-child { border-bottom: 1px solid var(--line); }
-  .about-co { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: 5px; }
-  .about-label { font: 400 19px/1.2 var(--serif); }
-  .about-body { font-size: 14px; line-height: 1.6; color: var(--muted); padding-top: 3px; }
+  .about-intro { font: 400 22px/1.4 var(--serif); margin-bottom: 36px; margin-top: 8px; color: var(--muted); }
+  .about-belief { padding: 22px 0; border-top: 1px solid var(--line); }
+  .about-belief:last-child { border-bottom: 1px solid var(--line); }
+  .about-belief__lead { font: 400 22px/1.2 var(--serif); margin-bottom: 8px; }
+  .about-belief__body { font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 620px; }
   .about-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
   .primary-action { display: inline-flex; align-items: center; gap: 9px; padding: 13px 16px; background: var(--ink); color: white; font-size: 13px; }
   .principles { padding: 100px 0; background: var(--green); }
@@ -111,7 +113,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .about-hero__grid, .principles__grid, .timeline__grid, .education__grid { grid-template-columns: 1fr; gap: 45px; }
     .about-hero h1 { font-size: 55px; }
     .about-intro { margin-top: 0; }
-    .about-row { grid-template-columns: 1fr; gap: 8px; }
     .about-actions { align-items: flex-start; flex-wrap: wrap; gap: 20px 24px; }
     .principles__grid > div { border-bottom: 1px solid rgba(23,23,22,.25); padding-bottom: 36px; }
     .principles__grid h2 { margin-top: 40px; }
